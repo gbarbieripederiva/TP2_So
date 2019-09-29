@@ -57,6 +57,10 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 20:
 		sys_screen(arg1, arg2, arg3);
 		break;
+	//sys_mem_get: get memory
+	case 45:
+		return (uint64_t) sys_mem_get((int)arg1);
+		break;
 	}
 
 	return 0;
@@ -204,4 +208,10 @@ void sys_screen(uint64_t option, uint64_t arg1, uint64_t arg2)
 			toColour(((Rect *)arg1)->blue, ((Rect *)arg1)->green, ((Rect *)arg1)->red));
 		break;
 	}
+}
+
+//SYSCALL 45 get memory
+//TODO
+uint64_t sys_mem_get(int memoryToGet){
+	return 0;
 }
