@@ -1,0 +1,17 @@
+Al iniciar el SO, se iniciará el intérprete de comandos. 
+
+Dicho intérprete ofrece los siguientes comandos: 
+
+help : muestra los comandos que ofrece el intérprete.
+
+snake : comienza el juego snake, una variación en la que la serpiente crece con el tiempo y se acelera. Los controles son wasd, los límites son la pantalla excepto el límite superior, que es una barra blanca. Tiene un contador de tiempo de juego. 
+
+Cada aproximadamente 15 segundos la serpiente se agranda en 2 pedazos y se acelera. Si ya llegó a su velocidad máxima (un movimiento cada 55 milisegundos), sigue alargándose pero ya no se acelera.
+
+clear : borra la pantalla del intérprete.
+
+time : imprime la hora en UTC
+
+testDivisionBy0 : Fuerza una excepción al intentar una división por 0, e imprime en el intérprete el valor de los registros rsi, rax, rbx, rcx, rdx, rsp y rbp al momento de la excepción. Luego espera un input cualquiera del teclado. Frente a dicho input, reinicia el intérprete.
+
+testInvalidOpcode : Hace lo mismo que testDivisionBy0, pero forzando la excepción al tratar de ejecutar un código inválido
