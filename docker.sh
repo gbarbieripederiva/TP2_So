@@ -1,7 +1,8 @@
 #!/bin/bash
 
-docker build . --tag $1/so_builder
+docker pull agodio/itba-so:1.0
 
-docker run -v ${PWD}:/sources/ $1/so_builder
+
+docker run --user $(id -u):$(id -g) -v ${PWD}:/mnt agodio/itba-so:1.0 /bin/bash -c "cd /mnt; cd Toolchain && make all && cd .. && make clean && make all"
 
 ./run.sh

@@ -1,20 +1,14 @@
 REQUISITOS PREVIOS:
 *Tener instalado los siguientes programas en su sistema operativo (Tipo Unix):
 	- qemu 
+	- qemu-system
 	- docker
-*Registrarce en docker.
 
-Se debe contener en la carpeta principal del trabajo práctico especial los archivos:
-
-	- Dockerfile
-	- docker.sh
-
-Se debe ejecutar desde la terminal sobre el directorio de trabajo:
+*Se debe ejecutar desde la terminal sobre el directorio de trabajo:
 	
-	./docker.sh nombreUsuarioDocker
+	./docker.sh
 
-Esto compila y linkedita su trabajo y luego basta correr
+*Esto compila y linkedita su trabajo y luego basta correr
+	(docker.sh lo ejecuta luego de compilar)
 
 	./run.sh
-
-Para poder correr su trabajo.
