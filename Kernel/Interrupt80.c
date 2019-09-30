@@ -59,7 +59,7 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		break;
 	//sys_mem_get: get memory
 	case 45:
-		return (uint64_t) sys_mem_get((int)arg1);
+		return (uint64_t) sys_mem_get((long)arg1);
 		break;
 	}
 
@@ -212,6 +212,20 @@ void sys_screen(uint64_t option, uint64_t arg1, uint64_t arg2)
 
 //SYSCALL 45 get memory
 //TODO
-uint64_t sys_mem_get(int memoryToGet){
-	return 0;
+#define SIZE 100000
+#define NULL 0
+uint64_t sys_mem_get(long size){
+	static char memChunk[SIZE]; 
+    static char * currentPtr = memChunk;
+    static long used = 0;
+
+    if(used + size > SIZE){
+        return NULL;
+    }
+    else{
+        char * retVal = currentPtr;
+        currentPtr += size;
+        used += size;
+        return retVal;
+    }
 }

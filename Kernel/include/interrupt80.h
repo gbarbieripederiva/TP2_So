@@ -15,5 +15,5 @@ uint64_t sys_get_ticks();										//SYS_CALL 10
 char sys_get_last_in();											//SYS_CALL 11
 uint8_t sys_get_clock_info(int option);                         //SYS_CALL 12
 void sys_screen(uint64_t option, uint64_t arg1, uint64_t arg2); //SYS_CALL 20
-uint64_t sys_mem_get(int memoryToGet);                          //SYS_CALL 45
+uint64_t sys_mem_get(long size);                          //SYS_CALL 45
 #endif
