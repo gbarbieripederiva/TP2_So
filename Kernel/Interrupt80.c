@@ -222,10 +222,8 @@ uint64_t sys_mem_get(long size){
     if(used + size > SIZE){
         return NULL;
     }
-    else{
-        char * retVal = currentPtr;
-        currentPtr += size;
-        used += size;
-        return retVal;
-    }
+	char * retVal = currentPtr;
+	currentPtr += size;
+	used += size;
+	return retVal;
 }
