@@ -49,7 +49,8 @@ void * giveMeMemory(uint64_t size){
 
     while(lowest->startLocation != NULL){
 
-        //chequear tambien espacio suficiente para un nuevo memBlock al final
+        //the condition checked is whether there is enough space for the new memory chunk
+        //but also whether between the last chunk and the "end" of the memBlock array there is enough space for a new memBlock struct
 
         if(lowest->startLocation - location >= size && (uint64_t) greatest - (greatest->startLocation + greatest->size) >= sizeof(memBlock) ){
             void * retVal = (void *) location;
@@ -57,10 +58,9 @@ void * giveMeMemory(uint64_t size){
             //since the memBlock array is ordered, we need to save the new memBlock where lowest is currently,
             //and then shift the rest of the array one position 
 
-            memBlock aux = *lowest;
-            lowest->startLocation = location;
-            lowest->size = size;
-            lowest -= sizeof(memBlock);
+            memBlock aux;
+            aux.startLocation = location;
+            aux.size = size;
 
             while(aux.startLocation != NULL){
                 swap(&aux, lowest);
@@ -101,4 +101,42 @@ void * giveMeMemory(uint64_t size){
     lowest->startLocation = NULL;
     return (void *)location;
 
+}
+
+//Equivalent to free()
+//This algorithm is O(n) where n is the total number of memory chunks. Could be upgraded to O(log n) very easily,
+//but I doubt we will be managing many chunks at any time
+
+int unGiveMeMemory(void * location){
+
+    uint64_t castLocation = (uint64_t) location;
+    //"lowest" is at each step the chunk of memory closest to the start of the memory that we haven't checked yet
+    memBlock * lowest = (memBlock *) (STARTING_MEM_LOCATION + INITIAL_MEM_SIZE - sizeof(memBlock));
+
+    while(lowest->startLocation != NULL){
+        if(lowest->startLocation > castLocation){
+            //there is no memory chunk starting at the specified location
+            return -1;
+        }
+        if (lowest->startLocation == castLocation){
+            //move array right and return 0
+            memBlock * next = lowest - sizeof(memBlock);
+            while(next->startLocation != NULL){
+                lowest->startLocation = next->startLocation;
+                lowest->size = next->size;
+                lowest -= sizeof(memBlock);
+                next -= sizeof(memBlock);
+            }
+            //add end of array marker at the end
+            lowest->startLocation = NULL;
+
+            //the memory is now sizeof(memBlock) bigger
+            memSize += sizeof(memBlock);
+            return 0;
+        }
+        //the specified memory chunk could be further ahead
+        lowest -= sizeof(memBlock);
+    }
+    //there is no memory chunk starting at the specified location
+    return -1;
 }
