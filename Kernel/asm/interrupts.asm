@@ -93,8 +93,22 @@ extern interruptDispatcher
 
 ;int 20h
 GLOBAL interrupt1
+extern scheduler
 interrupt1:
-	interrupt 1
+	pushState
+	cld
+	mov rdi,1
+	call interruptDispatcher
+	mov al, 20h
+	out 20h, al
+
+	mov rdi, rsp
+	call scheduler
+	mov rsp, rax
+
+	popState
+	iretq
+
 ;int 21h
 GLOBAL interrupt2
 interrupt2:

@@ -105,6 +105,8 @@ void drawRectangle(Rectangle *rect)
    sys_screen(2, (uint64_t)rect, 0);
 }
 
+
+
 //-----------Functions that don't interact with the kernel--------------------------------
 
 int strlength(char *str)
