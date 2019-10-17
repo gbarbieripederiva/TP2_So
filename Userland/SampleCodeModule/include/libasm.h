@@ -35,4 +35,7 @@ uint64_t sys_get_clock_call(uint64_t option);
 //SYS_CALL 20 ,for everything screen based
 void sys_screen(uint64_t option, uint64_t arg1, uint64_t arg2);
 
+//SYS_CALL 45, for memory management
+uint64_t sys_get_memory(long size);
+
 #endif
