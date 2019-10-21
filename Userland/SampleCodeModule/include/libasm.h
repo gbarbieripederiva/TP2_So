@@ -2,6 +2,16 @@
 #ifndef __LIBASMUSERLAND___
 #define __LIBASMUSERLAND__
 
+typedef struct process{
+    int pid;
+    char * name;
+    int priority;
+    uint64_t stack_end;
+    uint64_t sp;
+} process;
+
+typedef struct process * processInfo;
+
 //SYS_CALL 0 copy  count chars from the keyboard or waits until it has them, to the buffer.
 void sys_read_call(uint64_t buffer, uint64_t count);
 
@@ -36,6 +46,20 @@ uint64_t sys_get_clock_call(uint64_t option);
 void sys_screen(uint64_t option, uint64_t arg1, uint64_t arg2);
 
 //SYS_CALL 45, for memory management
-uint64_t sys_get_memory(long size);
+void * sys_get_memory(long size);
+
+//SYS_CALL 46, for memory free
+int *sys_mem_free(void * chunk);
+
+//SYS_CALL 47, to create a process
+processInfo *sys_create_process(char * name, int priority, uint64_t process);
+
+//SYS CALL 48, to put a process into the scheduler
+int sys_run_process(processInfo process);
+
+//SYS CALL 49, to kill a running process
+int kill_process(int pid);
+
+
 
 #endif

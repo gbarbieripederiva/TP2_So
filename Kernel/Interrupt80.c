@@ -6,6 +6,9 @@
 #include <interrupts.h>
 #include <drivers/videoDrivers.h>
 #include <lib.h>
+#include <memoryManager.h>
+#include <process.h>
+#include <scheduler.h>
 
 //Software interrupt used for interaction between user and kernel space
 //order of registers in standard rdi -> call number,rsi -> arg1 ,rdx -> arg2 ,rcx -> arg3
@@ -61,7 +64,25 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 45:
 		return (uint64_t) sys_mem_get((long)arg1);
 		break;
+	//sys_mem_free: frees memory
+	case 46:
+		return (int) sys_mem_free((uint64_t) arg1);
+		break;
+	//sys_create_process: Creates and registers new process
+	case 47:
+		return (processInfo) sys_create_process((char *)arg1, (int) arg2, (uint64_t)arg3); 
+		break;
+	//sys_run_process: Puts process into scheduler with state READY, BLOCKED, HALT
+	case 48:
+		return (int) sys_run_process((processInfo) arg1, (int) arg2);
+		break;
+	//sys_kill_process: stops iterating process from scheduler
+	case 49:
+		return (int) sys_kill_process((int) arg1);
+		break;
+
 	}
+
 
 	return 0;
 }
@@ -212,9 +233,31 @@ void sys_screen(uint64_t option, uint64_t arg1, uint64_t arg2)
 
 //SYSCALL 45 get memory
 //TODO
+uint64_t sys_mem_get(long size){
+	return (uint64_t) giveMeMemory(size);
+}
+
+//SYSCALL 46 free memory
+int sys_mem_free(uint64_t chunk){
+	return (int)unGiveMeMemory((void *)chunk);
+}
+//SYSCALL 47 creates a new process
+processInfo sys_create_process(char * name, int priority, uint64_t process){
+	return (processInfo) create_process(name, priority, process);
+}
+//SYSCALL 48 runs a process
+int sys_run_process(processInfo process, int state){
+	return run_process(process, state);
+}
+//SYSCALL 49 kills a running process
+int sys_kill_process(int pid){
+	return kill_process(pid);
+}
+
+/*
 #define SIZE 100000
 #define NULL 0
-uint64_t sys_mem_get(long size){
+void * sys_mem_get(long size){
 	static char memChunk[SIZE]; 
     static char * currentPtr = memChunk;
     static long used = 0;
@@ -227,3 +270,4 @@ uint64_t sys_mem_get(long size){
 	used += size;
 	return retVal;
 }
+*/

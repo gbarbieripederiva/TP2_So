@@ -6,7 +6,8 @@
 #include <idtLoader.h>
 #include <interrupt80.h>
 #include <drivers/videoDrivers.h>
-#include "mmu/memoryManager.h"
+#include <memoryManager.h>
+#include <scheduler.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -42,10 +43,11 @@ void *initializeKernelBinary()
 		sampleDataModuleAddress};
 
 	loadModules(&endOfKernelBinary, moduleAddresses);
-
 	clearBSS(&bss, &endOfKernel - &bss);
-
+	initializeMemory();
 	initializeConsole();
+	init_processes();
+	init_sched();
 
 	return getStackBase();
 }
@@ -53,7 +55,7 @@ void *initializeKernelBinary()
 int main()
 {
 	loadIDT();
-	initializeMemory();
+	
 
 	
 	//Entering sampleCodeModuleAddress in userland

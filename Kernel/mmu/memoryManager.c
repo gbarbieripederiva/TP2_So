@@ -1,5 +1,7 @@
-#include <stdint.h>
+
+#include "../include/memoryManager.h"
 #include "../include/null.h"
+#include <stdint.h>
 
 #define STARTING_MEM_LOCATION 0x600000
 #define INITIAL_MEM_SIZE 100000

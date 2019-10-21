@@ -161,7 +161,60 @@ sys_screen:
 	pushState
 	adjust_to_sys_call
 	;sys call sys_screen is call number 20
-	mov rdi,20;
+	mov rdi,20
 	int 80h
 	popState
 	ret
+
+
+GLOBAL sys_get_memory
+sys_get_memory:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_get_memory is call number 45
+	mov rdi,45
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_mem_free
+sys_mem_free:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_mem_free is call number 46
+	mov rdi,46
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_create_process
+sys_create_process:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_create_process is call number 47
+	mov rdi,47
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_run_process
+sys_run_process:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_run_process is call 48
+	mov rdi, 48
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_kill_process
+sys_kill_process:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_kill_process is call 49
+	mov rdi,49
+	int 80h
+	popState
+	ret
+
+
