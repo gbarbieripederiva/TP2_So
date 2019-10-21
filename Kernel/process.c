@@ -5,7 +5,8 @@
 
 static int pid = 1;
 
-
+#pragma pack(push)
+#pragma pack(1)
 typedef struct stack{
     uint64_t r15;
     uint64_t r14;
@@ -33,7 +34,7 @@ typedef struct stack{
     uint64_t base;
 
 } stack_frame;
-
+#pragma pack(pop)
 
 /*
 popState
