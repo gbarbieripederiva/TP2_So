@@ -9,3 +9,4 @@ exit
 cd root
 ./run.sh
 exit
+exit
