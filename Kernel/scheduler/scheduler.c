@@ -13,10 +13,6 @@
 static int pid = 1;
 static int iterator;
 
-
-
-
-
 procInSched procsInSched[SIZE];
 
 void init_sched(){

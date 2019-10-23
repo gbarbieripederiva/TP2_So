@@ -9,6 +9,6 @@
 int main() {
     processInfo terminalInfo;
     terminalInfo = sys_create_process("terminal",0, (uint64_t)terminal);
-    sys_run_process(terminalInfo);
+    sys_run_process(terminalInfo, 1);
     return 0;
 }
