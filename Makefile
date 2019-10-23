@@ -1,6 +1,8 @@
 
 all:  bootloader kernel userland image
 
+debugger: bootloader debugging_kernel debugging_userland image 
+
 bootloader:
 	cd Bootloader; make all
 
@@ -12,6 +14,12 @@ userland:
 
 image: kernel bootloader userland
 	cd Image; make all
+
+debugging_kernel:
+	cd Kernel; make debugger
+
+debugging_userland:
+	cd Userland; make debugger
 
 clean:
 	cd Bootloader; make clean

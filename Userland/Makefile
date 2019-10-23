@@ -4,8 +4,13 @@ SAMPLE_DATA=0001-sampleDataModule.bin
 
 all: sampleCodeModule sampleDataModule
 
+debugger:debugging_sampleCodeModule sampleDataModule
+
 sampleCodeModule:
 	cd SampleCodeModule; make
+
+debugging_sampleCodeModule:
+	cd SampleCodeModule; make debugger
 
 sampleDataModule:
 	printf "This is sample data." >> $(SAMPLE_DATA) && dd if=/dev/zero bs=1 count=1 >> $(SAMPLE_DATA)
