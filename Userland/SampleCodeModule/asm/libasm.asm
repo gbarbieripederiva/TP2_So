@@ -1,4 +1,3 @@
-GLOBAL testFun
 
 section .text
 
