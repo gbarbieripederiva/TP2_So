@@ -55,7 +55,7 @@ int *sys_mem_free(void * chunk);
 processInfo *sys_create_process(char * name, int priority, uint64_t process);
 
 //SYS CALL 48, to put a process into the scheduler
-int sys_run_process(processInfo process);
+int sys_run_process(processInfo process, int state);
 
 //SYS CALL 49, to kill a running process
 int kill_process(int pid);
