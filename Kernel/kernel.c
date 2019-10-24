@@ -8,6 +8,7 @@
 #include <drivers/videoDrivers.h>
 #include <memoryManager.h>
 #include <scheduler.h>
+#include <schedulerTest.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -48,6 +49,11 @@ void *initializeKernelBinary()
 	initializeConsole();
 	init_processes();
 	init_sched();
+	processInfo test1Aux;
+	test1Aux = create_process("test1", 1, test1);
+	processInfo test0Aux;
+	test0Aux = create_process("test0", 1, test0);
+
 
 	return getStackBase();
 }
