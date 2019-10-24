@@ -2,6 +2,11 @@
 #define SCHEDULER_H 
 #include <stdint.h>
 #include <process.h>
+#define HALT 3
+#define EMPTY 2
+#define BLOCKED 0
+#define READY 1
+#define SIZE 10
 
 
 

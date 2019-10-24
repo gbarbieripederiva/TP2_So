@@ -51,8 +51,10 @@ void *initializeKernelBinary()
 	init_sched();
 	processInfo test1Aux;
 	test1Aux = create_process("test1", 1, (uint64_t)test1);
+	run_process(test1Aux, READY);
 	processInfo test0Aux;
 	test0Aux = create_process("test0", 1, (uint64_t)test0);
+	run_process(test0Aux, READY);
 
 
 	return getStackBase();
@@ -65,7 +67,17 @@ int main()
 
 	
 	//Entering sampleCodeModuleAddress in userland
-	((EntryPoint)sampleCodeModuleAddress)();
+	//((EntryPoint)sampleCodeModuleAddress)();
+	processInfo entry;
+	entry = create_process("Sample Code Module", 1, (uint64_t)sampleCodeModuleAddress);
+	run_process(entry, READY);
+	while (1)
+	{
+	}
+	
+
+
+
 
 	ncPrint("[Finished]");
 	return 0;

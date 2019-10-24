@@ -4,11 +4,7 @@
 #include <process.h>
 #include <interrupts.h>
 
-#define HALT 3
-#define EMPTY 2
-#define BLOCKED 0
-#define READY 1
-#define SIZE 10
+
 
 static int iterator;
 
