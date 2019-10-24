@@ -52,10 +52,10 @@ void * sys_get_memory(long size);
 int *sys_mem_free(void * chunk);
 
 //SYS_CALL 47, to create a process
-processInfo *sys_create_process(char * name, int priority, uint64_t process);
+uint64_t sys_create_process(char * name, int priority, uint64_t process);
 
 //SYS CALL 48, to put a process into the scheduler
-int sys_run_process(processInfo process, int state);
+int sys_run_process(uint64_t process, int state);
 
 //SYS CALL 49, to kill a running process
 int kill_process(int pid);

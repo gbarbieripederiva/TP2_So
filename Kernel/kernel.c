@@ -50,9 +50,9 @@ void *initializeKernelBinary()
 	init_processes();
 	init_sched();
 	processInfo test1Aux;
-	test1Aux = create_process("test1", 1, test1);
+	test1Aux = create_process("test1", 1, (uint64_t)test1);
 	processInfo test0Aux;
-	test0Aux = create_process("test0", 1, test0);
+	test0Aux = create_process("test0", 1, (uint64_t)test0);
 
 
 	return getStackBase();

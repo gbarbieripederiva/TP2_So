@@ -18,8 +18,8 @@ uint8_t sys_get_clock_info(int option);                         //SYS_CALL 12
 void sys_screen(uint64_t option, uint64_t arg1, uint64_t arg2); //SYS_CALL 20
 uint64_t sys_mem_get(long size);                          //SYS_CALL 45
 int sys_mem_free(uint64_t chunk);                           //SYS_CALL 46
-processInfo sys_create_process(char * name, int priority, uint64_t process); //SYSCALL 47
-int sys_run_process(processInfo process, int state); //SYSCALL 48
+uint64_t sys_create_process(char * name, int priority, uint64_t process); //SYSCALL 47
+int sys_run_process(uint64_t process, int state); //SYSCALL 48
 int sys_kill_process(int pid); //SYSCAL 49
 
 #endif

@@ -10,7 +10,6 @@
 #define READY 1
 #define SIZE 10
 
-static int pid = 1;
 static int iterator;
 
 procInSched procsInSched[SIZE];
@@ -23,7 +22,7 @@ void init_sched(){
         procsInSched[i] = aux;
     }
     processInfo halt;
-    halt = create_process("halt",0,haltFunction);
+    halt = create_process("halt",0,(uint64_t)haltFunction);
     run_process(halt, HALT);
     init_iterator();
 }
