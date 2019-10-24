@@ -105,7 +105,7 @@ uint64_t build_stack(uint64_t rip, uint64_t from){
     stack -> rip = rip;
     stack -> cs = 0X8;
     stack -> eflags = 0X202;
-    stack -> rsp = stack -> base;
+    stack -> rsp = &(stack -> base);
     stack -> ss = 0X0;
     stack -> base = 0X0;
 
