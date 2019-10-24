@@ -50,10 +50,10 @@ void *initializeKernelBinary()
 	init_processes();
 	init_sched();
 	processInfo test1Aux;
-	test1Aux = create_process("test1", 1, (uint64_t)test1);
+	test1Aux = create_process("test1", 1, (uint64_t)&test1);
 	run_process(test1Aux, READY);
 	processInfo test0Aux;
-	test0Aux = create_process("test0", 1, (uint64_t)test0);
+	test0Aux = create_process("test0", 1, (uint64_t)&test0);
 	run_process(test0Aux, READY);
 
 
