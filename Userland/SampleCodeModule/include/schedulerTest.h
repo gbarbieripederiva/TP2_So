@@ -1,3 +1,2 @@
 
-void test1();
-void test0();
+void test();
