@@ -216,4 +216,13 @@ sys_kill_process:
 	popState
 	ret
 
+GLOBAL sys_print_processes
+sys_print_processes:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_print_processes is call 50
+	mov rdi,50
+	int 80h
+	popState
+	ret
 

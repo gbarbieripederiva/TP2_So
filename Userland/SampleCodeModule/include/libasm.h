@@ -2,6 +2,9 @@
 #ifndef __LIBASMUSERLAND___
 #define __LIBASMUSERLAND__
 
+#define READY 1
+#define BLOCKED 0
+
 typedef struct process{
     int pid;
     char * name;
@@ -58,7 +61,10 @@ uint64_t sys_create_process(char * name, int priority, uint64_t process);
 int sys_run_process(uint64_t process, int state);
 
 //SYS CALL 49, to kill a running process
-int kill_process(int pid);
+int sys_kill_process(int pid);
+
+//SYS CALL 50, to print processes
+void sys_print_processes();
 
 
 

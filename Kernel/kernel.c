@@ -8,7 +8,7 @@
 #include <drivers/videoDrivers.h>
 #include <memoryManager.h>
 #include <scheduler.h>
-#include <schedulerTest.h>
+
 
 extern uint8_t text;
 extern uint8_t rodata;

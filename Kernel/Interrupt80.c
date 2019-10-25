@@ -80,6 +80,11 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 49:
 		return (int) sys_kill_process((int) arg1);
 		break;
+	case 50:
+		sys_print_processes();
+		break;
+
+		
 
 	}
 
@@ -252,6 +257,11 @@ int sys_run_process(uint64_t process, int state){
 //SYSCALL 49 kills a running process
 int sys_kill_process(int pid){
 	return kill_process(pid);
+}
+
+//SYSCALL 50 prints all running processes
+void sys_print_processes(){
+	print_running_procs();
 }
 
 /*

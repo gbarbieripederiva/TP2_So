@@ -101,8 +101,8 @@ int kill_process(int pid){
     }
     if(procsInSched[i].process -> pid == pid && i != iterator) {  //if i equals iterator it means it is currently running we cant remove it
         procsInSched[i].state = EMPTY;
-        unGiveMeMemory(procsInSched[i].process->sp);
-        unGiveMeMemory(procsInSched[i].process);
+        unGiveMeMemory((void *)procsInSched[i].process->sp);
+        unGiveMeMemory((void *)procsInSched[i].process);
         running_procs--;
         return 0;
     }
@@ -134,6 +134,9 @@ void print_running_procs(){
     while(i < SIZE && procsInSched[i].state != EMPTY){
         ncPrint("PID:");
         ncPrintDec((uint64_t)procsInSched[i].process ->pid);
+        ncNewLine();
+        ncPrint("Name:");
+        ncPrint((char *)procsInSched[i].process -> name);
         ncNewLine();
         ncPrint("State: ");
         ncPrintDec((uint64_t)procsInSched[i].state);

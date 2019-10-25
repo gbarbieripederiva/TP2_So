@@ -21,5 +21,6 @@ int sys_mem_free(uint64_t chunk);                           //SYS_CALL 46
 uint64_t sys_create_process(char * name, int priority, uint64_t process); //SYSCALL 47
 int sys_run_process(uint64_t process, int state); //SYSCALL 48
 int sys_kill_process(int pid); //SYSCAL 49
+void sys_print_processes(); //SYSCALL 50
 
 #endif
