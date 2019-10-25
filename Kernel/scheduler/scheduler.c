@@ -80,7 +80,7 @@ void next(){
                 iterator++;
                 i--;
             }
-            if(i == 0){ //if i == 11 then there is no procInSched
+            if(i == 0 && procsInSched[iterator % SIZE].state != READY){ //if i == 11 then there is no procInSched
                 iterator = 0; 
             }
             iterator = iterator % SIZE;
