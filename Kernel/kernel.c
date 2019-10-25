@@ -49,7 +49,7 @@ void *initializeKernelBinary()
 	initializeConsole();
 	init_processes();
 	init_sched();
-	processInfo test1Aux;
+	
 	
 
 
@@ -63,10 +63,7 @@ int main()
 
 	
 	//Entering sampleCodeModuleAddress in userland
-	//((EntryPoint)sampleCodeModuleAddress)();
-	processInfo entry;
-	entry = create_process("Sample Code Module", 1, (uint64_t) sampleCodeModuleAddress);
-	run_process(entry, READY);
+	((EntryPoint)sampleCodeModuleAddress)();
 	while (1)
 	{
 	}
@@ -80,6 +77,7 @@ int main()
 }
 
 /*
+	processInfo test1Aux;
 	test1Aux = create_process("test1", 1, (uint64_t)test1);
 	run_process(test1Aux, READY);
 	processInfo test0Aux;
