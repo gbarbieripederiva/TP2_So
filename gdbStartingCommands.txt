@@ -11,5 +11,5 @@
     
     directory Userland/
     directory Userland/SampleCodeModule
-    directory Userland/include
-    directory Userland/asm
+    directory Userland/SampleCodeModule/include
+    directory Userland/SampleCodeModule/asm
