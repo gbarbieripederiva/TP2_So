@@ -27,7 +27,7 @@ void init_sched(){
 }
 
 
-procInSched create_fill_struct(processInfo process, int state){
+procInSched create_fill_struct(processInfo process, int state){ 
     procInSched aux;
     aux.process = process;
     aux.entered = process -> priority;
@@ -37,7 +37,7 @@ procInSched create_fill_struct(processInfo process, int state){
 
 
 int run_process(processInfo process, int state){
-    if(running_procs - 1 >= SIZE){
+    if(running_procs >= SIZE){
         return -1;
     }
     //if not it will always find an empty space in sched
@@ -46,6 +46,7 @@ int run_process(processInfo process, int state){
         i++;
     }
     procInSched aux = create_fill_struct(process, state);
+    running_procs++;
     procsInSched[i] = aux;
     return 0;
 }
@@ -65,23 +66,28 @@ void init_iterator(){
 
 //if it completes one cycle iterator goes to procInSched 0 which is halt
 void next(){
-    if(procsInSched[iterator].state == READY && procsInSched[iterator].entered != 0){
-        procsInSched[iterator].entered--;
-        return;
-    }
-    else {    
-        procsInSched[iterator].entered = procsInSched[iterator].process -> priority; //reset entered times
-        iterator++;
-        int i = SIZE + 1; //counts the times it enters the loop
-       
-        while( procsInSched[iterator % SIZE].state != READY && i > 0){
+    if(running_procs > 1){
+        if(procsInSched[iterator].state == READY && procsInSched[iterator].entered != 0){
+            procsInSched[iterator].entered--;
+            return;
+        }
+        else {    
+            procsInSched[iterator].entered = procsInSched[iterator].process -> priority; //reset entered times
             iterator++;
-            i--;
+            int i = SIZE + 1; //counts the times it enters the loop
+        
+            while( procsInSched[iterator % SIZE].state != READY && i > 0){
+                iterator++;
+                i--;
+            }
+            if(i == 0){ //if i == 11 then there is no procInSched
+                iterator = 0; 
+            }
+            iterator = iterator % SIZE;
         }
-        if(i == 0){ //if i == 11 then there is no procInSched
-            iterator = 0; 
-        }
-        iterator = iterator % SIZE;
+    }
+    else{
+        return;
     }
 
 }
