@@ -4,6 +4,7 @@
 #include <process.h>
 #include <interrupts.h>
 #include <memoryManager.h>
+#include <naiveConsole.h>
 
 
 
@@ -127,10 +128,40 @@ int set_state(int pid, int state){
 
 }
 
+
+void print_running_procs(){
+    int i = 0;
+    while(i < SIZE && procsInSched[i].state != EMPTY){
+        ncPrint("PID:");
+        ncPrintDec((uint64_t)procsInSched[i].process ->pid);
+        ncNewLine();
+        ncPrint("State: ");
+        ncPrintDec((uint64_t)procsInSched[i].state);
+        ncNewLine();
+        ncPrint("Priority: ");
+        ncPrintDec((uint64_t)procsInSched[i].process->priority);
+        ncNewLine();
+    }
+}
+
 int get_current_pid(){
     return procsInSched[iterator].process->pid;
 }
 
+int change_run_to(int pid){
+    int i = 0;
+    while(i < SIZE && procsInSched[i].process->pid != pid){
+        i++;
+    }
+    if(procsInSched[i].process->pid == pid && procsInSched[i].state != BLOCKED){
+        iterator = i;
+        return 0;
+    }
+    else{
+        next();
+        return -1;
+    }
+}
 
 /*
  void printTest(procInSched test){
