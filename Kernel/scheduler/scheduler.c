@@ -3,14 +3,17 @@
 #include <stdio.h>
 #include <process.h>
 #include <interrupts.h>
+#include <memoryManager.h>
 
 
 
-static int iterator;
+static int iterator = 0;
+static int running_procs;
 
 procInSched procsInSched[SIZE];
 
 void init_sched(){
+    running_procs = 0;
     procInSched aux;
     aux.state = EMPTY;
     int i;
@@ -34,15 +37,16 @@ procInSched create_fill_struct(processInfo process, int state){
 
 
 int run_process(processInfo process, int state){
+    if(running_procs - 1 >= SIZE){
+        return -1;
+    }
+    //if not it will always find an empty space in sched
     int i = 0;
     while(i < SIZE && procsInSched[i].state != EMPTY){
         i++;
     }
-    if(procsInSched[i].state == EMPTY){
-        procInSched aux = create_fill_struct(process, state);
-        procsInSched[i] = aux;
-        return 1;
-    }
+    procInSched aux = create_fill_struct(process, state);
+    procsInSched[i] = aux;
     return 0;
 }
 
@@ -88,8 +92,11 @@ int kill_process(int pid){
     while(i < SIZE && procsInSched[i].process -> pid != pid ){
         i++;
     }
-    if(procsInSched[i].process -> pid == pid){
+    if(procsInSched[i].process -> pid == pid && i != iterator) {  //if i equals iterator it means it is currently running we cant remove it
         procsInSched[i].state = EMPTY;
+        unGiveMeMemory(procsInSched[i].process->sp);
+        unGiveMeMemory(procsInSched[i].process);
+        running_procs--;
         return 0;
     }
     return -1;
@@ -117,6 +124,8 @@ int set_state(int pid, int state){
 int get_current_pid(){
     return procsInSched[iterator].process->pid;
 }
+
+
 /*
  void printTest(procInSched test){
     printf("pid = %d\n",  test.process -> pid);
