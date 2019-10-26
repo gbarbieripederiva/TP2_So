@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include "../include/memoryManager.h"
 #include "../include/null.h"
 
 #define STARTING_MEM_LOCATION 0x600000
