@@ -65,10 +65,6 @@ int main()
 	//Entering sampleCodeModuleAddress in userland
 	((EntryPoint)sampleCodeModuleAddress)();
 	
-	while (1)
-	{
-		
-	}
 	
 
 
