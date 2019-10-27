@@ -1,11 +1,5 @@
 #ifndef SEMAPHORE_H
 #define SEMAPHORE_H
-#include <stdint.h>
-#include <memoryManager.h>
-#include <sem.h>
-#include <scheduler.h>
-#include <null.h>
-
 
 typedef struct process_node * node_pointer;
 struct process_node{
@@ -21,7 +15,18 @@ typedef struct sem{
     node_pointer waiting_proc;
 } sem;
 
-typedef sem * semaphore;
+typedef sem *semaphore;
+
+#include <stdint.h>
+#include <memoryManager.h>
+#include <sem.h>
+#include <scheduler.h>
+#include <null.h>
+
+
+
+
+
 
 void init_sems();
 semaphore create_sem_struct(char * name, int state);

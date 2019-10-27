@@ -24,6 +24,7 @@ void init_iterator();
 int kill_process(int pid);
 uint64_t scheduler(uint64_t sp);
 int set_state(int pid, int state);
+int get_current_pid();
 
 
 

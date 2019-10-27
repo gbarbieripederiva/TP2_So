@@ -1,5 +1,5 @@
 
-#include <semaphore.h>
+#include <semaphores.h>
 
 #define MAX_SEMS 10
 
