@@ -28,6 +28,9 @@ void terminal()
 
     fillCommandList();
 
+    int sid = sys_create_semaphore("sem1", 1);
+    sys_sem_wait(sid);
+
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
 

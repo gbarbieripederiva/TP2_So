@@ -50,7 +50,7 @@ void *initializeKernelBinary()
 	initializeConsole();
 	init_processes();
 	init_sched();
-	//init_sems();
+	init_sems();
 
 	
 	
