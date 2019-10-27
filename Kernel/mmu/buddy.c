@@ -2,7 +2,7 @@
 #include "../include/null.h"
 
 #define STARTING_MEM_LOCATION 0x600000
-#define INITIAL_MEM_SIZE 131072  //cambiado para que haya 128 bloques de 1K
+#define INITIAL_MEM_SIZE 131072  //enough for 128 1K-sized blocks
 #define CHUNK_SIZE 1024
 #define CHUNKS (INITIAL_MEM_SIZE / CHUNK_SIZE)
 
@@ -107,7 +107,7 @@ void * giveMeMemory(uint64_t size){
 //(parentLocation + size/2^h) where h is the height of the current node. 
 
 static uint32_t findFirstChunk(uint64_t location){
-    location -= STARTING_MEM_LOCATION;
+    location -= STARTING_MEM_LOCATION; //normalize to 0, as if it was an offset
     uint32_t chunk = 0;
     uint64_t size = INITIAL_MEM_SIZE;
     uint64_t currentLocation = 0;
