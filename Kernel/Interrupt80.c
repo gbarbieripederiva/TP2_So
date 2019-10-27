@@ -81,6 +81,10 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 49:
 		return (int) sys_kill_process((int) arg1);
 		break;
+	//sys_get_pid
+	case 50:
+		return (int) sys_get_pid();
+		break;
 	//sys_create_semaphore: creates a sem and returns sem id
 	case 60:
 		return (int) sys_create_semaphore((char *)arg1, (int) arg2);
@@ -269,6 +273,11 @@ int sys_kill_process(int pid){
 	return kill_process(pid);
 }
 
+//SYSCALL 50 get pid
+int sys_get_pid(){
+	return get_current_pid();
+}
+
 //SYSCALL 60 creates a semaphore
 int sys_create_semaphore(char * name, int state){
 	return (int) s_open(name, state);
@@ -288,6 +297,7 @@ int sys_sem_post(int sid){
 int sys_sem_wait(int sid){
 	return (int) s_wait(sid);
 }
+
 
 
 /*

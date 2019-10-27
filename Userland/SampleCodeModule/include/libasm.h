@@ -60,6 +60,9 @@ int sys_run_process(uint64_t process, int state);
 //SYS CALL 49, to kill a running process
 int sys_kill_process(int pid);
 
+//SYS CALL 50, to get pid
+int sys_get_pid();
+
 //SYS CALL 60, to create a sempahore
 int sys_create_semaphore(char * nombre, int state);
 

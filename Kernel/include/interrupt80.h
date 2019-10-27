@@ -21,9 +21,11 @@ int sys_mem_free(uint64_t chunk);                           //SYS_CALL 46
 uint64_t sys_create_process(char * name, int priority, uint64_t process); //SYSCALL 47
 int sys_run_process(uint64_t process, int state); //SYSCALL 48
 int sys_kill_process(int pid); //SYSCAL 49
+int sys_get_pid();//SYSCALL 50
 int sys_create_semaphore(char * name, int state); //SYSCALL 60
 int sys_sem_close(int sid); //SYSCALL 61
 int sys_sem_post(int sid); //SYSCALL 62
 int sys_sem_wait(int sid); //SYSCALL 63
+
 
 #endif

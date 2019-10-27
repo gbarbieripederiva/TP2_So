@@ -216,6 +216,16 @@ sys_kill_process:
 	popState
 	ret
 
+GLOBAL sys_get_pid
+sys_get_pid:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_get_pid is call 50
+	mov rdi,50
+	int 80h
+	popState
+	ret
+
 GLOBAL sys_create_semaphore
 sys_create_semaphore:
 	pushState
@@ -255,3 +265,4 @@ sys_sem_wait:
 	int 80h
 	popState
 	ret
+
