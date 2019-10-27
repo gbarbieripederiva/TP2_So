@@ -9,6 +9,7 @@
 #include <memoryManager.h>
 #include <scheduler.h>
 #include <schedulerTest.h>
+#include <semaphore.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -49,6 +50,8 @@ void *initializeKernelBinary()
 	initializeConsole();
 	init_processes();
 	init_sched();
+	init_sems();
+
 	
 	
 
