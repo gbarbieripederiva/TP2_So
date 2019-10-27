@@ -35,7 +35,7 @@ int s_close(int sid);
 void add_waiting_proc(uint64_t lock, semaphore sem, int pid);
 int s_wait(int sid);
 void check_blocked(uint64_t lock, semaphore sem);
-int sem_post(int sid);
+int s_post(int sid);
 
 
 

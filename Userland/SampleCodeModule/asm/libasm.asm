@@ -216,4 +216,42 @@ sys_kill_process:
 	popState
 	ret
 
+GLOBAL sys_create_semaphore
+sys_create_semaphore:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_create_semaphore is call 60
+	mov rdi,60
+	int 80h
+	popState
+	ret
 
+GLOBAL sys_sem_close
+sys_sem_close:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_sem_close is call 61
+	mov rdi,61
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_sem_post
+sys_sem_post:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_sem_post is call 62
+	mov rdi,62
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_sem_wait
+sys_sem_wait:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_sem_wait is call 63
+	mov rdi,63
+	int 80h
+	popState
+	ret

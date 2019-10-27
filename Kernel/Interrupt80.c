@@ -9,6 +9,7 @@
 #include <memoryManager.h>
 #include <process.h>
 #include <scheduler.h>
+#include <semaphore.h>
 
 //Software interrupt used for interaction between user and kernel space
 //order of registers in standard rdi -> call number,rsi -> arg1 ,rdx -> arg2 ,rcx -> arg3
@@ -80,8 +81,22 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 49:
 		return (int) sys_kill_process((int) arg1);
 		break;
+	//sys_create_semaphore: creates a sem and returns sem id
+	case 60:
+		return (int) sys_create_semaphore((char *)arg1, (int) arg2);
+		break;
+	case 61:
+		return (int) sys_sem_close((int) arg1);
+		break;
+	case 62:
+		return (int) sys_sem_post((int) arg1);
+		break;
+	case 63:
+		return (int) sys_sem_wait((int) arg1);
+		break;
 
 	}
+
 
 
 	return 0;
@@ -253,6 +268,27 @@ int sys_run_process(uint64_t process, int state){
 int sys_kill_process(int pid){
 	return kill_process(pid);
 }
+
+//SYSCALL 60 creates a semaphore
+int sys_create_semaphore(char * name, int state){
+	return (int) s_open(name, state);
+}
+
+//SYSCALL 61 close an existing semaphore, if does not exist it returns -1
+int sys_sem_close(int sid){
+	return (int) s_close(sid);
+}
+
+//SYSCALL 62 sem post
+int sys_sem_post(int sid){
+	return (int) s_post(sid);
+}
+
+//SYSCALL 63 sem wait
+int sys_sem_wait(int sid){
+	return (int) s_wait(sid);
+}
+
 
 /*
 #define SIZE 100000

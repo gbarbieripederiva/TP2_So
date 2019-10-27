@@ -52,7 +52,7 @@ void free_waiting_procs(semaphore sem){
 
 int s_close(int sid){
     int i = 0;
-    while(i < MAX_SEMS && semaphores[i] -> sem_id != sid){
+    while(i < MAX_SEMS && (semaphores[i] == NULL || semaphores[i] -> sem_id != sid)){
         i++;
     }
     if(semaphores[i] -> sem_id == sid){
@@ -68,6 +68,7 @@ node_pointer create_node(int pid){
     node_pointer node = (node_pointer)  giveMeMemory(sizeof(struct process_node));
     node ->pid = pid;
     node -> next = NULL;
+    return node;
 }
 
 void add_waiting_proc(uint64_t lock, semaphore sem, int pid){
@@ -88,7 +89,7 @@ void add_waiting_proc(uint64_t lock, semaphore sem, int pid){
 
 int s_wait(int sid){
     int i = 0;
-    while(i < MAX_SEMS && semaphores[i]->sem_id != sid){
+    while(i < MAX_SEMS && (semaphores[i] == NULL || semaphores[i] -> sem_id != sid)){
         i++;
     }
     if(i == MAX_SEMS){
@@ -97,10 +98,7 @@ int s_wait(int sid){
     else{
         int pid = get_current_pid();
        enter_region((uint64_t)&(semaphores[i]->state), semaphores[i], pid);
-
-
-
-        return 0;
+       return semaphores[i]->state;
     }
 }
 
@@ -114,9 +112,9 @@ void check_blocked(uint64_t lock, semaphore sem){
     }
 }
 
-int sem_post(int sid){
+int s_post(int sid){
     int i = 0;
-      while(i < MAX_SEMS && semaphores[i]->sem_id != sid){
+      while(i < MAX_SEMS && (semaphores[i] == NULL || semaphores[i] -> sem_id != sid)){
         i++;
     }
     if(i == MAX_SEMS){
@@ -124,6 +122,7 @@ int sem_post(int sid){
     }
     else{
         leave_region((uint64_t)&(semaphores[i]->state), semaphores[i]);
+        return semaphores[i]->state;
 
     }
 }

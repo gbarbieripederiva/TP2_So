@@ -58,8 +58,18 @@ uint64_t sys_create_process(char * name, int priority, uint64_t process);
 int sys_run_process(uint64_t process, int state);
 
 //SYS CALL 49, to kill a running process
-int kill_process(int pid);
+int sys_kill_process(int pid);
 
+//SYS CALL 60, to create a sempahore
+int sys_create_semaphore(char * nombre, int state);
 
+//SYS CALL 61, to close a semaphore
+int sys_sem_close(int sid);
+
+//SYS CALL 62, to post a semaphore
+int sys_sem_post(int sid);
+
+//SYS CALL 63, to wait for a semaphore
+int sys_sem_wait(int sid);
 
 #endif
