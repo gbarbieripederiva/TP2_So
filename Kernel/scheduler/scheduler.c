@@ -131,6 +131,19 @@ int get_current_pid(){
     return procsInSched[iterator].process->pid;
 }
 
+int change_run_to(int pid){
+    int curr = 0;
+    while(curr < SIZE && procsInSched[curr].process ->pid != pid) {
+        curr++;
+    }
+    if(procsInSched[curr].process ->pid == pid){
+        iterator = curr;
+        return 0;
+    }
+    return -1;
+}
+
+
 
 /*
  void printTest(procInSched test){
