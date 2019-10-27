@@ -106,8 +106,6 @@ void * giveMeMemory(uint64_t size){
 }
 
 //Equivalent to free()
-//This algorithm is O(n) where n is the total number of memory chunks. Could be upgraded to O(log n) very easily,
-//but I doubt we will be managing many chunks at any time
 
 int unGiveMeMemory(void * location){
 

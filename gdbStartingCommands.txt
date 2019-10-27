@@ -2,5 +2,14 @@
     target remote 172.17.0.1:1234
     add-symbol-file Kernel/kernel.elf 0x100000
     add-symbol-file Userland/0000-sampleCodeModule.elf 0x400000
+
     directory Kernel/
+    directory Kernel/mmu
+    directory Kernel/scheduler
+    directory Kernel/include
+    directory Kernel/asm
+    
     directory Userland/
+    directory Userland/SampleCodeModule
+    directory Userland/SampleCodeModule/include
+    directory Userland/SampleCodeModule/asm
