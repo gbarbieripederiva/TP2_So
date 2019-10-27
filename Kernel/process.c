@@ -1,4 +1,5 @@
 #include <process.h>
+#include <scheduler.h>
 #include <stdint.h>
 #include <memoryManager.h>
 #include <null.h>
@@ -67,23 +68,20 @@ void init_processes(){
     }
 }
 
-processInfo create_process(char * name, int priority, uint64_t rip){
-    if(pid >= MAX_PROCESSES){
-        return NULL;
+void run_set_return(uint64_t rip, processInfo process){
+    void (*main) (void) = (void (*) (void)) rip;
+    (*main)();
+    if(get_current_pid() == process ->pid){
+        change_run_to(process -> ppid);
     }
-    processInfo process = (processInfo)giveMeMemory((long)sizeof(process));
-    process -> pid = pid;
-    process -> priority = priority;
-    process -> name = name;
-    process -> stack_end = (uint64_t)giveMeMemory(STACK_SIZE);
-    process -> sp = build_stack(rip, process -> stack_end);
-    processes[pid++] = process;
+    while(kill_process(process -> pid) == -1){
 
-    return process;
+    }
+
 }
 
 
-uint64_t build_stack(uint64_t rip, uint64_t from){
+uint64_t build_stack(uint64_t rip, uint64_t from, processInfo process){
     stack_frame  * stack = (stack_frame *)(from + STACK_SIZE - sizeof(stack_frame) - 1);
     stack -> r15 = 0X0;
     stack -> r14 = 0X0;
@@ -93,8 +91,8 @@ uint64_t build_stack(uint64_t rip, uint64_t from){
     stack -> r10 = 0X0;
     stack -> r9 = 0X0;
     stack -> r8 = 0X0;
-    stack -> rsi = 0X0;
-    stack -> rdi = 0X0;
+    stack -> rsi = (uint64_t)process;
+    stack -> rdi = rip;
     stack -> rbp = 0X0;
     stack -> rdx = 0X0;
     stack -> rcx = 0X0;
@@ -102,16 +100,35 @@ uint64_t build_stack(uint64_t rip, uint64_t from){
     stack -> rax = 0X0;
     
 
-    stack -> rip = rip;
+    stack -> rip = (uint64_t) run_set_return;
     stack -> cs = 0X8;
     stack -> eflags = 0X202;
-    stack -> rsp = &(stack -> base);
+    stack -> rsp = (uint64_t)&(stack -> base);
     stack -> ss = 0X0;
     stack -> base = 0X0;
 
     return (uint64_t) stack;
 
 }
+
+processInfo create_process(char * name, int priority, uint64_t rip){
+    if(pid >= MAX_PROCESSES){
+        return NULL;
+    }
+    processInfo process = (processInfo)giveMeMemory((long)sizeof(process));
+    process -> ppid = get_current_pid();
+    process -> pid = pid;
+    process -> priority = priority;
+    process -> name = name;
+    process -> stack_end = (uint64_t)giveMeMemory(STACK_SIZE);
+    process -> sp = build_stack(rip, process -> stack_end, process);
+    processes[pid++] = process;
+
+    return process;
+}
+
+
+
 int set_priority(int pid, int priority){
     int curr = 0;
     while(curr < MAX_PROCESSES && processes[curr] -> pid != pid){
