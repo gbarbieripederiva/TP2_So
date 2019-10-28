@@ -145,16 +145,3 @@ int set_priority(int pid, int priority){
 }
 
 
-
-/*
-int main(){
-     processInfo aux1 = create_process("Hola", READY,1, (uint64_t)test1);
-     printMe(aux1);
-    return 0;
-}
-void printMe(processInfo test){
-    printf("Function name: %s\n", test -> name);
-    printf("Stack Pointer: %llu\n", test -> sp);
-    printf("Priority: %d\n", test -> priority);
-}
-*/
