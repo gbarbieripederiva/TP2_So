@@ -73,7 +73,8 @@ void run_set_return(uint64_t rip, processInfo process){
     void (*main) (void) = (void (*) (void)) rip;
     (*main)();
     if(get_current_pid() == process ->pid){
-        switch_context();
+
+        interrupt1();
     }
     while(kill_process(process -> pid) == -1){
 

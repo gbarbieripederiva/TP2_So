@@ -122,7 +122,7 @@ int set_state(int pid, int state){
     }
     if(procsInSched[curr].process ->pid == pid){
         procsInSched[curr].state = state;
-        switch_context();
+        interrupt1();
         return 0;
     }
     return -1;

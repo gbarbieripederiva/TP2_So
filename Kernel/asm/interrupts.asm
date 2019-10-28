@@ -221,11 +221,4 @@ exception6:
 	ret
 
 
-GLOBAL switch_context
-switch_context:
-	pushState
-	mov rdi, rsp
-	call scheduler
-	mov rsp, rax
-	popState
-	iretq
+ 
