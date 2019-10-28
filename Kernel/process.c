@@ -116,7 +116,8 @@ processInfo create_process(char * name, int priority, uint64_t rip){
         return NULL;
     }
     processInfo process = (processInfo)giveMeMemory((long)sizeof(process));
-    process -> ppid = get_current_pid();
+    if(pid != 0){
+    process -> ppid = get_current_pid();}
     process -> pid = pid;
     process -> priority = priority;
     process -> name = name;
