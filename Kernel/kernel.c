@@ -52,7 +52,6 @@ void *initializeKernelBinary()
 	init_processes();
 	init_sched();
 	init_sems();
-	rep_halt();
 
 	
 	
