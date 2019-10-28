@@ -13,7 +13,7 @@ semaphore semaphores[MAX_SEMS];
 void init_sems(){
     int i=0;
     while(i < MAX_SEMS){
-        semaphores[i] = NULL;
+        semaphores[i++] = NULL;
     }
     sem_id = 0;
 }
@@ -37,8 +37,8 @@ int s_open(char * name, int state){
         return -1;
     }
     else{
-        semaphore aux = create_sem_struct(name, state);
-        return aux -> sem_id;
+        semaphores[i] = create_sem_struct(name, state);
+        return semaphores[i] -> sem_id;
     }
 }
 
@@ -97,8 +97,8 @@ int s_wait(int sid){
     }
     else{
         int pid = get_current_pid();
-       enter_region((uint64_t)&(semaphores[i]->state), semaphores[i], pid);
-       return semaphores[i]->state;
+        enter_region((uint64_t)&(semaphores[i]->state), semaphores[i], pid);
+        return semaphores[i]->state;
     }
 }
 

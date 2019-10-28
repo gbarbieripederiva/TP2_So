@@ -4,6 +4,7 @@
 #include <process.h>
 #include <interrupts.h>
 #include <memoryManager.h>
+#include <naiveConsole.h>
 
 
 
