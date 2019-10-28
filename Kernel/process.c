@@ -2,6 +2,7 @@
 #include <scheduler.h>
 #include <stdint.h>
 #include <memoryManager.h>
+#include <interrupt.h>
 #include <null.h>
 
 static int pid = 1;
@@ -73,7 +74,6 @@ void run_set_return(uint64_t rip, processInfo process){
     (*main)();
     if(get_current_pid() == process ->pid){
         switch_context();
-    
     }
     while(kill_process(process -> pid) == -1){
 
