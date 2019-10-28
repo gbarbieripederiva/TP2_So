@@ -2,7 +2,7 @@
 #include <scheduler.h>
 #include <stdint.h>
 #include <memoryManager.h>
-#include <interrupt.h>
+#include <interrupts.h>
 #include <null.h>
 
 static int pid = 1;
