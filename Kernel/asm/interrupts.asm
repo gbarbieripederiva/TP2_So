@@ -205,3 +205,9 @@ GLOBAL exception6
 exception6:
 	exception 6
 
+
+ GLOBAL rep_halt
+ rep_halt:
+	hlt
+	jp rep_halt
+	ret
