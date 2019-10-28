@@ -122,11 +122,10 @@ int set_state(int pid, int state){
     }
     if(procsInSched[curr].process ->pid == pid){
         procsInSched[curr].state = state;
-        interrupt1();
+        _int20();
         return 0;
     }
     return -1;
-
 }
 
 int get_current_pid(){

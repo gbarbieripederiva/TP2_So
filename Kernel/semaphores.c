@@ -73,7 +73,7 @@ node_pointer create_node(int pid){
 
 void add_waiting_proc(uint64_t lock, semaphore sem, int pid){
     
-    set_state(pid, BLOCKED);
+    
     if(sem->waiting_proc == NULL){
        sem -> waiting_proc = create_node(pid);
     }
@@ -84,7 +84,9 @@ void add_waiting_proc(uint64_t lock, semaphore sem, int pid){
             aux = aux->next;
         }
         aux -> next = create_node(pid);
+
     }
+        set_state(pid, BLOCKED);
 }
 
 int s_wait(int sid){

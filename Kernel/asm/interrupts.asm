@@ -220,5 +220,8 @@ exception6:
 	jp rep_halt
 	ret
 
-
+GLOBAL _int20
+_int20:
+int 20h
+ret
  

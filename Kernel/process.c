@@ -74,7 +74,7 @@ void run_set_return(uint64_t rip, processInfo process){
     (*main)();
     if(get_current_pid() == process ->pid){
 
-        interrupt1();
+        _int20();
     }
     while(kill_process(process -> pid) == -1){
 

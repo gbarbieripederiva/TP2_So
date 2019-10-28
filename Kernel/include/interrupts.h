@@ -33,8 +33,6 @@ void exception6();
 
 //repetitive halt
 void rep_halt();
-
-//switch context
-void switch_context();
-
+//int 20
+void _int20();
 #endif
