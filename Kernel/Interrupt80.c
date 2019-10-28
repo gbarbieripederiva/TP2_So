@@ -85,18 +85,37 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 50:
 		return (int) sys_get_pid();
 		break;
+	//sys_print_running_procs: prints process info
+	case 51:
+		sys_print_running_procs();
+		break;
+	//sys_set_priority: sets priority to a process
+	case 52:
+		return (int) sys_set_priority((int) arg1, (int) arg2);
+		break;
+	//sys_set_state: sets a state to a process
+	case 53:
+		return (int) sys_set_state((int)arg1, (int) arg2);
+		break;
 	//sys_create_semaphore: creates a sem and returns sem id
 	case 60:
 		return (int) sys_create_semaphore((char *)arg1, (int) arg2);
 		break;
+	//sys_sem_close: close sem
 	case 61:
 		return (int) sys_sem_close((int) arg1);
 		break;
+	//sys_sem_post: clears sem
 	case 62:
 		return (int) sys_sem_post((int) arg1);
 		break;
+	//sys_sem_wait: waits for a sem
 	case 63:
 		return (int) sys_sem_wait((int) arg1);
+		break;
+	//sys_print_sems: prints openned semaphores
+	case 64:
+		sys_print_sems();
 		break;
 
 	}
@@ -277,6 +296,19 @@ int sys_kill_process(int pid){
 int sys_get_pid(){
 	return get_current_pid();
 }
+//SYSCALL 51 prints process information
+void sys_print_running_procs(){
+	print_running_procs();
+}
+//SYSCALL 52 set priority to a process
+int sys_set_priority(int pid, int priority){
+	return (int) set_priority(pid, priority);
+}
+
+//SYSCALL 53 to set state
+int sys_set_state(int pid, int state){
+	return (int) set_state(pid, state);
+}
 
 //SYSCALL 60 creates a semaphore
 int sys_create_semaphore(char * name, int state){
@@ -298,6 +330,11 @@ int sys_sem_wait(int sid){
 	return (int) s_wait(sid);
 }
 
+//SYSCALL 64 print sems
+void sys_print_sems(){
+	print_sems();
+}
+
 
 
 /*
@@ -316,4 +353,6 @@ void * sys_mem_get(long size){
 	used += size;
 	return retVal;
 }
+
+
 */

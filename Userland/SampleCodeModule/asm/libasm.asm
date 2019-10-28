@@ -226,6 +226,33 @@ sys_get_pid:
 	popState
 	ret
 
+GLOBAL sys_print_running_procs
+sys_print_running_procs:
+	pushState
+	;sys_print_running_procs is call 51
+	mov rdi, 51
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_set_priority
+sys_set_priority:
+	pushState
+	;sys_set_priority is call 52
+	mov rdi, 52
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_set_state
+sys_set_state:
+	pushState
+	;sys_set_state is call 53
+	mov rdi, 53
+	int 80h
+	popState
+	ret
+
 GLOBAL sys_create_semaphore
 sys_create_semaphore:
 	pushState
@@ -266,3 +293,12 @@ sys_sem_wait:
 	popState
 	ret
 
+GLOBAL sys_print_sems
+sys_print_sems:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_print_sems is call 64
+	mov rdi,64
+	int 80h
+	popState
+	ret

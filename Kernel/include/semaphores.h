@@ -22,6 +22,7 @@ typedef sem *semaphore;
 #include <sem.h>
 #include <scheduler.h>
 #include <null.h>
+#include <naiveConsole.h>
 
 
 
@@ -36,6 +37,7 @@ void add_waiting_proc(uint64_t lock, semaphore sem, int pid);
 int s_wait(int sid);
 void check_blocked(uint64_t lock, semaphore sem);
 int s_post(int sid);
+void print_sems();
 
 
 

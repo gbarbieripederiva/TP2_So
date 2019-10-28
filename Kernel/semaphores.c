@@ -126,3 +126,20 @@ int s_post(int sid){
 
     }
 }
+
+void print_sems(){
+    int i = 0;
+    while(i < MAX_SEMS){
+        if(semaphores[i] !=  NULL){
+            ncPrint("Sem name: ");
+            ncPrint(semaphores[i] -> name);
+            ncNewLine();
+            ncPrint("Sem id: ");
+            ncPrint(semaphores[i] -> sem_id);
+            ncNewLine();
+            ncPrint("Sem state: ");
+            (semaphores[i] -> state) == 1 ? ncPrint("LOCKED") : ncPrint("UNLOCKED");
+            ncNewLine();
+        }
+    }
+}

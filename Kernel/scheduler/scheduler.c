@@ -144,6 +144,27 @@ int change_run_to(int pid){
     return -1;
 }
 
+void print_running_procs(){
+    int i = 0;
+    while(i < SIZE && procsInSched[i].state != EMPTY){
+        ncPrint("PID:");
+        ncPrintDec((uint64_t)procsInSched[i].process ->pid);
+        ncNewLine();
+          ncPrint("PPID:");
+        ncPrintDec((uint64_t)procsInSched[i].process ->ppid);
+        ncNewLine();
+        ncPrint("Name:");
+        ncPrint((char *)procsInSched[i].process -> name);
+        ncNewLine();
+        ncPrint("State: ");
+        ncPrintDec((uint64_t)procsInSched[i].state);
+        ncNewLine();
+        ncPrint("Priority: ");
+        ncPrintDec((uint64_t)procsInSched[i].process->priority);
+        ncNewLine();
+    }
+}
+
 
 
 /*

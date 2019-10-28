@@ -63,6 +63,15 @@ int sys_kill_process(int pid);
 //SYS CALL 50, to get pid
 int sys_get_pid();
 
+//SYS CALL 51 to print process information
+void sys_print_running_procs();
+
+//SYS CALL 52 to set priority
+int sys_set_priority(int pid, int priority);
+
+//SYS CALL 53 to set state to a process
+int sys_set_state(int pid, int priority);
+
 //SYS CALL 60, to create a sempahore
 int sys_create_semaphore(char * nombre, int state);
 
@@ -74,5 +83,9 @@ int sys_sem_post(int sid);
 
 //SYS CALL 63, to wait for a semaphore
 int sys_sem_wait(int sid);
+
+//SYS CALL 64, to print openned sems
+void sys_print_sems();
+
 
 #endif
