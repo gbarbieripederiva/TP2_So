@@ -222,6 +222,6 @@ exception6:
 
 GLOBAL _int20
 _int20:
-int 20h
-ret
- 
+	int 20h
+	ret
+	
