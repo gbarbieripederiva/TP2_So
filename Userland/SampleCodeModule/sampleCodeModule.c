@@ -5,12 +5,12 @@
 #include <terminal.h>
 #include <jueguito.h>
 #include <libasm.h>
-#include <naiveConsole.h>
+
 
 void checking(){
     while(1){
-        ncPrint("Hola");
-        ncNewLine();
+        print("Hola");
+        printAction(0);
     }
 }
 
