@@ -16,6 +16,8 @@ int main() {
     uint64_t terminalInfo;
     terminalInfo = sys_create_process("terminal",0, (uint64_t)terminal);
     sys_run_process(terminalInfo, 1);
-
+    
+     int sid = sys_create_semaphore("sem1", 1);
+    sys_sem_wait(sid);
     return 0;
 }
