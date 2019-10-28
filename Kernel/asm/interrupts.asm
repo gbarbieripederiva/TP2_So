@@ -40,6 +40,8 @@ haltFunction:
 	ret
 
 
+
+
 ;push all registers
 %macro pushState 0
 	push rax
@@ -226,3 +228,4 @@ switch_context:
 	call scheduler
 	mov rsp, rax
 	popState
+	iretq
