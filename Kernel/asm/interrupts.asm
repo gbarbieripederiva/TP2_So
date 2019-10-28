@@ -217,3 +217,12 @@ exception6:
 	hlt
 	jp rep_halt
 	ret
+
+
+GLOBAL switch_context
+switch_context:
+	pushState
+	mov rdi, rsp
+	call scheduler
+	mov rsp, rax
+	popState

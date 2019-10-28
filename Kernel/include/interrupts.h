@@ -34,4 +34,7 @@ void exception6();
 //repetitive halt
 void rep_halt();
 
+//switch context
+void switch_context();
+
 #endif
