@@ -6,11 +6,13 @@ GLOBAL _sti
 _sti:
 	sti
 	ret
+
 ;disable interrupts
 GLOBAL _cli
 _cli:
 	cli
 	ret
+
 ;apply mask to master pic
 GLOBAL picMasterMask
 picMasterMask:
@@ -20,6 +22,7 @@ picMasterMask:
     out	21h,al
     pop rbp
     retn
+
 ;apply mask to slave pic
 GLOBAL picSlaveMask
 picSlaveMask:
@@ -91,6 +94,7 @@ extern interruptDispatcher
 	iretq
 %endmacro
 
+
 ;int 20h
 GLOBAL interrupt1
 extern scheduler
@@ -100,13 +104,15 @@ interrupt1:
 	mov rdi,1
 	call interruptDispatcher
 	
-	mov al, 20h
-	out 20h, al
+
 
 	mov rdi, rsp
 	call scheduler
 	mov rsp, rax
 	popState
+
+	mov al, 20h
+	out 20h, al
 
 	
 	iretq
