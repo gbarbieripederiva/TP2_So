@@ -104,15 +104,15 @@ interrupt1:
 	mov rdi,1
 	call interruptDispatcher
 	
-
+	mov al, 20h
+	out 20h, al
 
 	mov rdi, rsp
 	call scheduler
 	mov rsp, rax
 	popState
 
-	mov al, 20h
-	out 20h, al
+
 
 	
 	iretq
