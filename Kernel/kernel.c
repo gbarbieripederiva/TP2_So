@@ -5,6 +5,7 @@
 #include <naiveConsole.h>
 #include <idtLoader.h>
 #include <interrupt80.h>
+#include <interrupts.h>
 #include <drivers/videoDrivers.h>
 #include <memoryManager.h>
 #include <scheduler.h>
@@ -51,6 +52,7 @@ void *initializeKernelBinary()
 	init_processes();
 	init_sched();
 	init_sems();
+	rep_halt();
 
 	
 	
