@@ -33,6 +33,8 @@ void exception6();
 
 //repetitive halt
 void rep_halt();
+
 //int 20
 void _int20();
+
 #endif

@@ -23,7 +23,7 @@ typedef sem *semaphore;
 #include <scheduler.h>
 #include <null.h>
 #include <naiveConsole.h>
-
+#include <interrupts.h>
 
 
 

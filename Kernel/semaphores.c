@@ -87,6 +87,7 @@ void add_waiting_proc(uint64_t lock, semaphore sem, int pid){
 
     }
         set_state(pid, BLOCKED);
+        _int20();
 }
 
 int s_wait(int sid){
