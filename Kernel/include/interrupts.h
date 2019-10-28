@@ -31,4 +31,7 @@ void exception0();
 //exception 6, invalid opcode
 void exception6();
 
+//repetitive halt
+void rep_halt();
+
 #endif
