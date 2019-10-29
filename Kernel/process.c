@@ -61,6 +61,7 @@ popState
 static processInfo processes[MAX_PROCESSES];
 static int pid;
 
+//it just initiate the array with processes array in null
 void init_processes(){
     pid = 0;
 
@@ -69,17 +70,14 @@ void init_processes(){
     }
 }
 
+//it is wrapper that controls thre return of a process
 void run_set_return(uint64_t rip, processInfo process){
     void (*main) (void) = (void (*) (void)) rip;
     (*main)();
     kill_process(process -> pid);
-    if(get_current_pid() == process ->pid){
-
-        _int20();
-    }
 }
 
-
+//builds stack of a new process
 uint64_t build_stack(uint64_t rip, uint64_t from, processInfo process){
     stack_frame  * stack = (stack_frame *)(from + STACK_SIZE - sizeof(stack_frame) - 1);
     stack -> r15 = 0X0;
@@ -109,7 +107,7 @@ uint64_t build_stack(uint64_t rip, uint64_t from, processInfo process){
     return (uint64_t) stack;
 
 }
-
+//puts a process in the array and fills the stack with the rip
 processInfo create_process(char * name, int priority, uint64_t rip){
     if(pid >= MAX_PROCESSES){
         return NULL;
@@ -128,7 +126,7 @@ processInfo create_process(char * name, int priority, uint64_t rip){
 }
 
 
-
+//sets priority of a process
 int set_priority(int pid, int priority){
     int curr = 0;
     while(curr < MAX_PROCESSES && processes[curr] -> pid != pid){

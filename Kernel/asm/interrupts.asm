@@ -104,9 +104,6 @@ interrupt1:
 	pushState
 	cld
 	mov rdi,1
-	mov rsi, 1
-	mov rdx, 1
-	mov rcx, 1
 	call interruptDispatcher 
 	
 

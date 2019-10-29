@@ -51,7 +51,7 @@ int run_process(processInfo process, int state){
     procsInSched[i] = aux;
     return 0;
 }
-
+//it initiates the iterator in the first READY process if there arent anyone it returns 0 which is halt process
 void init_iterator(){
     int i = 0;
     while(i < SIZE && procsInSched[i].state != READY){
@@ -92,7 +92,7 @@ void next(){
     }
 
 }
-
+// kills a process if it is running it calls int 20 to switch context
 int kill_process(int pid){
     int i = 0;
 
@@ -111,13 +111,14 @@ int kill_process(int pid){
     }
     return -1;
 }
-
+//switch context
 uint64_t scheduler(uint64_t sp){
     procsInSched[iterator].process -> sp = sp;
     next();
     return(procsInSched[iterator].process -> sp);
 }
 
+//set states of a program
 int set_state(int pid, int state){
     int curr = 0;
     while(curr < SIZE && procsInSched[curr].process ->pid != pid){
@@ -129,23 +130,12 @@ int set_state(int pid, int state){
     }
     return -1;
 }
-
+//it returns the process id of the running process
 int get_current_pid(){
     return procsInSched[iterator].process->pid;
 }
 
-int change_run_to(int pid){
-    int curr = 0;
-    while(curr < SIZE && procsInSched[curr].process ->pid != pid) {
-        curr++;
-    }
-    if(procsInSched[curr].process ->pid == pid){
-        iterator = curr;
-        return 0;
-    }
-    return -1;
-}
-
+//prints information of a running process
 void print_running_procs(){
     int i = 0;
     while(i < SIZE && procsInSched[i].state != EMPTY){

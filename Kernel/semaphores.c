@@ -9,7 +9,7 @@
 
 int sem_id;
 semaphore semaphores[MAX_SEMS];
-
+//initiates the array of semaphores with no sems in it
 void init_sems(){
     int i=0;
     while(i < MAX_SEMS){
@@ -18,6 +18,7 @@ void init_sems(){
     sem_id = 0;
 }
 
+//mallocs a struct to open a sem
 semaphore create_sem_struct(char * name, int state){
     semaphore aux1 = (semaphore) giveMeMemory (sizeof(sem));
     aux1 -> name = name;
@@ -27,7 +28,7 @@ semaphore create_sem_struct(char * name, int state){
     return aux1;
 }
 
-
+//it opens a semaphore with its sem id
 int s_open(char * name, int state){
     int i = 0;
     while(i < MAX_SEMS && semaphores[i] != NULL){
@@ -42,6 +43,7 @@ int s_open(char * name, int state){
     }
 }
 
+//it frees every process attached to the semaphore
 void free_waiting_procs(semaphore sem){
     while(sem ->waiting_proc != NULL){
         node_pointer aux = sem -> waiting_proc;
@@ -50,6 +52,7 @@ void free_waiting_procs(semaphore sem){
     }
 }
 
+//it closes the semaphore identified by the sem id
 int s_close(int sid){
     int i = 0;
     while(i < MAX_SEMS && (semaphores[i] == NULL || semaphores[i] -> sem_id != sid)){
@@ -64,6 +67,8 @@ int s_close(int sid){
     return -1;
 }
 
+
+//creates the node to add a process blocked by the sem
 node_pointer create_node(int pid){
     node_pointer node = (node_pointer)  giveMeMemory(sizeof(struct process_node));
     node ->pid = pid;
@@ -71,6 +76,7 @@ node_pointer create_node(int pid){
     return node;
 }
 
+// adds a process to the queue of waiting processes
 void add_waiting_proc(uint64_t lock, semaphore sem, int pid){
     
     
@@ -90,6 +96,7 @@ void add_waiting_proc(uint64_t lock, semaphore sem, int pid){
         _int20();
 }
 
+// it checks the lock and blocks if it is necessary
 int s_wait(int sid){
     int i = 0;
     while(i < MAX_SEMS && (semaphores[i] == NULL || semaphores[i] -> sem_id != sid)){
@@ -105,6 +112,7 @@ int s_wait(int sid){
     }
 }
 
+//when a semaphore is unlocked, it checks if there is a blocked process by it
 void check_blocked(uint64_t lock, semaphore sem){
     node_pointer aux = sem -> waiting_proc;
     if(aux != NULL){
@@ -114,7 +122,7 @@ void check_blocked(uint64_t lock, semaphore sem){
         (sem->state)++;
     }
 }
-
+//unlocks the sem
 int s_post(int sid){
     int i = 0;
       while(i < MAX_SEMS && (semaphores[i] == NULL || semaphores[i] -> sem_id != sid)){
@@ -129,7 +137,7 @@ int s_post(int sid){
 
     }
 }
-
+//prints information of openned sems
 void print_sems(){
     int i = 0;
     while(i < MAX_SEMS){
