@@ -111,8 +111,10 @@ interrupt1:
 	mov rdi, rsp
 	call scheduler
 	mov rsp, rax
+
 	mov al, 20h
 	out 20h, al
+	
 	popState
 
 	iretq
