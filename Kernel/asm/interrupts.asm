@@ -87,7 +87,7 @@ extern interruptDispatcher
 	pushState
 	cld
 	mov rdi,%1
-	call interruptDispatcher
+	call interruptDispatcher 
 
 	mov al, 20h
 	out 20h, al
@@ -104,7 +104,10 @@ interrupt1:
 	pushState
 	cld
 	mov rdi,1
-	call interruptDispatcher
+	mov rsi, 1
+	mov rdx, 1
+	mov rcx, 1
+	call interruptDispatcher 
 	
 
 
@@ -114,7 +117,7 @@ interrupt1:
 
 	mov al, 20h
 	out 20h, al
-	
+
 	popState
 
 	iretq
