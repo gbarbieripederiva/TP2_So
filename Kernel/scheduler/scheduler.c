@@ -99,11 +99,14 @@ int kill_process(int pid){
     while(i < SIZE && procsInSched[i].process -> pid != pid ){
         i++;
     }
-    if(procsInSched[i].process -> pid == pid && i != iterator) {  //if i equals iterator it means it is currently running we cant remove it
+    if(procsInSched[i].process -> pid == pid) {  //if i equals iterator it means it is currently running we cant remove it
         procsInSched[i].state = EMPTY;
         unGiveMeMemory(procsInSched[i].process->sp);
         unGiveMeMemory(procsInSched[i].process);
         running_procs--;
+        if(i == iterator){
+            _int20();
+        }
         return 0;
     }
     return -1;

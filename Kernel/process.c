@@ -72,14 +72,11 @@ void init_processes(){
 void run_set_return(uint64_t rip, processInfo process){
     void (*main) (void) = (void (*) (void)) rip;
     (*main)();
+    kill_process(process -> pid);
     if(get_current_pid() == process ->pid){
 
         _int20();
     }
-    while(kill_process(process -> pid) == -1){
-
-    }
-
 }
 
 
