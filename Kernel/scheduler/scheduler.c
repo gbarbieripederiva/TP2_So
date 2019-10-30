@@ -9,6 +9,7 @@
 
 
 static int iterator = 0;
+static int first_time = 1;
 static int running_procs;
 
 procInSched procsInSched[SIZE];
@@ -22,6 +23,7 @@ void halt_proc(){
 }
 
 void init_sched(){
+    first_time = 1;
     running_procs = 0;
     procInSched aux;
     aux.state = EMPTY;
@@ -118,9 +120,14 @@ int kill_process(int pid){
     }
     return -1;
 }
+
 //switch context
 uint64_t scheduler(uint64_t sp){
-    procsInSched[iterator].process -> sp = sp;
+    if(first_time){
+        first_time--;
+    }
+    else{
+    procsInSched[iterator].process -> sp = sp;}
     next();
     return(procsInSched[iterator].process -> sp);
 }
