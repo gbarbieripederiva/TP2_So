@@ -13,6 +13,14 @@ static int running_procs;
 
 procInSched procsInSched[SIZE];
 
+void halt_proc(){
+    while (1)
+    {
+        haltFunction();
+    }
+    
+}
+
 void init_sched(){
     running_procs = 0;
     procInSched aux;
@@ -22,7 +30,7 @@ void init_sched(){
         procsInSched[i] = aux;
     }
     processInfo halt;
-    halt = create_process("halt",0,(uint64_t)rep_halt);
+    halt = create_process("halt",0,(uint64_t)halt_proc);
     run_process(halt, HALT);
     init_iterator();
 }
@@ -81,7 +89,7 @@ void next(){
                 iterator++;
                 i--;
             }
-            if(i == 0 && procsInSched[iterator % SIZE].state != READY){ //if i == 11 then there is no procInSched
+            if(i == 0 && procsInSched[iterator % SIZE].state != READY){ //if i == 0 then there is no procInSched
                 iterator = 0; 
             }
             iterator = iterator % SIZE;
@@ -104,9 +112,8 @@ int kill_process(int pid){
         unGiveMeMemory(procsInSched[i].process->sp);
         unGiveMeMemory(procsInSched[i].process);
         running_procs--;
-        if(i == iterator){
-            _int20();
-        }
+        _int20();
+        
         return 0;
     }
     return -1;
