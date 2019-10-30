@@ -11,7 +11,7 @@ void checking(){
     while(1){
         print("Hola");
        printAction(0);
-       print("Hola");
+       print("Chau");
        printAction(0);
     }
 }
