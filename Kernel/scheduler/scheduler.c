@@ -123,7 +123,7 @@ int kill_process(int pid){
 
 //switch context
 uint64_t scheduler(uint64_t sp){
-    if(first_time){
+    if(!first_time){
         first_time--;
     }
     else{
