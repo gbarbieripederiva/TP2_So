@@ -17,7 +17,7 @@ procInSched procsInSched[SIZE];
 void halt_proc(){
     while (1)
     {
-        haltFunction();
+        //haltFunction();
     }
     
 }
