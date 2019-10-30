@@ -70,6 +70,11 @@ int main()
 	((EntryPoint)sampleCodeModuleAddress)();
 
 
+	while(1){
+		
+	}
+
+
 
 
 	ncPrint("[Finished]");
