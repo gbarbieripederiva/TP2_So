@@ -13,6 +13,9 @@ void checking(){
        printAction(0);
        print("Chau");
        printAction(0);
+       int sid;
+       sid = sys_create_semaphore("hola", 1);
+       sys_sem_wait(sid);
     }
 }
 
