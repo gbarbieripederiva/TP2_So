@@ -63,13 +63,14 @@ void *initializeKernelBinary()
 int main()
 {
 
-	uint64_t SampleInfo = sys_create_process("Sample Code Module",1,((EntryPoint)sampleCodeModuleAddress)());
-	sys_run_process(SampleInfo, READY);
+
+
 	loadIDT();
-	
+	//Entering sampleCodeModuleAddress in userland
+	((EntryPoint)sampleCodeModuleAddress)();	
 
 	
-	//Entering sampleCodeModuleAddress in userland
+	
 	
 
 
