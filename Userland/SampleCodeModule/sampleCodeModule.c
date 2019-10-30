@@ -24,7 +24,7 @@ int main() {
     uint64_t checkInfo = sys_create_process("checking", 1, (uint64_t) checking);
     sys_run_process(checkInfo, 1);
 
-    sys_kill_process(2);
+    
 
     return 0;
 }
