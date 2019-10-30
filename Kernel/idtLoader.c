@@ -66,7 +66,7 @@ static void setupEntry(int index, uint64_t offset)
 void loadIDT()
 {
 	//disable interrupts
-	_cli();
+	
 	setupEntry(0x20, (uint64_t)&interrupt1);  //Interrupt del pic
 	setupEntry(0x21, (uint64_t)&interrupt2);  //Interrupt del teclado
 	setupEntry(0x80, (uint64_t)&interrupt80); //Int 80
@@ -81,5 +81,5 @@ void loadIDT()
 	picSlaveMask(0xFF);
 
 	// reenable interrupts
-	_sti();
+	
 }
