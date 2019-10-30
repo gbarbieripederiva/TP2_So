@@ -24,10 +24,6 @@ int main() {
     sys_run_process(terminalInfo, 1);
     
 
-    uint64_t checkInfo = sys_create_process("checking", 0, (uint64_t) checking);
-    sys_run_process(checkInfo, 1);
-    sys_sem_post(1);
-
     
 
     return 0;
