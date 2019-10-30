@@ -10,7 +10,9 @@
 void checking(){
     while(1){
         print("Hola");
-        printAction(0);
+       printAction(0);
+       print("Hola");
+       printAction(0);
     }
 }
 
