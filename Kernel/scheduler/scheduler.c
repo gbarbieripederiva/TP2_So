@@ -123,8 +123,8 @@ int kill_process(int pid){
 
 //switch context
 uint64_t scheduler(uint64_t sp){
-    if(!first_time){
-        first_time--;
+    if(first_time == 1){
+        first_time--; 
     }
     else{
     procsInSched[iterator].process -> sp = sp;}
