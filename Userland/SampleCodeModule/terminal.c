@@ -35,7 +35,7 @@ void terminal()
 
      //int sid = sys_create_semaphore("sem1", 1);
      //sys_sem_wait(sid);
-    sys_get_pid();
+    printDec(sys_get_pid());
 
     while (1)
     {
