@@ -53,6 +53,8 @@ void *initializeKernelBinary()
 	init_sched();
 	init_sems();
 
+	loadIDT();
+
 
 	
 
@@ -65,9 +67,10 @@ int main()
 
 
 
-	loadIDT();
+	
 	//Entering sampleCodeModuleAddress in userland
-	((EntryPoint)sampleCodeModuleAddress)();	
+	uint64_t sampleInfo = create_process("SampleInfo", 1, (uint64_t)((EntryPoint)sampleCodeModuleAddress)());
+	run_process(sampleInfo, READY);	
 
 	
 	
