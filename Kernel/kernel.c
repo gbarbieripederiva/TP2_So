@@ -67,7 +67,7 @@ int main()
 	_cli();
 	loadIDT();
 	//Entering sampleCodeModuleAddress in userland
-	uint64_t sampleInfo = create_process("SampleInfo", 1, (uint64_t)((EntryPoint)sampleCodeModuleAddress)());
+	uint64_t sampleInfo = create_process("SampleInfo", 1, (uint64_t)((EntryPoint)sampleCodeModuleAddress));
 	run_process(sampleInfo, READY);	
 	_sti();
 	
