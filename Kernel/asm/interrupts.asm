@@ -36,6 +36,7 @@ picSlaveMask:
 ;Halt the program until we get an interrupt:
 GLOBAL haltFunction
 haltFunction:
+	sti
 	hlt
 	ret
 
@@ -213,12 +214,6 @@ GLOBAL exception6
 exception6:
 	exception 6
 
-
- GLOBAL rep_halt
- rep_halt:
-	hlt
-	jp rep_halt
-	ret
 
 GLOBAL _int20
 _int20:
