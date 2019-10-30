@@ -90,7 +90,7 @@ void next(){
                 i--;
             }
             if(i == 0 && procsInSched[iterator % SIZE].state != READY){ //if i == 0 then there is no procInSched
-                iterator = 0; 
+                iterator = 0; //returns halt process
             }
             iterator = iterator % SIZE;
         }
