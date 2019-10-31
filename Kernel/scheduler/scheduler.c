@@ -77,7 +77,6 @@ void init_iterator(){
 
 //if it completes one cycle iterator goes to procInSched 0 which is halt
 void next(){
-    if(running_procs > 1){
         if(procsInSched[iterator].state == READY && procsInSched[iterator].entered != 0){
             procsInSched[iterator].entered--;
             return;
@@ -96,10 +95,6 @@ void next(){
             }
             iterator = iterator % SIZE;
         }
-    }
-    else{
-        return;
-    }
 
 }
 // kills a process if it is running it calls int 20 to switch context
