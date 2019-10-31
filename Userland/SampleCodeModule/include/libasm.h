@@ -2,6 +2,9 @@
 #ifndef __LIBASMUSERLAND___
 #define __LIBASMUSERLAND__
 
+#define SEM_LOCKED 1
+#define SEM_UNLOCKED 0
+
 typedef struct process{
     int pid;
     char * name;

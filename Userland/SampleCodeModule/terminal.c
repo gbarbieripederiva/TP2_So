@@ -1,6 +1,7 @@
-#include "include/lib.h"
-#include "include/terminal.h"
-#include "include/jueguito.h"
+#include <lib.h>
+#include <terminal.h>
+#include <jueguito.h>
+#include <libasm.h>
 
 #define BUFFER_SIZE 100
 #define MAX_COMDESC 100
@@ -33,7 +34,7 @@ void terminal()
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
 
-     int sid = sys_create_semaphore("sem1", 0);
+     int sid = sys_create_semaphore("sem1", SEM_LOCKED);
      sys_sem_wait(sid);
     //printDec(sys_set_state(2, 0));
 
