@@ -117,7 +117,6 @@ processInfo create_process(char * name, int priority, uint64_t rip){
     process -> ppid = get_current_pid();}
     process -> pid = pid;
     process -> priority = priority;
-    process -> name = name;
     process -> stack_end = (uint64_t)giveMeMemory(STACK_SIZE);
     process -> sp = build_stack(rip, process -> stack_end, process);
     processes[pid++] = process;
