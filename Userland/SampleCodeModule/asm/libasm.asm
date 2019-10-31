@@ -229,6 +229,7 @@ sys_get_pid:
 GLOBAL sys_print_running_procs
 sys_print_running_procs:
 	pushState
+	adjust_to_sys_call
 	;sys_print_running_procs is call 51
 	mov rdi, 51
 	int 80h
@@ -238,6 +239,7 @@ sys_print_running_procs:
 GLOBAL sys_set_priority
 sys_set_priority:
 	pushState
+	adjust_to_sys_call
 	;sys_set_priority is call 52
 	mov rdi, 52
 	int 80h
@@ -247,6 +249,7 @@ sys_set_priority:
 GLOBAL sys_set_state
 sys_set_state:
 	pushState
+	adjust_to_sys_call
 	;sys_set_state is call 53
 	mov rdi, 53
 	int 80h
