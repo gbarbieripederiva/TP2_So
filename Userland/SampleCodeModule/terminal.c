@@ -33,7 +33,7 @@ void terminal()
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
 
-     int sid = sys_create_semaphore("sem1", 1);
+     int sid = sys_create_semaphore("sem1", 0);
      sys_sem_wait(sid);
     //printDec(sys_set_state(2, 0));
 
