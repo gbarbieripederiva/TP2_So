@@ -135,11 +135,12 @@ uint64_t scheduler(uint64_t sp){
 //set states of a program
 int set_state(int pid, int state){
     int curr = 0;
-    while(curr < SIZE && procsInSched[curr].process ->pid != pid){
+    while(curr < SIZE && procsInSched[curr].process ->pid != pid){//busca el pid
         curr++;
     }
     if(procsInSched[curr].process ->pid == pid){
         procsInSched[curr].state = state;
+        _int20();
         return 0;
     }
     return -1;
