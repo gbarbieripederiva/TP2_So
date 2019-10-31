@@ -108,7 +108,7 @@ uint64_t build_stack(uint64_t rip, uint64_t from, processInfo process){
 
 }
 //puts a process in the array and fills the stack with the rip
-processInfo create_process(char * name, int priority, uint64_t rip){
+processInfo create_process(int priority, uint64_t rip){
     if(pid >= MAX_PROCESSES){
         return NULL;
     }

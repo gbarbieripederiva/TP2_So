@@ -71,7 +71,7 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		break;
 	//sys_create_process: Creates and registers new process
 	case 47:
-		return (uint64_t) sys_create_process((char *)arg1, (int) arg2, (uint64_t)arg3); 
+		return (uint64_t) sys_create_process((int) arg2, (uint64_t)arg3); 
 		break;
 	//sys_run_process: Puts process into scheduler with state READY, BLOCKED, HALT
 	case 48:
@@ -280,8 +280,8 @@ int sys_mem_free(uint64_t chunk){
 	return (int)unGiveMeMemory((void *)chunk);
 }
 //SYSCALL 47 creates a new process
-uint64_t sys_create_process(char * name, int priority, uint64_t process){
-	return (uint64_t) create_process(name, priority, process);
+uint64_t sys_create_process(int priority, uint64_t process){
+	return (uint64_t) create_process(priority, process);
 }
 //SYSCALL 48 runs a process
 int sys_run_process(uint64_t process, int state){

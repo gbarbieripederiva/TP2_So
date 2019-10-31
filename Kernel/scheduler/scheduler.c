@@ -32,7 +32,7 @@ void init_sched(){
         procsInSched[i] = aux;
     }
     processInfo halt;
-    halt = create_process("halt_function",0,(uint64_t)halt_proc);
+    halt = create_process(0,(uint64_t)halt_proc);
     run_process(halt, HALT);
     init_iterator();
 }
@@ -155,8 +155,6 @@ void print_running_procs(){
           ncPrint("PPID:");
         ncPrintDec((uint64_t)procsInSched[i].process ->ppid);
         ncNewLine();
-        ncPrint("Name:");
-        ncPrint((char *)procsInSched[i].process -> name);
         ncNewLine();
         ncPrint("State: ");
         ncPrintDec((uint64_t)procsInSched[i].state);

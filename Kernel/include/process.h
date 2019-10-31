@@ -7,7 +7,6 @@
 typedef struct process{
     int ppid;
     int pid;
-    char * name;
     int priority;
     uint64_t stack_end;
     uint64_t sp;
@@ -17,7 +16,7 @@ typedef struct process * processInfo;
 
 void init_processes();
 
-processInfo create_process(char * name, int priority, uint64_t rip);
+processInfo create_process(int priority, uint64_t rip);
 
 int set_priority(int pid, int priority);
 
