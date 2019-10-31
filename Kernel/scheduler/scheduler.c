@@ -32,7 +32,7 @@ void init_sched(){
         procsInSched[i] = aux;
     }
     processInfo halt;
-    halt = create_process("halt",0,(uint64_t)halt_proc);
+    halt = create_process("halt_function",0,(uint64_t)halt_proc);
     run_process(halt, HALT);
     init_iterator();
 }
