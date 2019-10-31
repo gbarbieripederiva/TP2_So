@@ -121,7 +121,7 @@ uint64_t scheduler(uint64_t sp){
     if(first_time == 1){
         first_time--; 
     }
-    else{
+    else if(sp >= 0x600000){
     procsInSched[iterator].process -> sp = sp;}
     next();
     return(procsInSched[iterator].process -> sp);
