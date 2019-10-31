@@ -71,7 +71,7 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		break;
 	//sys_create_process: Creates and registers new process
 	case 47:
-		return (uint64_t) sys_create_process((int) arg2, (uint64_t)arg3); 
+		return (uint64_t) sys_create_process((int) arg1, (uint64_t)arg2); 
 		break;
 	//sys_run_process: Puts process into scheduler with state READY, BLOCKED, HALT
 	case 48:
