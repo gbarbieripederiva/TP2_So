@@ -9,7 +9,7 @@ struct process_node{
 
 
 typedef struct sem{
-    char *name;
+    int name;
     int state;
     int sem_id;
     node_pointer waiting_proc;

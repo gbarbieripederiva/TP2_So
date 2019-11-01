@@ -25,7 +25,7 @@ int sys_get_pid();//SYSCALL 50
 void sys_print_running_procs(); //SYSCALL 51
 int sys_set_priority(int pid, int priority); //SYSCALL 52
 int sys_set_state(int pid, int priority);//SYSCALL 53
-int sys_create_semaphore(char * name, int state); //SYSCALL 60
+int sys_create_semaphore(int name, int state); //SYSCALL 60
 int sys_sem_close(int sid); //SYSCALL 61
 int sys_sem_post(int sid); //SYSCALL 62
 int sys_sem_wait(int sid); //SYSCALL 63

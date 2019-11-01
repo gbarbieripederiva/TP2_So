@@ -99,7 +99,7 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		break;
 	//sys_create_semaphore: creates a sem and returns sem id
 	case 60:
-		return (int) sys_create_semaphore((char *)arg1, (int) arg2);
+		return (int) sys_create_semaphore((int)arg1, (int) arg2);
 		break;
 	//sys_sem_close: close sem
 	case 61:
@@ -311,7 +311,7 @@ int sys_set_state(int pid, int state){
 }
 
 //SYSCALL 60 creates a semaphore
-int sys_create_semaphore(char * name, int state){
+int sys_create_semaphore(int name, int state){
 	return (int) s_open(name, state);
 }
 

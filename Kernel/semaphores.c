@@ -1,7 +1,7 @@
 
 #include <semaphores.h>
 
-#define MAX_SEMS 100
+#define MAX_SEMS 50
 
 
 
@@ -19,7 +19,7 @@ void init_sems(){
 }
 
 //mallocs a struct to open a sem
-semaphore create_sem_struct(char * name, int state){
+semaphore create_sem_struct(int name, int state){
     semaphore aux1 = (semaphore) giveMeMemory (sizeof(sem));
     aux1 -> name = name;
     aux1 -> sem_id = sem_id;
@@ -30,12 +30,12 @@ semaphore create_sem_struct(char * name, int state){
 }
 
 //it opens a semaphore with its sem id
-int s_open(char * name, int state){
+int s_open(int name, int state){
     int j = 0;
-    while((strcmp(name, semaphores[j]->name) != 0) && (j < MAX_SEMS)){
+    while((j < MAX_SEMS) && (semaphores[j] == NULL || semaphores[j]->name != name)) {
         j++;
     }
-    if(strcmp(name, semaphores[j]->name) == 0){ // if it finds a semaphore with the same name it returns its sem id
+    if(semaphores[j] -> name == name){ // if it finds a semaphore with the same name it returns its sem id
         return semaphores[j]->sem_id;
     }
     else{ //it creates one
@@ -162,7 +162,7 @@ void print_sems(){
     while(i < MAX_SEMS){
         if(semaphores[i] !=  NULL){
             ncPrint("Sem name: ");
-            ncPrint(semaphores[i] -> name);
+            ncPrintDec(semaphores[i] -> name);
             ncNewLine();
             ncPrint("Sem id: ");
             ncPrint(semaphores[i] -> sem_id);

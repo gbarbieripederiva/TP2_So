@@ -76,7 +76,7 @@ int sys_set_priority(int pid, int priority);
 int sys_set_state(int pid, int priority);
 
 //SYS CALL 60, to create a sempahore
-int sys_create_semaphore(char * nombre, int state);
+int sys_create_semaphore(int nombre, int state);
 
 //SYS CALL 61, to close a semaphore
 int sys_sem_close(int sid);
