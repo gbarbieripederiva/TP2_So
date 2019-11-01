@@ -28,7 +28,7 @@ static void * giveMeMemoryWrapped(uint64_t size, uint32_t chunk, uint64_t curren
 
     //if a smaller chunk can be allocated, we'll do exactly that
 
-    if(size <= currentSize / 2 && chunk < CHUNKS){
+    if(size <= currentSize / 2 && 2 * chunk + 1 < CHUNKS){
 
         void * retVal = (void *)NULL;
 
