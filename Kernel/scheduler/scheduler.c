@@ -148,20 +148,22 @@ int get_current_pid(){
 //prints information of a running process
 void print_running_procs(){
     int i = 0;
-    while(i < SIZE && procsInSched[i].state != EMPTY){
-        ncNewLine();
-        ncPrint("PID:");
-        ncPrintDec((uint64_t)procsInSched[i].process ->pid);
-        ncNewLine();
-          ncPrint("PPID:");
-        ncPrintDec((uint64_t)procsInSched[i].process ->ppid);
-        ncNewLine();
-        ncPrint("State: ");
-        ncPrintDec((uint64_t)procsInSched[i].state);
-        ncNewLine();
-        ncPrint("Priority: ");
-        ncPrintDec((uint64_t)procsInSched[i].process->priority);
-        ncNewLine();
+    while(i < SIZE){
+        if(procsInSched[i].state != EMPTY){
+            ncNewLine();
+            ncPrint("PID:");
+            ncPrintDec((uint64_t)procsInSched[i].process ->pid);
+            ncNewLine();
+            ncPrint("PPID:");
+            ncPrintDec((uint64_t)procsInSched[i].process ->ppid);
+            ncNewLine();
+            ncPrint("State: ");
+            ncPrintDec((uint64_t)procsInSched[i].state);
+            ncNewLine();
+            ncPrint("Priority: ");
+            ncPrintDec((uint64_t)procsInSched[i].process->priority);
+            ncNewLine();
+        }
         i++;
     }
 }
