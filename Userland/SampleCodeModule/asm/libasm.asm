@@ -305,3 +305,53 @@ sys_print_sems:
 	int 80h
 	popState
 	ret
+
+GLOBAL sys_open_pipe
+sys_pipe_open:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_open_pipe is call 75
+	mov rdi,75
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_close_pipe
+sys_pipe_close:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_close_pipe is call 76
+	mov rdi,76
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_write_pipe
+sys_write_pipe:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_write_pipe is call 77
+	mov rdi,77
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_read_pipe
+sys_read_pipe:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_read_pipe is call 78
+	mov rdi,78
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_print_pipe
+sys_print_pipe:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_print_pipe is call 79
+	mov rdi,79
+	int 80h
+	popState
+	ret

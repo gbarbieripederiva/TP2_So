@@ -90,5 +90,19 @@ int sys_sem_wait(int sid);
 //SYS CALL 64, to print openned sems
 void sys_print_sems();
 
+//SYS CALL 75, to open a pipe
+int sys_open_pipe(int *fd);
+
+//SYS CALL 76, to close a pipe
+void sys_close_pipe(int fd);
+
+//SYS CALL 77 to write in a pipe
+int sys_write_pipe(int fd, char * buffer, int size); //SYSCALL 77
+
+//SYS CALL 78 to read from a pipe
+int sys_read_pipe(int fd, char * buffer, int size); //SYSCALL 78
+
+//SYS CALL 79 to print state of a pipe
+void sys_print_pipe();
 
 #endif

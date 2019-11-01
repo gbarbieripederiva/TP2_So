@@ -10,7 +10,7 @@
 #include <process.h>
 #include <scheduler.h>
 #include <semaphore.h>
-
+#include <pipes.h>
 //Software interrupt used for interaction between user and kernel space
 //order of registers in standard rdi -> call number,rsi -> arg1 ,rdx -> arg2 ,rcx -> arg3
 uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_t arg2, uint64_t arg3)
@@ -117,8 +117,24 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 64:
 		sys_print_sems();
 		break;
-
+	case 75:
+		return (int)sys_open_pipe((int *) arg1);
+		break;
+	case 76:
+		sys_close_pipe((int) arg1);
+		break;
+	case 77:
+		return (int) sys_write_pipe((int) arg1, (char *) arg2,(int) arg3);
+		break;
+	case 78:
+		return (int) sys_read_pipe((int) arg1, (char *) arg2, (int) arg3);
+		break;
+	case 79:
+		sys_print_pipe();
+		break;
 	}
+
+
 
 
 
@@ -335,24 +351,26 @@ void sys_print_sems(){
 	print_sems();
 }
 
-
-
-/*
-#define SIZE 100000
-#define NULL 0
-void * sys_mem_get(long size){
-	static char memChunk[SIZE]; 
-    static char * currentPtr = memChunk;
-    static long used = 0;
-
-    if(used + size > SIZE){
-        return NULL;
-    }
-	char * retVal = currentPtr;
-	currentPtr += size;
-	used += size;
-	return retVal;
+//SYSCALL 75 opens a pipe if it doesnt exist it creates one
+int sys_open_pipe(int *fd){
+	return (int) pipe_open(fd);
+}
+//SYSCALL 76 closes a pipe
+void sys_close_pipe(int fd){
+	pipe_close(fd);
 }
 
+//SYSCALL 77 writes a pipe
+int sys_write_pipe(int fd, char * buffer, int size){
+	return pipe_write(fd, buffer, size);
+}
 
-*/
+//SYSCALL 78 reads from a pipe
+int sys_read_pipe(int fd, char * buffer, int size){
+	return pipe_read(fd, buffer, size);
+}
+
+//SYSCALL 79 prints from a pipe
+void sys_print_pipe(){
+	print_pipes();
+}
