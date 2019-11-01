@@ -31,7 +31,7 @@ typedef sem *semaphore;
 
 void init_sems();
 semaphore create_sem_struct(char * name, int state);
-int s_open(char * name, int state);
+int s_open(int name, int state);
 int s_close(int sid);
 void add_waiting_proc(uint64_t lock, semaphore sem, int pid);
 int s_wait(int sid);

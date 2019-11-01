@@ -165,7 +165,7 @@ void print_sems(){
             ncPrintDec(semaphores[i] -> name);
             ncNewLine();
             ncPrint("Sem id: ");
-            ncPrint(semaphores[i] -> sem_id);
+            ncPrintDec(semaphores[i] -> sem_id);
             ncNewLine();
             ncPrint("Sem state: ");
             (semaphores[i] -> state) == 1 ? ncPrint("LOCKED") : ncPrint("UNLOCKED");
