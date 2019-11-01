@@ -4,10 +4,12 @@
 #define MAX_PROCESSES 300
 #define STACK_SIZE 8192
 
+
 typedef struct process{
     int ppid;
     int pid;
     int priority;
+    int fd[2];
     uint64_t stack_end;
     uint64_t sp;
 } process;
