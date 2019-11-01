@@ -34,7 +34,7 @@ void terminal()
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
 
-     
+     sys_print_running_procs();
      int sid = sys_create_semaphore(1 , SEM_LOCKED);
      //sys_sem_wait(sid);
     //printDec(sys_set_state(2, 0));
@@ -210,6 +210,8 @@ void waitFor(uint64_t seconds)
     }
 }
 
+
+
 void fillCommandList()
 {
     fillCommand(helpDef, &helpCommand);
@@ -228,3 +230,4 @@ void fillCommand(char *desc, void (*cmdptr)(void))
     aux.cmdptr = cmdptr;
     commandList[commandsSize++] = aux;
 }
+
