@@ -22,25 +22,38 @@ void init_sems(){
 semaphore create_sem_struct(char * name, int state){
     semaphore aux1 = (semaphore) giveMeMemory (sizeof(sem));
     aux1 -> name = name;
-    aux1 -> sem_id = sem_id++;
+    aux1 -> sem_id = sem_id;
     aux1 -> state = state;
     aux1 -> waiting_proc = NULL;
+    sem_id++;
     return aux1;
 }
 
 //it opens a semaphore with its sem id
 int s_open(char * name, int state){
-    int i = 0;
+    int j = 0;
+    while(strcmp(name, semaphores[j]->name) != 0 && j < MAX_SEMS){
+        j++;}
+    }
+    if(strcmp(name, semaphores[j]->name) == 0){ // if it finds a semaphore with the same name it returns its sem id
+        return semaphores[j]->sem_id;
+    }
+    else{ //it creates one
 
-    while(i < MAX_SEMS && semaphores[i] != NULL){
-        i++;
-    }
-    if(i == MAX_SEMS){
-        return -1;
-    }
-    else{
-        semaphores[i] = create_sem_struct(name, state);
-        return semaphores[i] -> sem_id;
+
+        int i = 0;
+
+        while(i < MAX_SEMS && semaphores[i] != NULL){ //finds an empty position
+            i++;
+        }
+        if(i == MAX_SEMS){ // if there is no empty space it returns -1
+            return -1;
+        }
+        else{
+            semaphores[i] = create_sem_struct(name, state); //creates a semaphore and attached to a position
+            return semaphores[i] -> sem_id;
+            
+        }
     }
 }
 

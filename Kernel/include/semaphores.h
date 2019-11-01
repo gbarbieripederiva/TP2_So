@@ -24,7 +24,7 @@ typedef sem *semaphore;
 #include <null.h>
 #include <naiveConsole.h>
 #include <interrupts.h>
-
+#include <lib.h>
 
 
 
