@@ -2,7 +2,7 @@ include Makefile.inc
 
 KERNEL=kernel.bin
 DEBUGGING=kernel.elf
-SOURCES=$(wildcard *.c) $(wildcard mmu/memoryManager.c) $(wildcard scheduler/*.c)
+SOURCES=$(wildcard *.c) $(wildcard mmu/buddy.c) $(wildcard scheduler/*.c)
 SOURCES_ASM=$(wildcard asm/*.asm)
 OBJECTS=$(SOURCES:.c=.o)
 OBJECTS_ASM=$(SOURCES_ASM:.asm=.o)
