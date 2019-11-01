@@ -171,15 +171,17 @@ void print_sems(){
             (semaphores[i] -> state) == 1 ? ncPrint("LOCKED") : ncPrint("UNLOCKED");
             ncNewLine();
             node_pointer aux = waiting_iterator(semaphores[i]);
-            int i = 1;
+            int j = 1;
             while(aux != NULL){
                 ncPrint("Waiting process");
-                ncPrintDec(i);
+                ncPrintDec(j);
                 ncPrint(": ");
                 ncPrintDec(aux->pid);
                 ncNewLine();
-                i++;
+                j++;
             }
+           
         }
+        i++;
     }
 }
