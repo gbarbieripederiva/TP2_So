@@ -32,8 +32,8 @@ semaphore create_sem_struct(char * name, int state){
 //it opens a semaphore with its sem id
 int s_open(char * name, int state){
     int j = 0;
-    while(strcmp(name, semaphores[j]->name) != 0 && j < MAX_SEMS){
-        j++;}
+    while((strcmp(name, semaphores[j]->name) != 0) && (j < MAX_SEMS)){
+        j++;
     }
     if(strcmp(name, semaphores[j]->name) == 0){ // if it finds a semaphore with the same name it returns its sem id
         return semaphores[j]->sem_id;
