@@ -22,6 +22,7 @@ void init_sems(){
 semaphore create_sem_struct(int name, int state){
     semaphore aux1 = (semaphore) giveMeMemory (sizeof(sem));
     aux1 -> name = name;
+    aux1 ->refs = 1;
     aux1 -> sem_id = sem_id;
     aux1 -> state = state;
     aux1 -> waiting_proc = NULL;
@@ -36,6 +37,7 @@ int s_open(int name, int state){
         j++;
     }
     if(semaphores[j] -> name == name){ // if it finds a semaphore with the same name it returns its sem id
+        semaphores[j] ->refs ++;
         return semaphores[j]->sem_id;
     }
     else{ //it creates one
@@ -73,10 +75,16 @@ int s_close(int sid){
         i++;
     }
     if(semaphores[i] -> sem_id == sid){
-        free_waiting_procs(semaphores[i]);
-        unGiveMeMemory((void *)semaphores[i]);
-        semaphores[i] = NULL;
+        if(semaphores[i] -> refs > 1){ //opened from different processes
+            (semaphores[i] -> refs)++;
+        }
+        else{ //it is openned in just 1 process
+            free_waiting_procs(semaphores[i]);
+            unGiveMeMemory((void *)semaphores[i]);
+            semaphores[i] = NULL;
+        }
         return 0;
+
     }
     return -1;
 }

@@ -2,7 +2,7 @@
 #define PIPES_H
 
 // Tamaño maximo del buffer de un pipe
-#define SIZEOFBUFF 300
+#define SIZEOFBUFF 2048
 // Cantidad de pipes
 #define AMOUNTOFPIPES 40
 
