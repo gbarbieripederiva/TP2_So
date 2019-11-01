@@ -162,6 +162,7 @@ void print_running_procs(){
         ncPrint("Priority: ");
         ncPrintDec((uint64_t)procsInSched[i].process->priority);
         ncNewLine();
+        i++;
     }
 }
 
