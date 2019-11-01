@@ -149,12 +149,12 @@ int get_current_pid(){
 void print_running_procs(){
     int i = 0;
     while(i < SIZE && procsInSched[i].state != EMPTY){
+        ncNewLine();
         ncPrint("PID:");
         ncPrintDec((uint64_t)procsInSched[i].process ->pid);
         ncNewLine();
           ncPrint("PPID:");
         ncPrintDec((uint64_t)procsInSched[i].process ->ppid);
-        ncNewLine();
         ncNewLine();
         ncPrint("State: ");
         ncPrintDec((uint64_t)procsInSched[i].state);

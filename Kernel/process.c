@@ -114,7 +114,10 @@ processInfo create_process(int priority, uint64_t rip){
     }
     processInfo process = (processInfo)giveMeMemory((long)sizeof(process));
     if(pid != 0){
-    process -> ppid = get_current_pid();}
+        process -> ppid = get_current_pid();}
+    else{
+        process -> ppid = 0;
+    }
     process -> pid = pid;
     process -> priority = priority;
     process -> stack_end = (uint64_t)giveMeMemory(STACK_SIZE);
