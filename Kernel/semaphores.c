@@ -1,7 +1,7 @@
 
 #include <semaphores.h>
 
-#define MAX_SEMS 50
+#define MAX_SEMS 100
 
 
 

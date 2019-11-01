@@ -35,8 +35,8 @@ static PipeP pipes[AMOUNTOFPIPES];
 
 void create_pipe(int pos){
     pipes[pos]=giveMeMemory(sizeof(Pipe));
-    // pipes[pos]->readSem=s_open();// SEMAPHORE
-    // pipes[pos]->buffSem=s_open();// SEMAPHORE
+    //pipes[pos]->readSem=s_open();// SEMAPHORE
+    //pipes[pos]->buffSem=s_open();// SEMAPHORE
     s_post(pipes[pos]->buffSem); // SEMAPHORE
     pipes[pos]->readRefs=1;
     pipes[pos]->writeRefs=1;

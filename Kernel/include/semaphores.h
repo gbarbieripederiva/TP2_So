@@ -1,6 +1,9 @@
 #ifndef SEMAPHORE_H
 #define SEMAPHORE_H
 
+#define SEM_LOCKED 1
+#define SEM_UNLOCKED 0
+
 typedef struct process_node * node_pointer;
 struct process_node{
     int pid;
