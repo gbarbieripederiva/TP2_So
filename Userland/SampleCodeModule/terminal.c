@@ -184,7 +184,6 @@ void testIvalidOpCodeCommand()
     (punt)();
 }
 
-
 //----------------------AUXILIARY FUNCTIONS-----------------------------------------
 void cleanBuffer()
 {

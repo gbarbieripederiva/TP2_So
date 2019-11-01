@@ -1,7 +1,7 @@
 
 #include <semaphores.h>
 
-#define MAX_SEMS 10
+#define MAX_SEMS 100
 
 
 
@@ -31,6 +31,7 @@ semaphore create_sem_struct(char * name, int state){
 //it opens a semaphore with its sem id
 int s_open(char * name, int state){
     int i = 0;
+
     while(i < MAX_SEMS && semaphores[i] != NULL){
         i++;
     }
@@ -137,6 +138,11 @@ int s_post(int sid){
 
     }
 }
+
+node_pointer waiting_iterator(semaphore sem){
+    node_pointer aux = sem -> waiting_proc;
+    return aux;
+}
 //prints information of openned sems
 void print_sems(){
     int i = 0;
@@ -151,6 +157,11 @@ void print_sems(){
             ncPrint("Sem state: ");
             (semaphores[i] -> state) == 1 ? ncPrint("LOCKED") : ncPrint("UNLOCKED");
             ncNewLine();
+            node_pointer aux = waiting_iterator(semaphores[i]);
+            while(aux != NULL){
+                ncPrintDec(aux->pid);
+                ncNewLine();
+            }
         }
     }
 }

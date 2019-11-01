@@ -135,7 +135,6 @@ int strcmp(const char *str1, const char *str2)
 
    return 1;
 }
-
 void strncopy(char *source, char *dest, int size)
 {
    int i = 0;

@@ -18,4 +18,8 @@ uint8_t readHours();
 
 void rebootASM();
 
+int strlength(char *str);
+void strncopy(char *source, char *dest, int size);
+int strcmp(const char *str1, const char *str2);
+
 #endif
