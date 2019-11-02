@@ -5,8 +5,8 @@
 
 #define BUFFER_SIZE 100
 #define MAX_COMDESC 100
-#define MAX_COMMANDS 20
-#define COMMANDS 2
+#define MAX_COMMANDS 2
+#define COMMANDS 19
 #define SPACE 32
 #define MARKS 34
 
@@ -14,20 +14,13 @@
 static char terminalBuffer[BUFFER_SIZE + 1] = {0}; //Non cyclic buffer
 static int bufferSize = 0;
 
-//Structure of a command stored in the command List
-typedef struct command
-{
-    char desc[MAX_COMDESC];
-    void (*cmdptr)(void);
-} command;
 
-//Store all the commands in this array.
-static command commandList[MAX_COMMANDS];
-static int commandsSize = 0;
+
+
 
 
 //command handler variables
-char *commands[COMMANDS] = {"nice","pipe"}; //all command names
+char *commands[COMMANDS] = {0}; //all command names
 int tokenIterator = 0; //used to process multiple tokens
 int tokens = 0; //we need token to be visible for extract token function and for the handler
 
@@ -207,18 +200,168 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     switch (commandNum) //we execute the command or we tell the user it does not exist
     {
-    case 0: ;
-        char arg1[64];
-        char arg2[64];
-        extractToken(arg1, string, tokenIterator + 1);
-        extractToken(arg2, string, tokenIterator + 2);
-        tokenIterator = tokenIterator + 2;
-        niceCommand(stringToInt(arg1), stringToInt(arg2));
+    case NICE: ;
+        
+        if(tokens >= tokenNum + 2){
+            char arg1[64];
+            char arg2[64];
+            extractToken(arg1, string, tokenIterator + 1);
+            extractToken(arg2, string, tokenIterator + 2);
+            tokenIterator = tokenIterator + 2;
+            niceCommand(stringToInt(arg1), stringToInt(arg2));
+        }
+        else{
+            print("Not enough arguments");
+            printAction(0);
+        }
         break;
-    case 1:
+
+        
+    case PIPE:
         pipeCommand();
-        return;
         break;
+
+
+    case CLEAR:
+        clearCommand();
+        break;
+
+
+    case TIME:
+        timeCommand();
+        break;
+
+
+    case HELP:
+        helpCommand();
+        break;
+
+
+    case SNAKE:
+        snakeCommand();
+        break;
+
+
+    case TEST_DIVISION_BY_0:
+        testDivisionBy0Command();
+        break;
+
+
+    case TEST_INVALID_OPCODE:
+        testIvalidOpCodeCommand();
+        break;
+
+
+    case MEM:
+        memCommand();
+        break;
+
+
+    case PS:
+        psCommand();
+        break;
+
+
+    case LOOP: ;
+        if(tokens >= tokenNum + 1){
+            char arg1[64];
+            extractToken(arg1, string, tokenNum + 1);
+            loopCommand((uint64_t) stringToInt(arg1));
+        }
+        else{
+            print("Not enough arguments for command loop");
+            printAction(0);
+        }
+        break;
+
+
+    case KILL:
+         if(tokens >= tokenNum + 1){
+            char arg1[64];
+            extractToken(arg1, string, tokenNum + 1);
+            killCommand(stringToInt(arg1));
+        }
+        else{
+            print("Not enough arguments for command kill");
+            printAction(0);
+        }
+        break;
+
+
+    case BLOCK:
+         if(tokens >= tokenNum + 1){
+            char arg1[64];
+            extractToken(arg1, string, tokenNum + 1);
+            blockCommand(stringToInt(arg1));
+        }
+        else{
+            print("Not enough arguments for command block");
+            printAction(0);
+        }
+        break;
+
+
+    case UNBLOCK:
+          if(tokens >= tokenNum + 1){
+            char arg1[64];
+            extractToken(arg1, string, tokenNum + 1);
+            unblockCommand(stringToInt(arg1));
+        }
+        else{
+            print("Not enough arguments for command unblock");
+            printAction(0);
+        }
+        break;
+
+
+
+    case CAT:
+        if(tokens >= tokenNum + 1){
+            char arg1[64];
+            extractToken(arg1, string, tokenNum + 1);
+            catCommand(arg1);
+        }
+        else{
+            print("Not enough arguments for command cat");
+            printAction(0);
+        }
+        break;
+
+    case WC:
+        if(tokens >= tokenNum + 1){
+            char arg1[64];
+            extractToken(arg1, string, tokenNum + 1);
+            wcCommand(arg1);
+        }
+        else{
+            print("Not enough arguments for command wc");
+            printAction(0);
+        }
+        break;
+
+
+    case FILTER:
+         if(tokens >= tokenNum + 1){
+            char arg1[64];
+            extractToken(arg1, string, tokenNum + 1);
+            filterCommand(arg1);
+        }
+        else{
+            print("Not enough arguments for command filter");
+            printAction(0);
+        }
+        break;
+
+
+    case SEM:
+        semCommand();
+        break;
+
+    case PHYLO:
+        phyloCommand();
+        break;
+
+
 
 
     default:
@@ -260,13 +403,13 @@ void handleCommand(){
 void helpCommand()
 {
     print("You have entered the help command.The following commands are available:");
-    for (int i = 0; i < commandsSize; i++)
+    for (int i = 0; i < COMMANDS; i++)
     {
         printAction(0); //New Line
         print("Command ");
         printDec(i);
         print(": "); //Just for stethic
-        print(commandList[i].desc);
+        print(commands[i]);
     }
 }
 
@@ -407,6 +550,10 @@ void semCommand(){
     sys_print_sems();
 }
 
+void phyloCommand(){
+    //TODO
+}
+
 
 
 //----------------------AUXILIARY FUNCTIONS-----------------------------------------
@@ -438,27 +585,52 @@ void waitFor(uint64_t seconds)
 
 void fillCommandList()
 {
-    fillCommand(helpDef, &helpCommand);
-    fillCommand(snakeDef, &snakeCommand);
-    fillCommand(clearDef, &clearCommand);
-    fillCommand(timeDef, &timeCommand);
-    fillCommand(testDivisonBy0Def, &testDivisionBy0Command);
-    fillCommand(testInvalidOpCodeDef, &testIvalidOpCodeCommand);
+    commands[0] = "nice";
+    commands[1] = "pipe";
+    commands[2] = "clear";
+    commands[3] = "time";
+    commands[4] = "help";
+    commands[5] = "snake";
+    commands[6] = "testvDivisionBy0";
+    commands[7] = "testInvalidOpcode";
+    commands[8] = "mem";
+    commands[9] = "ps";
+    commands[10] = "loop";
+    commands[11] = "kill";
+    commands[12] = "block";
+    commands[13] = "unblock";
+    commands[14] = "cat";
+    commands[15] = "wc";
+    commands[16] = "filter";
+    commands[17] = "sem";
+    commands[18] = "phylo";
 
 }
 
-void fillCommand(char *desc, void (*cmdptr)(void))
+
+
+
+/*
+//Store all the commands in this array.
+static command commandList[MAX_COMMANDS];
+static int commandsSize = 0;
+
+//Structure of a command stored in the command List
+typedef struct command
+{
+    char desc[MAX_COMDESC];
+    void (*cmdptr)(void);
+} command;
+void handleCommand()
+{
+
+    void fillCommand(char *desc, void (*cmdptr)(void))
 {
     command aux;
     strncopy(desc, aux.desc, strlength(desc));
     aux.cmdptr = cmdptr;
     commandList[commandsSize++] = aux;
 }
-
-
-/*void handleCommand()
-{
-
     //Copy the command into the array. Did this to avoid a bug in which in some cases the buffer
     //represented more chars that it should.
     char potentialCommand[MAX_COMDESC] = {0};

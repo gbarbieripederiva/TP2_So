@@ -40,12 +40,27 @@ void semCommand();
 
 
 //--------------------Command definitions------------------------------------------------
-static const char * helpDef = "help";
-static const char * snakeDef = "snake";
-static const char * clearDef = "clear";
-static const char * timeDef = "time";
-static const char * testDivisonBy0Def = "testDivisionBy0";
-static const char * testInvalidOpCodeDef = "testInvalidOpcode";
+#define NICE 0
+#define PIPE 1
+#define CLEAR 2
+#define TIME 3
+#define HELP 4
+#define SNAKE 5
+#define TEST_DIVISION_BY_0 6
+#define TEST_INVALID_OPCODE 7
+#define MEM 8
+#define PS 9
+#define LOOP 10
+#define KILL 11
+#define BLOCK 12
+#define UNBLOCK 13
+#define CAT 14
+#define WC 15
+#define FILTER 16
+#define SEM 17
+#define PHYLO 18
+
+
 
 
 
