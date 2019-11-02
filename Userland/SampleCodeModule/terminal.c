@@ -211,12 +211,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             niceCommand(stringToInt(arg1), stringToInt(arg2));
         }
         else{
-            print("Not enough arguments");
+            print("Not enough arguments for command nice");
             printAction(0);
         }
         break;
 
-        
+
     case PIPE:
         pipeCommand();
         break;
@@ -369,6 +369,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         printAction(0);
         break;
     }
+    printNewLineOfTerminal();
 }
 
 void handleCommand(){
