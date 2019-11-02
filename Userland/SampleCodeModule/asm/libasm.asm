@@ -258,9 +258,7 @@ sys_set_state:
 	ret
 
 GLOBAL sys_create_process_params
-extern print_args
 sys_create_process_params:
-	print_args
 	pushState
 	adjust_to_sys_call
 	;sys_create_process_params is call 54
