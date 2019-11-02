@@ -509,7 +509,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         }
         break;
     
-    case BACKGROUND:
+    case BACKGROUND: //it has to be called with "& command1 parameters"
         background = 1;
         break;
     
@@ -568,7 +568,14 @@ void helpCommand()
         printDec(i);
         print(": "); //Just for stethic
         print(commands[i]);
+        if(i == HELP){
+            print("(Be careful if it is not called in background it blocks the terminal)");
+        }
+        else if(i == BACKGROUND){
+            print("(format: \"& command parameters\")");
+        }
     }
+    printAction(0);
 }
 
 void clearCommand()
