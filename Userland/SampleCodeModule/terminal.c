@@ -32,8 +32,8 @@ void terminal()
 
     fillCommandList();
 
-    uint64_t test = sys_create_process_params(1, catCommand,(uint64_t) "hola", 0);
-    sys_run_process(test, PROC_RUNNING);
+    //uint64_t test = sys_create_process_params(1, catCommand,(uint64_t) "hola", 0);
+    //sys_run_process(test, PROC_RUNNING);
 
     char * test1 = "hola";
     uint64_t aux = (uint64_t) test1;
