@@ -138,10 +138,22 @@ void extractToken(char *dest, char *string, int tokenNum){ //extracts an specifi
         i++;
     }
     int j = 0; //copying the token in the destination
-    while(string[i] != 0 && string[i] != SPACE){
-        dest[j] = string[i];
-        j++;
+    if(string[i] == MARKS){
         i++;
+        while (string[i] != 0 && string[i] != MARKS)
+        {
+             dest[j] = string[i];
+            j++;
+            i++;
+        }
+        
+    }
+    else{
+        while(string[i] != 0 && string[i] != SPACE){
+            dest[j] = string[i];
+            j++;
+            i++;
+        }
     }
     dest[j] = 0;
     tokenIterator ++;
@@ -495,7 +507,7 @@ void killCommand(uint64_t pid){
         printAction(0);
     }
     else if(pid == 0 || pid == 2){
-        print("Error, it is not permitted to kill halt and terminal.");
+        print("Error, it is not permitted to kill process halt or terminal.");
     }
     else{
         printAction(0);
