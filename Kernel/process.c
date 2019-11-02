@@ -178,7 +178,7 @@ uint64_t build_stack_with_args(uint64_t rip, uint64_t from, processInfo process,
     stack -> rax = 0X0;
     
 
-    stack -> rip = (uint64_t) run_set_return;
+    stack -> rip = (uint64_t) run_set_return_with_arguments;
     stack -> cs = 0X8;
     stack -> eflags = 0X202;
     stack -> rsp = (uint64_t)&(stack -> base);
