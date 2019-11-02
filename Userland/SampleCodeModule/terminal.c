@@ -378,7 +378,7 @@ void handleCommand(){
     strncopy(terminalBuffer, potentialCommand, bufferSize);
     tokens = tokensCounter(potentialCommand);
     int i = 1;
-    while(tokens + 1 >= tokenIterator){ //consumes all the tokens the potential command has
+    while(tokens + 1 > tokenIterator){ //consumes all the tokens the potential command has
         handleToken(potentialCommand, tokenIterator);
         printDec(i);
         i++;
