@@ -115,9 +115,7 @@ int tokensCounter(char *string){ //counting all tokens found in the string submi
             insideString = !insideString;
         }
         if(string[i] == SPACE && !insideString){ //counts another token
-            while(string[i] == SPACE){
-                i++;
-            }
+
             tokens++;
         }
         i++;
@@ -130,24 +128,16 @@ void extractToken(char *dest, char *string, int tokenNum){ //extracts an specifi
     int insideString = 0;
     int i = 0;
     int count = 0;
-    while(string[i] == SPACE){
-        i++;
-    }
     while(count < tokenNum - 1 && string[i] != 0){ //same logic as token counter
         if(string[i] == MARKS){
             insideString = !insideString;
         }
         else if(string[i] == SPACE && !insideString){
-            while(string[i] == SPACE){
-                i++; //eliminates two consecutive spaces
-            }
             count++;
         }
         i++;
     }
-    while(string[i] == SPACE){
-        i++;
-    }
+
     int j = 0; //copying the token in the destination
     if(string[i] == MARKS){
         i++;
