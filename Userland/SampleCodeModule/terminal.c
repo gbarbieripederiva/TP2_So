@@ -42,8 +42,6 @@ void terminal()
      //sys_sem_wait(sid);
     //printDec(sys_set_state(2, 0));
 
-    testchoi(10, 20, 30, 40);
-
     while (1)
     {
         if (readNewInput())
@@ -516,7 +514,9 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         printAction(0);
         break;
     }
-    printNewLineOfTerminal();
+    if(background != 1){
+        printNewLineOfTerminal();
+    }
 }
 
 void handleCommand(){
@@ -525,7 +525,6 @@ void handleCommand(){
     char potentialCommand[MAX_COMDESC];
     strncopy(terminalBuffer, potentialCommand, bufferSize);
     tokens = tokensCounter(potentialCommand);
-    int i = 1;
     while(tokens + 1 > tokenIterator){ //consumes all the tokens the potential command has
         handleToken(potentialCommand, tokenIterator);
     }
@@ -616,6 +615,7 @@ void psCommand(){
 }
 
 void loopCommand(uint64_t seconds){
+    printDec(seconds);
     while(1){
         waitFor(seconds);
         printAction(0);
