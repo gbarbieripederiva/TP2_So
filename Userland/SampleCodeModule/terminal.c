@@ -197,7 +197,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         commandNum++;
     }
 
-    printDec(tokens);
 
     switch (commandNum) //we execute the command or we tell the user it does not exist
     {
@@ -366,7 +365,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     default:
-        print("Command not fount");
+        print("Command not found");
         printAction(0);
         break;
     }
@@ -378,9 +377,11 @@ void handleCommand(){
     char potentialCommand[MAX_COMDESC];
     strncopy(terminalBuffer, potentialCommand, bufferSize);
     tokens = tokensCounter(potentialCommand);
-
+    int i = 1;
     while(tokens + 1 >= tokenIterator){ //consumes all the tokens the potential command has
         handleToken(potentialCommand, tokenIterator);
+        printDec(i);
+        i++;
     }
 }
 
