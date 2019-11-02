@@ -342,6 +342,9 @@ int sys_set_state(int pid, int state){
 
 //SYSCALL 54 to create a process with parameters
 uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2){
+	ncPrintDec(arg1);
+	ncNewLine();
+	ncPrintDec(arg2);
 	return (uint64_t) create_process_with_args(priority, rip ,arg1 , arg2);
 }
 
