@@ -771,6 +771,13 @@ void fillCommandList()
 
 }
 
+void print_args(int arg1, uint64_t arg2, uint64_t arg3, uint64_t arg4){
+    print("Userland: ");
+    printDec(arg3);
+    printDec(arg4);
+    printAction(0);
+}
+
 
 
 
