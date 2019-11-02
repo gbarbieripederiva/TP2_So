@@ -610,7 +610,6 @@ void handleCommand(){
     char potentialCommand[MAX_COMDESC];
     strncopy(terminalBuffer, potentialCommand, bufferSize);
     pipesAmount = pipesCount(potentialCommand);
-    printDec(pipesAmount);
     tokens = tokensCounter(potentialCommand);
     while(tokens + 1 > tokenIterator){ //consumes all the tokens the potential command has
         handleToken(potentialCommand, tokenIterator);
