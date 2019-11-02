@@ -198,6 +198,10 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
     }
     printDec(commandNum);
 
+    printDec(tokenNum);
+    printAction(0);
+    printDec(tokens);
+
     switch (commandNum) //we execute the command or we tell the user it does not exist
     {
     case NICE: ;
