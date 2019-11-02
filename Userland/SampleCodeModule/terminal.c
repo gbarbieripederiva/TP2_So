@@ -380,8 +380,6 @@ void handleCommand(){
     int i = 1;
     while(tokens + 1 > tokenIterator){ //consumes all the tokens the potential command has
         handleToken(potentialCommand, tokenIterator);
-        printDec(i);
-        i++;
     }
 }
 
