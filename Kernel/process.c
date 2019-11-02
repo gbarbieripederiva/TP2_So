@@ -149,11 +149,11 @@ int set_priority(int pid, int priority){
 
 //Runs a process with two arguments
 void run_set_return_with_arguments(uint64_t rip, processInfo process, uint64_t arg1, uint64_t arg2){
-    
+    ncPrint("run set return:");
+		ncPrintDec(arg1);
+		ncPrintDec(arg2);
+		ncNewLine();
     void (*main) (uint64_t, uint64_t) = (void (*) (uint64_t, uint64_t)) rip;
-    ncPrintDec(arg1);
-    ncNewLine();
-    ncPrintDec(arg2);
     (*main)(arg1, arg2);
     kill_process(process -> pid);
 }

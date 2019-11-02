@@ -99,6 +99,10 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		break;
 	//sys_create_process_params: to create a process with parameters
 	case 54:
+		ncPrint("Int 80:");
+		ncPrintDec(arg3);
+		ncPrintDec(arg4);
+		ncNewLine();
 		return (uint64_t) sys_create_process_params((int) arg1, (uint64_t) arg2, (uint64_t) arg3, (uint64_t) arg4);
 	//sys_create_semaphore: creates a sem and returns sem id
 	case 60:
@@ -342,9 +346,10 @@ int sys_set_state(int pid, int state){
 
 //SYSCALL 54 to create a process with parameters
 uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2){
-	ncPrint((char *)arg1);
-	ncNewLine();
-	ncPrint((char *) arg2);
+	ncPrint("sys_create_process_params :");
+		ncPrintDec(arg1);
+		ncPrintDec(arg2);
+		ncNewLine();
 	return (uint64_t) create_process_with_args(priority, rip ,arg1 , arg2);
 }
 
