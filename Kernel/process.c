@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <memoryManager.h>
 #include <interrupts.h>
+#include <naiveConsole.h>
 #include <null.h>
 
 static int pid = 1;
@@ -148,7 +149,11 @@ int set_priority(int pid, int priority){
 
 //Runs a process with two arguments
 void run_set_return_with_arguments(uint64_t rip, processInfo process, uint64_t arg1, uint64_t arg2){
+    
     void (*main) (uint64_t, uint64_t) = (void (*) (uint64_t, uint64_t)) rip;
+    ncPrintDec(arg1);
+    ncNewLine();
+    ncPrintDec(arg2);
     (*main)(arg1, arg2);
     kill_process(process -> pid);
 }
