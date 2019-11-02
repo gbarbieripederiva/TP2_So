@@ -32,6 +32,9 @@ void terminal()
 
     fillCommandList();
 
+    uint64_t test = sys_create_process_params(1, catCommand,(uint64_t) "hola mundo", 0);
+    sys_run_process(test, PROC_RUNNING);
+
    
 
     print("Welcome! Please enter a command. Try 'help'");
