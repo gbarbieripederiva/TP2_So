@@ -126,6 +126,9 @@ int tokensCounter(char *string){ //counting all tokens found in the string submi
 }
 
 void extractToken(char *dest, char *string, int tokenNum){ //extracts an specific token
+    while(string[i] == SPACE){
+        i++;
+    }
     int insideString = 0;
     int i = 0;
     int count = 0;
