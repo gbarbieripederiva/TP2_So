@@ -483,7 +483,7 @@ void loopCommand(uint64_t seconds){
         print("Welcome to Barca SO");
         printAction(0);
         print("PID: ");
-        printDec(sys_get_pid);
+        printDec(sys_get_pid());
         printAction(0);
     }
 }
@@ -493,6 +493,9 @@ void killCommand(uint64_t pid){
         printAction(0);
         print("Succesfully killed");
         printAction(0);
+    }
+    else if(pid == 0 || pid == 2){
+        print("Error, it is not permitted to kill halt and terminal.");
     }
     else{
         printAction(0);
