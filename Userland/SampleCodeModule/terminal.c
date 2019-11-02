@@ -6,6 +6,9 @@
 #define BUFFER_SIZE 100
 #define MAX_COMDESC 100
 #define MAX_COMMANDS 20
+#define COMMANDS 2
+#define SPACE 32
+#define MARKS 34
 
 //Buffer to store the input from the keyboard.
 static char terminalBuffer[BUFFER_SIZE + 1] = {0}; //Non cyclic buffer
@@ -22,6 +25,12 @@ typedef struct command
 static command commandList[MAX_COMMANDS];
 static int commandsSize = 0;
 
+
+//command handler variables
+char *commands[COMMANDS] = {"nice","pipe"}; //all command names
+int tokenIterator = 0; //used to process multiple tokens
+int tokens = 0; //we need token to be visible for extract token function and for the handler
+
 //-----------------------------Main functions---------------------------------------------
 
 void terminal()
@@ -33,8 +42,6 @@ void terminal()
 
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
-
-     sys_print_running_procs();
      int sid = sys_create_semaphore(1 , SEM_LOCKED);
      //sys_sem_wait(sid);
     //printDec(sys_set_state(2, 0));
@@ -48,6 +55,8 @@ void terminal()
         }
     }
 }
+
+
 
 /* Reads from the keyboard if theres new input.
 If there is new input(and valid):
@@ -102,31 +111,149 @@ int readNewInput()
 /* Means that the enter key was pressed so we must take action based on 
    the current state of the buffer.
  */
-void handleCommand()
-{
 
-    //Copy the command into the array. Did this to avoid a bug in which in some cases the buffer
-    //represented more chars that it should.
-    char potentialCommand[MAX_COMDESC] = {0};
-    strncopy(terminalBuffer, potentialCommand, bufferSize);
+//______________________________________________________________new handler__________________________________________________________________________
 
-    for (int i = 0; i < commandsSize; i++)
-    {
-        if (strcmp(potentialCommand, commandList[i].desc))
-        {
-            (commandList[i].cmdptr)();
+//tokens
+int tokensCounter(char *string){ //counting all tokens found in the string submitted
+    int i = 0; //iterates inside the string
+    int tokens = 1; //it starts in the first token
+    int insideString = 0; //checks if it is inside a string which doesnt count as a token
+    while(string[i] != 0){
+        if(string[i] == MARKS){ // if it is a mark, then it means we are starting or ending a string
+            insideString = !insideString;
+        }
+        if(string[i] == SPACE && !insideString){ //counts another token
+            tokens++;
+        }
+        i++;
+    }
+    return tokens;
+}
 
-            //After executing the command we print a newLine and exit.
-            printNewLineOfTerminal();
-            return;
+void extractToken(char *dest, char *string, int tokenNum){ //extracts an specific token
+    int insideString = 0;
+    int i = 0;
+    int count = 0;
+    while(count < tokenNum - 1 && string[i] != 0){ //same logic as token counter
+        if(string[i] == MARKS){
+            insideString = !insideString;
+        }
+        else if(string[i] == SPACE && !insideString){
+            count++;
+        }
+        i++;
+    }
+    int j = 0; //copying the token in the destination
+    while(string[i] != 0 && string[i] != SPACE){
+        dest[j] = string[i];
+        j++;
+        i++;
+    }
+    dest[j] = 0;
+    tokens --;
+
+}
+int power(int base, int exponent){ //we need power to get the string into an integer
+    int aux = 1;
+    if(exponent < 0){
+        return -1;
+    }
+    else{
+        while(exponent > 0){
+            aux = aux * base;
+            exponent-- ;
         }
     }
-
-    //If command not found
-    print("Not a valid command: ");
-    print(potentialCommand);
-    printNewLineOfTerminal();
+    return aux;
 }
+int isNumber(char i){ //we have to check it is a number, else is not a valid argument
+    if( i >= 48 && i <= 57){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int stringToInt(char *string){ //logic
+    int i = 0;
+    int aux = 0;
+    int size = strlength(string);
+    while(size > 0){
+        if(isNumber(string[i])){ 
+            aux += (((int)string[i]) - 48) * power(10, size - 1);
+            i++;
+            size --;
+        }
+        else{ //if it is not a number then it is not a valid argument
+            print("Not a valid argument");
+            printAction(0);
+            return -1;
+        }
+    }
+    return aux;
+
+}
+void handleToken(char *string, int tokenNum){ //we need to execute the correct function
+    char justCommand[MAX_COMDESC] = {0};
+    extractToken(justCommand, string, tokenNum); //we want to extract the token we need
+
+    int commandNum = 0;
+    while(commandNum < COMMANDS && (strcmp(justCommand, commands[commandNum]) != 0)){ //we look for the command that matches
+        commandNum++;
+    }
+
+
+    switch (commandNum) //we execute the command or we tell the user it does not exist
+    {
+    case 0: ;
+        char arg1[64];
+        char arg2[64];
+        extractToken(arg1, string, tokenIterator + 1);
+        extractToken(arg2, string, tokenIterator + 2);
+        tokenIterator = tokenIterator + 2;
+        niceCommand(stringToInt(arg1), stringToInt(arg2));
+        break;
+    case 1:
+        pipeCommand();
+        return;
+        break;
+
+
+    default:
+        print("Command not fount");
+        printAction(0);
+        break;
+    }
+}
+
+void handleCommand(){
+    tokenIterator = 0;
+    char potentialCommand[MAX_COMDESC];
+    strncopy(terminalBuffer, potentialCommand, bufferSize);
+    tokens = tokensCounter(potentialCommand);
+
+    while(tokens != 0){ //consumes all the tokens the potential command has
+        tokenIterator++;
+
+        handleToken(potentialCommand, tokenIterator);
+    }
+}
+
+
+
+
+
+
+//______________________________________________________________________________________________________________________________________________________
+
+
+
+
+
+
+
 
 //----------------------Possible Commands-------------------------------------------
 
@@ -185,6 +312,103 @@ void testIvalidOpCodeCommand()
     (punt)();
 }
 
+void memCommand()
+{
+    //TODO
+}
+
+void pipeCommand() {
+    sys_print_pipe();
+}
+
+void psCommand(){
+    sys_print_running_procs();
+}
+
+void loopCommand(uint64_t seconds){
+    while(1){
+        waitFor(seconds);
+        printAction(0);
+        print("Welcome to Barca SO");
+        printAction(0);
+        print("PID: ");
+        printDec(sys_get_pid);
+        printAction(0);
+    }
+}
+
+void killCommand(int pid){
+    if(sys_kill_process(pid) != -1){
+        printAction(0);
+        print("Succesfully killed");
+        printAction(0);
+    }
+    else{
+        printAction(0);
+        print("No such process running");
+        printAction(0);
+    }
+}
+
+void niceCommand(int pid, int priority){
+    if(sys_set_priority(pid, priority) != -1){
+        printAction(0);
+        print("Succesfully priority set");
+        printAction(0);
+    }
+    else{
+        printAction(0);
+        print("No such process running");
+        printAction(0);
+    }
+}
+
+void blockCommand(int pid){
+      if(sys_set_state(pid, PROC_BLOCK) != -1){
+        printAction(0);
+        print("Succesfully blocked");
+        printAction(0);
+    }
+    else{
+        printAction(0);
+        print("No such process running");
+        printAction(0);
+    }
+}
+
+void unblockCommand(int pid){
+      if(sys_set_state(pid, PROC_RUNNING) != -1){
+        printAction(0);
+        print("Succesfully unblocked");
+        printAction(0);
+    }
+    else{
+        printAction(0);
+        print("No such process running");
+        printAction(0);
+    }
+}
+
+void catCommand(char *string){//dont know if it should be redirected
+        printAction(0);
+        print(string);
+        printAction(0);
+}
+
+void wcCommand(char *string){
+
+}
+
+void filterCommand(char *string){
+
+}
+
+void semCommand(){
+    sys_print_sems();
+}
+
+
+
 //----------------------AUXILIARY FUNCTIONS-----------------------------------------
 void cleanBuffer()
 {
@@ -231,3 +455,30 @@ void fillCommand(char *desc, void (*cmdptr)(void))
     commandList[commandsSize++] = aux;
 }
 
+
+/*void handleCommand()
+{
+
+    //Copy the command into the array. Did this to avoid a bug in which in some cases the buffer
+    //represented more chars that it should.
+    char potentialCommand[MAX_COMDESC] = {0};
+    strncopy(terminalBuffer, potentialCommand, bufferSize);
+
+    for (int i = 0; i < commandsSize; i++)
+    {
+        if (strcmp(potentialCommand, commandList[i].desc))
+        {
+            (commandList[i].cmdptr)();
+
+            //After executing the command we print a newLine and exit.
+            printNewLineOfTerminal();
+            return;
+        }
+    }
+
+    //If command not found
+    print("Not a valid command: ");
+    print(potentialCommand);
+    printNewLineOfTerminal();
+}
+*/

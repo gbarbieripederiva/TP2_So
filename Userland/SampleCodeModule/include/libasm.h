@@ -5,6 +5,9 @@
 #define SEM_LOCKED 1
 #define SEM_UNLOCKED 0
 
+#define PROC_BLOCK 0
+#define PROC_RUNNING 1
+
 typedef struct process{
     int pid;
     char * name;

@@ -25,6 +25,18 @@ void timeCommand();
 void snakeCommand();
 void testDivisionBy0Command();
 void testIvalidOpCodeCommand();
+void memCommand();
+void pipeCommand();
+void psCommand();
+void loopCommand(uint64_t seconds);
+void killCommand(int pid);
+void niceCommando(int pid, int priority);
+void blockCommand(int pid);
+void unblockCommand(int pid);
+void catCommand(char *string);
+void wcCommand(char *string);
+void filterCommando(char *string);
+void semCommand();
 
 
 //--------------------Command definitions------------------------------------------------
