@@ -107,6 +107,7 @@ uint64_t build_stack(uint64_t rip, uint64_t from, processInfo process){
     return (uint64_t) stack;
 
 }
+
 //puts a process in the array and fills the stack with the rip
 processInfo create_process(int priority, uint64_t rip){
     if(pid >= MAX_PROCESSES){
@@ -142,4 +143,64 @@ int set_priority(int pid, int priority){
 
 }
 
+//------------------------------------------------------this is to create a process with arguments--------------------------------------------------------
+
+
+//Runs a process with two arguments
+void run_set_return_with_arguments(uint64_t rip, processInfo process, uint64_t arg1, uint64_t arg2){
+    void (*main) (uint64_t, uint64_t) = (void (*) (uint64_t, uint64_t)) rip;
+    (*main)(arg1, arg2);
+    kill_process(process -> pid);
+}
+
+//builds stack of a new process with arguments
+uint64_t build_stack_with_args(uint64_t rip, uint64_t from, processInfo process, uint64_t arg1, uint64_t arg2){
+    stack_frame  * stack = (stack_frame *)(from + STACK_SIZE - sizeof(stack_frame) - 1);
+    stack -> r15 = 0X0;
+    stack -> r14 = 0X0;
+    stack -> r13 = 0X0;
+    stack -> r12 = 0X0;
+    stack -> r11 = 0X0;
+    stack -> r10 = 0X0;
+    stack -> r9 = 0X0;
+    stack -> r8 = 0X0;
+    stack -> rsi = (uint64_t)process;
+    stack -> rdi = rip;
+    stack -> rbp = 0X0;
+    stack -> rdx = arg1;
+    stack -> rcx = arg2;
+    stack -> rbx = 0X0;
+    stack -> rax = 0X0;
+    
+
+    stack -> rip = (uint64_t) run_set_return;
+    stack -> cs = 0X8;
+    stack -> eflags = 0X202;
+    stack -> rsp = (uint64_t)&(stack -> base);
+    stack -> ss = 0X0;
+    stack -> base = 0X0;
+
+    return (uint64_t) stack;
+
+}
+
+//puts a process in the array and fills the stack with the rip
+processInfo create_process_with_args(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2){
+    if(pid >= MAX_PROCESSES){
+        return NULL;
+    }
+    processInfo process = (processInfo)giveMeMemory((long)sizeof(process));
+    if(pid != 0){
+        process -> ppid = get_current_pid();}
+    else{
+        process -> ppid = 0;
+    }
+    process -> pid = pid;
+    process -> priority = priority;
+    process -> stack_end = (uint64_t)giveMeMemory(STACK_SIZE);
+    process -> sp = build_stack_with_args(rip, process -> stack_end, process, arg1, arg2);
+    processes[pid++] = process;
+
+    return process;
+}
 

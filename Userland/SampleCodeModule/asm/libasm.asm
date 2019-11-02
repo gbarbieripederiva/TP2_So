@@ -42,6 +42,7 @@ section .text
 ;the sys_call number
 ; rdi -> rsi, rsi->rdx, rdx -> rcx,
 %macro adjust_to_sys_call 0
+	mov r8, rcx
 	mov rcx,rdx
 	mov rdx,rsi
 	mov rsi,rdi
@@ -252,6 +253,16 @@ sys_set_state:
 	adjust_to_sys_call
 	;sys_set_state is call 53
 	mov rdi, 53
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_create_process_params
+sys_create_process_params:
+	pushState
+	adjust_to_sys_call
+	;sys_create_process_params is call 54
+	mov rdi, 54
 	int 80h
 	popState
 	ret

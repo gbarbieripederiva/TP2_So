@@ -78,6 +78,9 @@ int sys_set_priority(int pid, int priority);
 //SYS CALL 53 to set state to a process
 int sys_set_state(int pid, int priority);
 
+//SYS CALL 54 to create a process with parameters
+uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2);
+
 //SYS CALL 60, to create a sempahore
 int sys_create_semaphore(int nombre, int state);
 

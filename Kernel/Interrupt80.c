@@ -13,7 +13,7 @@
 #include <pipes.h>
 //Software interrupt used for interaction between user and kernel space
 //order of registers in standard rdi -> call number,rsi -> arg1 ,rdx -> arg2 ,rcx -> arg3
-uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_t arg2, uint64_t arg3)
+uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_t arg2, uint64_t arg3, uint64_t arg4)
 {
 
 	switch (callNumber)
@@ -97,6 +97,9 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 53:
 		return (int) sys_set_state((int)arg1, (int) arg2);
 		break;
+	//sys_create_process_params: to create a process with parameters
+	case 54:
+		return (uint64_t) sys_create_process_params((int) arg1, (uint64_t) arg2, (uint64_t) arg3, (uint64_t) arg4);
 	//sys_create_semaphore: creates a sem and returns sem id
 	case 60:
 		return (int) sys_create_semaphore((int)arg1, (int) arg2);
@@ -324,6 +327,11 @@ int sys_set_priority(int pid, int priority){
 //SYSCALL 53 to set state
 int sys_set_state(int pid, int state){
 	return (int) set_state(pid, state);
+}
+
+//SYSCALL 54 to create a process with parameters
+uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2){
+	return (uint64_t) create_process_with_args(priority, rip ,arg1 , arg2);
 }
 
 //SYSCALL 60 creates a semaphore

@@ -6,7 +6,7 @@
 #define BUFFER_SIZE 100
 #define MAX_COMDESC 100
 #define MAX_COMMANDS 2
-#define COMMANDS 19
+#define COMMANDS 21
 #define SPACE 32
 #define MARKS 34
 
@@ -612,6 +612,8 @@ void fillCommandList()
     commands[16] = "filter";
     commands[17] = "sem";
     commands[18] = "phylo";
+    commands[19] = "&";
+    commands[20] = "|";
 
 }
 

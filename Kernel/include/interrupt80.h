@@ -4,7 +4,7 @@
 #include <process.h>
 
 // the int 80h dispatcher
-uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_t arg2, uint64_t arg3);
+uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_t arg2, uint64_t arg3, uint64_t arg4);
 void sys_read_function(char *buffer, int count);				//SYS_CALL 0
 void sys_write(char *buffer, int count);						//SYS_CALL 1
 void sys_put_char(char c);										//SYS_CALL 2
@@ -25,6 +25,7 @@ int sys_get_pid();//SYSCALL 50
 void sys_print_running_procs(); //SYSCALL 51
 int sys_set_priority(int pid, int priority); //SYSCALL 52
 int sys_set_state(int pid, int priority);//SYSCALL 53
+uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2); //SYSCALL 54
 int sys_create_semaphore(int name, int state); //SYSCALL 60
 int sys_sem_close(int sid); //SYSCALL 61
 int sys_sem_post(int sid); //SYSCALL 62
