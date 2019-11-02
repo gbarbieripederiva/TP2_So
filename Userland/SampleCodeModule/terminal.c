@@ -208,7 +208,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             extractToken(arg1, string, tokenNum + 1);
             extractToken(arg2, string, tokenNum + 2);
             tokenIterator = tokenIterator + 2;
-            niceCommand(stringToInt(arg1), stringToInt(arg2));
+            niceCommand((uint64_t) stringToInt(arg1), (uint64_t) stringToInt(arg2));
         }
         else{
             tokenIterator = tokens + 1; // this is to stop the while iteration
@@ -281,7 +281,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
          if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            killCommand(stringToInt(arg1));
+            killCommand((uint64_t) stringToInt(arg1));
         }
         else{
             tokenIterator = tokens + 1; // this is to stop the while iteration
@@ -295,7 +295,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
          if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            blockCommand(stringToInt(arg1));
+            blockCommand((uint64_t) stringToInt(arg1));
         }
         else{
             tokenIterator = tokens + 1; // this is to stop the while iteration
@@ -309,7 +309,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
           if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            unblockCommand(stringToInt(arg1));
+            unblockCommand((uint64_t) stringToInt(arg1));
         }
         else{
             tokenIterator = tokens + 1; // this is to stop the while iteration
@@ -324,7 +324,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            catCommand(arg1);
+            catCommand((uint64_t) arg1);
         }
         else{
             tokenIterator = tokens + 1; // this is to stop the while iteration
@@ -337,7 +337,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            wcCommand(arg1);
+            wcCommand((uint64_t) arg1);
         }
         else{
             tokenIterator = tokens + 1; // this is to stop the while iteration
@@ -351,7 +351,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
          if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            filterCommand(arg1);
+            filterCommand((uint64_t) arg1);
         }
         else{
             tokenIterator = tokens + 1; // this is to stop the while iteration
@@ -488,8 +488,8 @@ void loopCommand(uint64_t seconds){
     }
 }
 
-void killCommand(int pid){
-    if(sys_kill_process(pid) != -1){
+void killCommand(uint64_t pid){
+    if(sys_kill_process((int) pid) != -1){
         printAction(0);
         print("Succesfully killed");
         printAction(0);
@@ -501,8 +501,8 @@ void killCommand(int pid){
     }
 }
 
-void niceCommand(int pid, int priority){
-    if(sys_set_priority(pid, priority) != -1){
+void niceCommand(uint64_t pid, uint64_t priority){
+    if(sys_set_priority((int) pid, (int)priority) != -1){
         printAction(0);
         print("Succesfully priority set");
         printAction(0);
@@ -514,8 +514,8 @@ void niceCommand(int pid, int priority){
     }
 }
 
-void blockCommand(int pid){
-      if(sys_set_state(pid, PROC_BLOCK) != -1){
+void blockCommand(uint64_t pid){
+      if(sys_set_state((int) pid, PROC_BLOCK) != -1){
         printAction(0);
         print("Succesfully blocked");
         printAction(0);
@@ -527,8 +527,8 @@ void blockCommand(int pid){
     }
 }
 
-void unblockCommand(int pid){
-      if(sys_set_state(pid, PROC_RUNNING) != -1){
+void unblockCommand(uint64_t pid){
+      if(sys_set_state((int) pid, PROC_RUNNING) != -1){
         printAction(0);
         print("Succesfully unblocked");
         printAction(0);
@@ -540,18 +540,19 @@ void unblockCommand(int pid){
     }
 }
 
-void catCommand(char *string){//dont know if it should be redirected
+void catCommand(uint64_t string){//dont know if it should be redirected
+        
         printAction(0);
-        print(string);
+        print((char *) string);
         printAction(0);
 }
 
-void wcCommand(char *string){
-
+void wcCommand(uint64_t string){
+    char * str = (char *) string;
 }
 
-void filterCommand(char *string){
-
+void filterCommand(uint64_t string){
+    char * str = (char *) string;
 }
 
 void semCommand(){
