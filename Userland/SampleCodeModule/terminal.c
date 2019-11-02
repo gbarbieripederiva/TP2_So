@@ -374,13 +374,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 }
 
 void handleCommand(){
-    tokenIterator = 0;
+    tokenIterator = 1;
     char potentialCommand[MAX_COMDESC];
     strncopy(terminalBuffer, potentialCommand, bufferSize);
     tokens = tokensCounter(potentialCommand);
 
     while(tokens != tokenIterator){ //consumes all the tokens the potential command has
-        tokenIterator ++;
         handleToken(potentialCommand, tokenIterator);
     }
 }
