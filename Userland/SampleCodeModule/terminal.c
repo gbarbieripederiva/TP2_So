@@ -489,7 +489,7 @@ void loopCommand(uint64_t seconds){
 }
 
 void killCommand(uint64_t pid){
-    if(sys_kill_process((int) pid) != -1){
+    if(pid != 0 && pid != 2 &&sys_kill_process((int) pid) != -1){
         printAction(0);
         print("Succesfully killed");
         printAction(0);
