@@ -220,7 +220,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             char arg2[64];
             extractToken(arg1, string, tokenNum + 1);
             extractToken(arg2, string, tokenNum + 2);
-            tokenIterator = tokenIterator + 2;
 
             if(background == 1){
                 uint64_t niceInfo = sys_create_process_params(0, (uint64_t) niceCommand, (uint64_t) stringToInt(arg1), (uint64_t) stringToInt(arg2));
