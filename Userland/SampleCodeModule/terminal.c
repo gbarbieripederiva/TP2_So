@@ -211,6 +211,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             niceCommand(stringToInt(arg1), stringToInt(arg2));
         }
         else{
+            tokenIterator = tokens + 1; // this is to stop the while iteration
             print("Not enough arguments for command nice");
             printAction(0);
         }
@@ -269,6 +270,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             loopCommand((uint64_t) stringToInt(arg1));
         }
         else{
+            tokenIterator = tokens + 1; // this is to stop the while iteration
             print("Not enough arguments for command loop");
             printAction(0);
         }
@@ -282,6 +284,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             killCommand(stringToInt(arg1));
         }
         else{
+            tokenIterator = tokens + 1; // this is to stop the while iteration
             print("Not enough arguments for command kill");
             printAction(0);
         }
@@ -295,6 +298,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             blockCommand(stringToInt(arg1));
         }
         else{
+            tokenIterator = tokens + 1; // this is to stop the while iteration
             print("Not enough arguments for command block");
             printAction(0);
         }
@@ -308,6 +312,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             unblockCommand(stringToInt(arg1));
         }
         else{
+            tokenIterator = tokens + 1; // this is to stop the while iteration
             print("Not enough arguments for command unblock");
             printAction(0);
         }
@@ -322,6 +327,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             catCommand(arg1);
         }
         else{
+            tokenIterator = tokens + 1; // this is to stop the while iteration
             print("Not enough arguments for command cat");
             printAction(0);
         }
@@ -334,6 +340,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             wcCommand(arg1);
         }
         else{
+            tokenIterator = tokens + 1; // this is to stop the while iteration
             print("Not enough arguments for command wc");
             printAction(0);
         }
@@ -347,6 +354,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             filterCommand(arg1);
         }
         else{
+            tokenIterator = tokens + 1; // this is to stop the while iteration
             print("Not enough arguments for command filter");
             printAction(0);
         }
@@ -365,6 +373,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     default:
+        tokenIterator = tokens + 1; // this is to stop the while iteration
         print("Command not found");
         printAction(0);
         break;
