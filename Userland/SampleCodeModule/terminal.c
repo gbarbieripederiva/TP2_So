@@ -115,6 +115,9 @@ int tokensCounter(char *string){ //counting all tokens found in the string submi
             insideString = !insideString;
         }
         if(string[i] == SPACE && !insideString){ //counts another token
+            while(string[i] == SPACE){
+                i++;
+            }
             tokens++;
         }
         i++;
@@ -131,8 +134,14 @@ void extractToken(char *dest, char *string, int tokenNum){ //extracts an specifi
             insideString = !insideString;
         }
         else if(string[i] == SPACE && !insideString){
+            while(string[i] == SPACE){
+                i++; //eliminates two consecutive spaces
+            }
             count++;
         }
+        i++;
+    }
+    while(string[i] == SPACE){
         i++;
     }
     int j = 0; //copying the token in the destination
@@ -140,7 +149,7 @@ void extractToken(char *dest, char *string, int tokenNum){ //extracts an specifi
         i++;
         while (string[i] != 0 && string[i] != MARKS)
         {
-             dest[j] = string[i];
+            dest[j] = string[i];
             j++;
             i++;
         }
@@ -568,7 +577,7 @@ void helpCommand()
         printDec(i);
         print(": "); //Just for stethic
         print(commands[i]);
-        if(i == HELP){
+        if(i == LOOP){
             print("      (Be careful if it is not called in background it blocks the terminal)");
         }
         else if(i == BACKGROUND){
