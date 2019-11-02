@@ -29,13 +29,13 @@ void memCommand();
 void pipeCommand();
 void psCommand();
 void loopCommand(uint64_t seconds);
-void killCommand(int pid);
-void niceCommando(int pid, int priority);
-void blockCommand(int pid);
-void unblockCommand(int pid);
-void catCommand(char *string);
-void wcCommand(char *string);
-void filterCommando(char *string);
+void killCommand(uint64_t pid);
+void niceCommando(uint64_t pid, uint64_t priority);
+void blockCommand(uint64_t pid);
+void unblockCommand(uint64_t pid);
+void catCommand(uint64_t string);
+void wcCommand(uint64_t string);
+void filterCommando(uint64_t string);
 void semCommand();
 
 
