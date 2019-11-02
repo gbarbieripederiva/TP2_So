@@ -31,9 +31,6 @@ void terminal()
 {
 
     fillCommandList();
-
-    uint64_t test = sys_create_process_params(1, catCommand,(uint64_t) "hola", 0);
-    sys_run_process(test, PROC_RUNNING);
    
 
     print("Welcome! Please enter a command. Try 'help'");
@@ -224,6 +221,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             extractToken(arg2, string, tokenNum + 2);
 
             if(background == 1){
+                background = 0;
                 uint64_t niceInfo = sys_create_process_params(0, (uint64_t) niceCommand, (uint64_t) stringToInt(arg1), (uint64_t) stringToInt(arg2));
                 sys_run_process(niceInfo, PROC_RUNNING);
             }
@@ -241,6 +239,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case PIPECHECK:
         if(background == 1){
+            background = 0;
             uint64_t pipeInfo = sys_create_process(0, (uint64_t) pipeCommand);
             sys_run_process(pipeInfo, PROC_RUNNING);
         }
@@ -256,6 +255,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case TIME:
         if(background == 1){
+            background = 0;
             uint64_t timeInfo = sys_create_process(0, (uint64_t)timeCommand);
             sys_run_process(timeInfo, PROC_RUNNING);
         }
@@ -267,6 +267,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case HELP:
         if(background == 1){
+            background = 0;
              uint64_t helpInfo = sys_create_process(0, (uint64_t) helpCommand);
             sys_run_process(helpInfo, PROC_RUNNING);
         }
@@ -281,6 +282,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case SNAKE:
         if(background == 1){
+            background = 0;
             uint64_t snakeInfo = sys_create_process(0, (uint64_t) snakeCommand);
             sys_run_process(snakeInfo, PROC_RUNNING);
         }
@@ -294,6 +296,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case TEST_DIVISION_BY_0:
         if(background == 1){
+            background = 0;
             uint64_t testDivInfo = sys_create_process(0, (uint64_t) testDivisionBy0Command);
             sys_run_process(testDivInfo, PROC_RUNNING);
         }
@@ -305,6 +308,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case TEST_INVALID_OPCODE:
         if(background == 1){
+            background = 0;
             uint64_t testInvalidInfo = sys_create_process(0, (uint64_t) testIvalidOpCodeCommand);
             sys_run_process(testInvalidInfo, PROC_RUNNING);
         }
@@ -320,6 +324,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case MEM:
          if(background == 1){
+             background = 0;
             uint64_t memInfo = sys_create_process(0, (uint64_t) memCommand);
             sys_run_process(memInfo, PROC_RUNNING);
         }
@@ -339,6 +344,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1){
+                background = 0;
                 uint64_t loopInfo = sys_create_process_params(0, (uint64_t)loopCommand,(uint64_t) stringToInt(arg1), 0);
                 sys_run_process(loopInfo, PROC_RUNNING);
             }
@@ -359,6 +365,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1){
+                background = 0;
                 uint64_t killInfo = sys_create_process_params(0, (uint64_t) killCommand, (uint64_t)stringToInt(arg1), (uint64_t) 0);
                 sys_run_process(killInfo, PROC_RUNNING);
             }
@@ -379,6 +386,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1){
+                background = 0;
                 uint64_t blockInfo = sys_create_process_params(0, (uint64_t)blockCommand, (uint64_t) stringToInt(arg1), 0);
                 sys_run_process(blockInfo, PROC_RUNNING);
             }
@@ -399,6 +407,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1){
+                background = 0;
                 uint64_t unblockInfo = sys_create_process_params(0, (uint64_t)unblockCommand, (uint64_t) stringToInt(arg1), 0);
                 sys_run_process(unblockInfo, PROC_RUNNING);
             }
@@ -420,6 +429,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1){
+                background = 0;
                 uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) stringToInt(arg1), 0);
                 sys_run_process(catInfo, PROC_RUNNING);
             }
@@ -436,6 +446,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case WC:
         if(tokens >= tokenNum + 1){
+            background = 0;
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1){
@@ -457,6 +468,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case FILTER:
          if(tokens >= tokenNum + 1){
+            background = 0;
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1){
@@ -479,6 +491,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case SEM:
         if(background == 1){
+            background = 0;
             uint64_t semInfo = sys_create_process(0, (uint64_t) semCommand);
             sys_run_process(semInfo, PROC_RUNNING);
         }
