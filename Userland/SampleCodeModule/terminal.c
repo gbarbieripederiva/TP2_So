@@ -381,9 +381,8 @@ void handleCommand(){
     strncopy(terminalBuffer, potentialCommand, bufferSize);
     tokens = tokensCounter(potentialCommand);
 
-    while(tokens != 0){ //consumes all the tokens the potential command has
-        tokenIterator++;
-
+    while(tokens != tokenIterator){ //consumes all the tokens the potential command has
+        tokenIterator ++;
         handleToken(potentialCommand, tokenIterator);
     }
 }
