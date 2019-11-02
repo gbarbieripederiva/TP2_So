@@ -569,10 +569,10 @@ void helpCommand()
         print(": "); //Just for stethic
         print(commands[i]);
         if(i == HELP){
-            print("(Be careful if it is not called in background it blocks the terminal)");
+            print("      (Be careful if it is not called in background it blocks the terminal)");
         }
         else if(i == BACKGROUND){
-            print("(format: \"& command parameters\")");
+            print("      (format: \"& command parameters\")");
         }
     }
     printAction(0);
