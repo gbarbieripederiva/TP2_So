@@ -196,7 +196,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
     while(commandNum < COMMANDS && (strcmp(justCommand, commands[commandNum]) != 0)){ //we look for the command that matches
         commandNum++;
     }
-
+    printDec(commandNum);
 
     switch (commandNum) //we execute the command or we tell the user it does not exist
     {
