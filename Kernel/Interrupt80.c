@@ -304,7 +304,7 @@ uint64_t sys_create_process(int priority, uint64_t process){
 }
 //SYSCALL 48 runs a process
 int sys_run_process(uint64_t process, int state){
-	return run_process(process, state);
+	return run_process((processInfo) process, state);
 }
 //SYSCALL 49 kills a running process
 int sys_kill_process(int pid){

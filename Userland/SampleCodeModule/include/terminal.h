@@ -30,18 +30,18 @@ void pipeCommand();
 void psCommand();
 void loopCommand(uint64_t seconds);
 void killCommand(uint64_t pid);
-void niceCommando(uint64_t pid, uint64_t priority);
+void niceCommand(uint64_t pid, uint64_t priority);
 void blockCommand(uint64_t pid);
 void unblockCommand(uint64_t pid);
 void catCommand(uint64_t string);
 void wcCommand(uint64_t string);
-void filterCommando(uint64_t string);
+void filterCommand(uint64_t string);
 void semCommand();
 
 
 //--------------------Command definitions------------------------------------------------
 #define NICE 0
-#define PIPE 1
+#define PIPECHECK 1
 #define CLEAR 2
 #define TIME 3
 #define HELP 4
@@ -59,7 +59,8 @@ void semCommand();
 #define FILTER 16
 #define SEM 17
 #define PHYLO 18
-
+#define BACKGROUND 19
+#define PIPE 20
 
 
 
