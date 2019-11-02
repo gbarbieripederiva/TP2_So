@@ -35,9 +35,9 @@ void terminal()
     uint64_t test = sys_create_process_params(1, catCommand,(uint64_t) "hola", 0);
     sys_run_process(test, PROC_RUNNING);
 
-    char * test = "hola";
-    uint64_t aux = (uint64_t) test;
-    print((char *) test);
+    char * test1 = "hola";
+    uint64_t aux = (uint64_t) test1;
+    print((char *) test1);
    
 
     print("Welcome! Please enter a command. Try 'help'");
