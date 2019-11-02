@@ -599,6 +599,7 @@ int pipesCount(char * string){
         if(string[i] == PIPE_MARK){
             counter++;
         }
+        i++;
     }
     return counter;
 }
