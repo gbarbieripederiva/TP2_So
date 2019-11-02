@@ -366,3 +366,13 @@ sys_print_pipe:
 	int 80h
 	popState
 	ret
+
+
+GLOBAL testchoi
+testchoi:
+	pushState
+	adjust_to_sys_call
+	mov rdi, 120
+	int 80h
+	popState
+	ret

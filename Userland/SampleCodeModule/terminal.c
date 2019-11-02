@@ -32,12 +32,8 @@ void terminal()
 
     fillCommandList();
 
-    //uint64_t test = sys_create_process_params(1, catCommand,(uint64_t) "hola", 0);
-    //sys_run_process(test, PROC_RUNNING);
-
-    char * test1 = "hola";
-    uint64_t aux = (uint64_t) test1;
-    print((char *) test1);
+    uint64_t test = sys_create_process_params(1, catCommand,(uint64_t) "hola", 0);
+    sys_run_process(test, PROC_RUNNING);
    
 
     print("Welcome! Please enter a command. Try 'help'");
@@ -45,6 +41,8 @@ void terminal()
      int sid = sys_create_semaphore(1 , SEM_LOCKED);
      //sys_sem_wait(sid);
     //printDec(sys_set_state(2, 0));
+
+    testchoi(10, 20, 30, 40);
 
     while (1)
     {

@@ -135,6 +135,17 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 79:
 		sys_print_pipe();
 		break;
+
+	case 120:
+		ncPrintDec(arg1);
+		ncNewLine();
+		ncPrintDec(arg2);
+		ncNewLine();
+		ncPrintDec(arg3);
+		ncNewLine();
+		ncPrintDec(arg4);
+		break;
+		
 	}
 
 
