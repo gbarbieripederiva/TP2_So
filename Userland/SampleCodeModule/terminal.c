@@ -339,7 +339,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1){
-                uint64_t loopInfo = sys_create_process_params(0, (uint64_t)loopCommand,(uint64_t) stringToInt(arg1), (uint64_t) 0);
+                uint64_t loopInfo = sys_create_process_params(0, (uint64_t)loopCommand,(uint64_t) stringToInt(arg1), 0);
                 sys_run_process(loopInfo, PROC_RUNNING);
             }
             else{
