@@ -193,7 +193,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
     extractToken(justCommand, string, tokenNum); //we want to extract the token we need
 
     int commandNum = 0;
-    while(commandNum < COMMANDS && (strcmp(justCommand, commands[commandNum]) != 0)){ //we look for the command that matches
+    while(commandNum < COMMANDS && (strcmp(justCommand, commands[commandNum]) != 1)){ //we look for the command that matches
         commandNum++;
     }
     printDec(commandNum);
