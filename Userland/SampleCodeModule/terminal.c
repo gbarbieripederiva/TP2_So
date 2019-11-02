@@ -144,7 +144,7 @@ void extractToken(char *dest, char *string, int tokenNum){ //extracts an specifi
         i++;
     }
     dest[j] = 0;
-    tokens --;
+    tokenIterator ++;
 
 }
 int power(int base, int exponent){ //we need power to get the string into an integer
@@ -196,7 +196,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
     while(commandNum < COMMANDS && (strcmp(justCommand, commands[commandNum]) != 1)){ //we look for the command that matches
         commandNum++;
     }
-    printDec(commandNum);
 
     printDec(tokenNum);
     printAction(0);
@@ -209,8 +208,8 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         if(tokens >= tokenNum + 2){
             char arg1[64];
             char arg2[64];
-            extractToken(arg1, string, tokenIterator + 1);
-            extractToken(arg2, string, tokenIterator + 2);
+            extractToken(arg1, string, tokenNum + 1);
+            extractToken(arg2, string, tokenNum + 2);
             tokenIterator = tokenIterator + 2;
             niceCommand(stringToInt(arg1), stringToInt(arg2));
         }
