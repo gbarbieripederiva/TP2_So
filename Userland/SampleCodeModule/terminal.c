@@ -9,6 +9,8 @@
 #define COMMANDS 21
 #define SPACE 32
 #define MARKS 34
+#define PIPE_MARK 124
+
 
 //Buffer to store the input from the keyboard.
 static char terminalBuffer[BUFFER_SIZE + 1] = {0}; //Non cyclic buffer
@@ -24,6 +26,7 @@ char *commands[COMMANDS] = {0}; //all command names
 int tokenIterator = 0; //used to process multiple tokens
 int tokens = 0; //we need token to be visible for extract token function and for the handler
 int background = 0; //checks if it has to be executed in background
+int pipesAmount = 0; //counts the amounts of pipes in a command
 
 //-----------------------------Main functions---------------------------------------------
 
@@ -221,9 +224,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             extractToken(arg1, string, tokenNum + 1);
             extractToken(arg2, string, tokenNum + 2);
 
-            if(background == 1){
+            if(background == 1 || pipesAmount != 0){
                 background = 0;
                 uint64_t niceInfo = sys_create_process_params(0, (uint64_t) niceCommand, (uint64_t) stringToInt(arg1), (uint64_t) stringToInt(arg2));
+                if(pipesAmount != 0){
+                    //TODO PIPE
+                }
                 sys_run_process(niceInfo, PROC_RUNNING);
             }
             else{
@@ -239,9 +245,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     case PIPECHECK:
-        if(background == 1){
+        if(background == 1 || pipesAmount != 0){
             background = 0;
             uint64_t pipeInfo = sys_create_process(0, (uint64_t) pipeCommand);
+            if(pipesAmount != 0){
+                //TODO
+            }
             sys_run_process(pipeInfo, PROC_RUNNING);
         }
         else{
@@ -255,9 +264,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     case TIME:
-        if(background == 1){
+        if(background == 1 || pipesAmount != 0){
             background = 0;
             uint64_t timeInfo = sys_create_process(0, (uint64_t)timeCommand);
+            if(pipesAmount != 0){
+                //TODO
+            }
             sys_run_process(timeInfo, PROC_RUNNING);
         }
         else{
@@ -267,9 +279,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     case HELP:
-        if(background == 1){
+        if(background == 1 || pipesAmount != 0){
             background = 0;
              uint64_t helpInfo = sys_create_process(0, (uint64_t) helpCommand);
+             if(pipesAmount != 0){
+                 //TODO
+             }
             sys_run_process(helpInfo, PROC_RUNNING);
         }
         else
@@ -282,9 +297,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     case SNAKE:
-        if(background == 1){
+        if(background == 1 || pipesAmount != 0){
             background = 0;
             uint64_t snakeInfo = sys_create_process(0, (uint64_t) snakeCommand);
+            if(pipesAmount != 0){
+                //TODO
+            }
             sys_run_process(snakeInfo, PROC_RUNNING);
         }
         else
@@ -296,9 +314,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     case TEST_DIVISION_BY_0:
-        if(background == 1){
+        if(background == 1 || pipesAmount != 0){
             background = 0;
             uint64_t testDivInfo = sys_create_process(0, (uint64_t) testDivisionBy0Command);
+            if(pipesAmount != 0){
+
+            }
             sys_run_process(testDivInfo, PROC_RUNNING);
         }
         else{
@@ -308,9 +329,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     case TEST_INVALID_OPCODE:
-        if(background == 1){
+        if(background == 1 || pipesAmount != 0){
             background = 0;
             uint64_t testInvalidInfo = sys_create_process(0, (uint64_t) testIvalidOpCodeCommand);
+            if(pipesAmount != 0){
+
+            }
             sys_run_process(testInvalidInfo, PROC_RUNNING);
         }
 
@@ -324,9 +348,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     case MEM:
-         if(background == 1){
+         if(background == 1 || pipesAmount != 0){
              background = 0;
             uint64_t memInfo = sys_create_process(0, (uint64_t) memCommand);
+            if(pipesAmount != 0){
+                //TODO
+            }
             sys_run_process(memInfo, PROC_RUNNING);
         }
         else{
@@ -344,9 +371,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            if(background == 1){
+            if(background == 1 || pipesAmount != 0){
                 background = 0;
                 uint64_t loopInfo = sys_create_process_params(0, (uint64_t)loopCommand,(uint64_t) stringToInt(arg1), 0);
+                if(pipesAmount != 0){
+                    //TODO
+                }
                 sys_run_process(loopInfo, PROC_RUNNING);
             }
             else{
@@ -365,9 +395,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
          if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            if(background == 1){
+            if(background == 1 || pipesAmount != 0){
                 background = 0;
                 uint64_t killInfo = sys_create_process_params(0, (uint64_t) killCommand, (uint64_t)stringToInt(arg1), (uint64_t) 0);
+                if(pipesAmount != 0){
+                    //TODO
+                }
                 sys_run_process(killInfo, PROC_RUNNING);
             }
             else{
@@ -386,9 +419,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
          if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            if(background == 1){
+            if(background == 1 || pipesAmount != 0){
                 background = 0;
                 uint64_t blockInfo = sys_create_process_params(0, (uint64_t)blockCommand, (uint64_t) stringToInt(arg1), 0);
+                if(pipesAmount != 0){
+                    //TODO
+                }
                 sys_run_process(blockInfo, PROC_RUNNING);
             }
             else{
@@ -407,9 +443,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
           if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            if(background == 1){
+            if(background == 1 || pipesAmount != 0){
                 background = 0;
                 uint64_t unblockInfo = sys_create_process_params(0, (uint64_t)unblockCommand, (uint64_t) stringToInt(arg1), 0);
+                if(pipesAmount != 0){
+                    //TODO
+                }
                 sys_run_process(unblockInfo, PROC_RUNNING);
             }
             else{
@@ -432,6 +471,9 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             if(background == 1){
                 background = 0;
                 uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) arg1, 0);
+                if(pipesAmount != 0){
+                    //TODO
+                }
                 sys_run_process(catInfo, PROC_RUNNING);
             }
             else{
@@ -450,8 +492,11 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             background = 0;
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            if(background == 1){
+            if(background == 1 || pipesAmount != 0){
                 uint64_t wcInfo = sys_create_process_params(0, (uint64_t)wcCommand , (uint64_t) arg1, 0);
+                if(pipesAmount != 0){
+                    //TODO
+                }
                 sys_run_process(wcInfo, PROC_RUNNING);
             }
             else
@@ -472,8 +517,11 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             background = 0;
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            if(background == 1){
+            if(background == 1 || pipesAmount != 0){
                 uint64_t filterInfo = sys_create_process_params(0, (uint64_t)filterCommand , (uint64_t) arg1, 0);
+                if(pipesAmount != 0){
+                    //TODO
+                }
                 sys_run_process(filterInfo, PROC_RUNNING);
             }
             else
@@ -491,9 +539,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
 
     case SEM:
-        if(background == 1){
+        if(background == 1 || pipesAmount != 0){
             background = 0;
             uint64_t semInfo = sys_create_process(0, (uint64_t) semCommand);
+            if(pipesAmount != 0){
+                //TODO
+            }
             sys_run_process(semInfo, PROC_RUNNING);
         }
         else
@@ -504,8 +555,11 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         break;
 
     case PHYLO:
-        if(background == 1){
+        if(background == 1 || pipesAmount != 0){
             //TODO
+            if(pipesAmount != 0){
+                //TODO
+            }
         }
         else{
             phyloCommand();
@@ -517,7 +571,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         break;
     
     case PIPE:
-        
+        pipesAmount--;
         break;
 
 
@@ -534,11 +588,27 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
     }
 }
 
+int pipesCount(char * string){
+    int insideString = 0;
+    int counter = 0;
+    int i = 0;
+    while(string[i] != 0){
+        if(string[i] == MARKS){
+            insideString = !insideString;
+        }
+        if(string[i] == PIPE_MARK){
+            counter++;
+        }
+    }
+    return counter;
+}
+
 void handleCommand(){
     background = 0;
     tokenIterator = 1;
     char potentialCommand[MAX_COMDESC];
     strncopy(terminalBuffer, potentialCommand, bufferSize);
+    pipesAmount = pipesCount(potentialCommand);
     tokens = tokensCounter(potentialCommand);
     while(tokens + 1 > tokenIterator){ //consumes all the tokens the potential command has
         handleToken(potentialCommand, tokenIterator);
@@ -637,7 +707,6 @@ void psCommand(){
 }
 
 void loopCommand(uint64_t seconds){
-    printDec(seconds);
     while(1){
         waitFor(seconds);
         printAction(0);
