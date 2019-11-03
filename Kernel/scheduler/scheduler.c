@@ -190,9 +190,11 @@ void setStdin(int pid,int fd){
     if(i == SIZE){
         return;
     }
+    else{ //found the process we are looking for and we can reference to in procsInSched[i]
     
-    if(fd<0){
-        setCurrentStdin(fd);
+        if(fd<0){
+            setCurrentStdin(fd);
+        }
     }
 }
 
