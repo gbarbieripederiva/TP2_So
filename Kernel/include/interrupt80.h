@@ -34,9 +34,14 @@ void sys_print_sems(); //SYSCALL 64
 int sys_open_pipe(int *fd); //SYSCALL 75
 void sys_close_pipe(int fd); //SYSCALL 76
 int sys_write_pipe(int fd, char * buffer, int size); //SYSCALL 77
-int sys_red_pipe(int fd, char * buffer, int size); //SYSCALL 78
-void sys_print_pipe();
-
+int sys_read_pipe(int fd, char * buffer, int size); //SYSCALL 78
+void sys_print_pipe();//SYSCALL 79
+void sys_dup_in(int pid,int fd);//SYSCALL 80
+void sys_dup_out(int pid,int fd);//SYSCALL 81
+int sys_get_char_from_stdin();//SYSCALL 99
+int sys_read_from_stdin(char* buffer,int size);//SYSCALL 100
+int sys_write_to_stdout(char* buffer,int size);//SYSCALL 101
+ 
 
 
 #endif

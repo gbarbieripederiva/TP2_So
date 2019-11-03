@@ -168,7 +168,34 @@ void print_running_procs(){
     }
 }
 
+// get current process
+processInfo getCurrentProcess(){
+    return procsInSched[iterator].process;
+}
 
+// set current process stdin
+void setCurrentStdin(int fd){
+    procsInSched[iterator].process->stdin=fd;
+}
+// set current process stdout
+void setCurrentStdout(int fd){
+    procsInSched[iterator].process->stdout=fd;
+}
+// set process stdin
+void setStdin(int pid,int fd){
+    //TODO
+    if(fd<0){
+        setCurrentStdin(fd);
+    }
+}
+
+// set process stdout
+void setStdout(int pid,int fd){
+    //TODO
+    if(fd<0){
+        setCurrentStdout(fd);
+    }
+}
 
 /*
  void printTest(procInSched test){

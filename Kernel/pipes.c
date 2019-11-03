@@ -35,8 +35,8 @@ static PipeP pipes[AMOUNTOFPIPES];
 
 void create_pipe(int pos){
     pipes[pos]=giveMeMemory(sizeof(Pipe));
-    //pipes[pos]->readSem=s_open();// SEMAPHORE
-    //pipes[pos]->buffSem=s_open();// SEMAPHORE
+    pipes[pos]->readSem=s_open(pos,SEM_LOCKED);// SEMAPHORE
+    pipes[pos]->buffSem=s_open(pos+AMOUNTOFPIPES,SEM_UNLOCKED);// SEMAPHORE
     s_post(pipes[pos]->buffSem); // SEMAPHORE
     pipes[pos]->readRefs=1;
     pipes[pos]->writeRefs=1;
@@ -124,7 +124,7 @@ int pipe_write(int fd, char * buff,int size){
 
     // NO COPIO EL 0 FINAL YA QUE ME GUARDO EL ESPACIO OCUPADO
     int i;
-    for(i=0;i<SIZEOFBUFF && buff[i]!=0;i++){
+    for(i=0;i<SIZEOFBUFF && buff[i]!=0 && i<size;i++){
 
         pipes[fd]->pipeBuff[(pipes[fd]->writeP+i)%SIZEOFBUFF]=buff[i];
 
@@ -177,6 +177,7 @@ int pipe_read(int fd,char * buff, int size){
     }
     //habilito el mutex de vuelta
     s_post(pipes[fd]->buffSem);//SEMAPHORE
+    return i;
 }
 
 

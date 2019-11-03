@@ -135,6 +135,22 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 79:
 		sys_print_pipe();
 		break;
+	case 80:
+		sys_dup_in((int)arg1,(int)arg2);
+		break;
+	case 81:
+		sys_dup_out((int)arg1,(int)arg2);
+		break;
+
+	case 99:
+		return (int) sys_get_char_from_stdin();
+		break;
+	case 100:
+		return (int) sys_read_from_stdin((char *)arg1,(int)arg2);
+		break;
+	case 101:
+		return (int) sys_write_to_stdout((char *)arg1,(int)arg2);
+		break;
 
 	case 120:
 		ncPrintDec(arg1);
@@ -393,3 +409,46 @@ int sys_read_pipe(int fd, char * buffer, int size){
 void sys_print_pipe(){
 	print_pipes();
 }
+
+//SYSCALL 80
+void sys_dup_in(int pid,int fd){
+	setStdin(pid,fd);
+}
+//SYSCALL 81
+void sys_dup_out(int pid,int fd){
+	setStdout(pid,fd);
+}
+
+//SYSCALL 99
+int sys_get_char_from_stdin(){
+	//obtener el stdin del proceso actual
+	int fd=getCurrentProcess()->stdin;
+	if(fd<0){
+		return getCharFromKeyboardPipe();
+	}else{
+		char ret[2];
+		int error=pipe_read(fd,ret,2);
+		return error<0?error:ret[1];
+	}
+}
+
+//SYSCALL 100
+int sys_read_from_stdin(char* buffer,int size){
+	int fd=getCurrentProcess()->stdin;
+	if(fd<0){
+		return readFromKeyboardPipe(buffer,size);
+	}else{
+		return pipe_read(fd,buffer,size);
+	}
+}
+//SYSCALL 101
+int sys_write_to_stdout(char* buffer,int size){
+	int fd=getCurrentProcess()->stdout;
+	if(fd<0){
+		ncPrint(buffer);
+		return 0;
+	}else{
+		return pipe_write(fd,buffer,size);
+	}
+}
+

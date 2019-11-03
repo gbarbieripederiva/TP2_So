@@ -11,6 +11,7 @@
 #include <scheduler.h>
 #include <schedulerTest.h>
 #include <semaphore.h>
+#include <keyboard.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -52,7 +53,7 @@ void *initializeKernelBinary()
 	init_processes();
 	init_sched();
 	init_sems();
-
+	initKeyboardPipe();
 	
 
 

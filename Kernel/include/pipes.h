@@ -8,6 +8,9 @@
 
 // Abre el pipe y retorna el "fd" que se usara
 // para la lectoescritura del pipe
+// recibe un array de dos posiciones
+// en el primero pone el fd de lectura y en el
+// segundo el fd de lectura
 int pipe_open(int *names);
 
 // Cierra el pipe abierto

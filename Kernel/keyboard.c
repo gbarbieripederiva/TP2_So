@@ -2,6 +2,7 @@
 #include <keyboard.h>
 #include <naiveConsole.h>
 #include <keyMap.h>
+#include <pipes.h>
 
 //Chose 100 as maximum size
 #define BUFFER_SIZE 100
@@ -20,6 +21,19 @@ static int CAPS_LOCKED = 0;
 static int CTRL_LOCKED = 0;
 
 void addToBuffer(char charToAdd);
+
+static int keyboardPipeIn;
+static int keyboardPipeOut;
+
+
+
+//initiate keyboard pipe
+void initKeyboardPipe(){
+	int pipe[2];
+	pipe_open(pipe);
+	keyboardPipeOut=pipe[1];
+	keyboardPipeIn=pipe[0];
+}
 
 //Ads an element to the buffer.
 void keyboard_handler(uint8_t code)
@@ -115,6 +129,8 @@ void addToBuffer(char charToAdd)
 	buffer[endPosition] = charToAdd;
 	endPosition = (endPosition + 1) % BUFFER_SIZE; //As its cyclic iterator
 	size++;
+	//write one char to the pipe
+	pipe_write(keyboardPipeIn,&charToAdd,1);
 }
 
 //Function to return a uint8 from the buffer and delete it. Return 0 if empty
@@ -152,4 +168,15 @@ uint8_t getLastInput()
 		size--;
 		return buffer[endPosition];
 	}
+}
+
+// get last char added, block if not available
+int getCharFromKeyboardPipe(){
+	char retValue[2];
+	int error=pipe_read(keyboardPipeOut,retValue,2);
+	return error>0?retValue[0]:error;
+}
+
+int readFromKeyboardPipe(char *buff,int size){
+	return pipe_read(keyboardPipeOut,buff,size);
 }
