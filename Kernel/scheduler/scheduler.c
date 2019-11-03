@@ -183,7 +183,14 @@ void setCurrentStdout(int fd){
 }
 // set process stdin
 void setStdin(int pid,int fd){
-    //TODO
+    int i = 0;
+    while(i < SIZE && procsInSched[i].process -> pid != pid){
+        i++;
+    }
+    if(i == SIZE){
+        return;
+    }
+    
     if(fd<0){
         setCurrentStdin(fd);
     }

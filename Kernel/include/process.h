@@ -9,7 +9,6 @@ typedef struct process{
     int ppid;
     int pid;
     int priority;
-    int fd[2];
     uint64_t stack_end;
     uint64_t sp;
     int stdin;
