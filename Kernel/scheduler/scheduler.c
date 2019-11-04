@@ -158,7 +158,22 @@ void print_running_procs(){
             ncPrintDec((uint64_t)procsInSched[i].process ->ppid);
             ncNewLine();
             ncPrint("State: ");
-            ncPrintDec((uint64_t)procsInSched[i].state);
+            switch (procsInSched[i].state)
+            {
+            case 0:
+                ncPrint("BLOCKED");
+                break;
+            case 1:
+                ncPrint("RUNNING");
+                break;
+            case 3:
+                ncPrint("HALT");
+                break;
+            
+            default:
+                break;
+            }
+            //ncPrintDec((uint64_t)procsInSched[i].state);
             ncNewLine();
             ncPrint("Priority: ");
             ncPrintDec((uint64_t)procsInSched[i].process->priority);
