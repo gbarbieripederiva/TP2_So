@@ -1,17 +1,18 @@
 #ifndef SCHEDULER_H
-#define SCHEDULER_H 
+#define SCHEDULER_H
 #include <stdint.h>
 #include <process.h>
 #define HALT 3
 #define EMPTY 2
 #define BLOCKED 0
 #define READY 1
+
+#define ASLEEP 4
+
 #define SIZE 10
 
-
-
-
-struct procInSched{
+struct procInSched
+{
     processInfo process;
     int entered;
     int state;
@@ -26,13 +27,5 @@ uint64_t scheduler(uint64_t sp);
 int set_state(int pid, int state);
 int get_current_pid();
 void print_running_procs();
-
-
-
-
-
-
-
-
 
 #endif
