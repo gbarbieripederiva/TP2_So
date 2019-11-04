@@ -43,7 +43,8 @@ char getLastInput()
 {
    
    //return sys_get_last_in_call();
-   return sys_get_char_from_stdin();
+   int c=sys_get_char_from_stdin();
+   return c>0?c:0;
 }
 
 /* Prints a number on based on the option:

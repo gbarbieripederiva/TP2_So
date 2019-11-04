@@ -43,8 +43,6 @@ void terminal()
     sys_sem_wait(sid);
     sys_sem_close(sid);
     
-
-
     while (1)
     {
         if (readNewInput())
