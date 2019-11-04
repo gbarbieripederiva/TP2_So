@@ -8,18 +8,12 @@
 
 
 void checking(){
-<<<<<<< HEAD
-  int sid = sys_create_semaphore(1, SEM_LOCKED);
-  sys_sem_post(sid);
-  sys_sem_close(sid);
-=======
     
     int sid = sys_create_semaphore(1, SEM_LOCKED);
     printDec(sid);
     printAction(0);
     sys_sem_post(sid);
     sys_sem_close(sid);
->>>>>>> mmu
 }
 
 int main() {
@@ -27,11 +21,8 @@ int main() {
     terminalInfo = sys_create_process(1, (uint64_t)terminal);
     sys_run_process(terminalInfo, 1);
 
-<<<<<<< HEAD
-=======
     //uint64_t checkInfo = sys_create_process(0, (uint64_t)checking);
     //sys_run_process(checkInfo, 1);
->>>>>>> mmu
     
     uint64_t checkInfo = sys_create_process(1, (uint64_t)checking);
     sys_run_process(checkInfo, 1);
