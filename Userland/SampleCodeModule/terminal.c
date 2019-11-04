@@ -19,6 +19,8 @@ static int bufferSize = 0;
 
 
 
+
+
 //command handler variables
 char *commands[COMMANDS] = {0}; //all command names
 int tokenIterator = 0; //used to process multiple tokens
@@ -36,13 +38,12 @@ void terminal()
     
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
-    
-
-
-    //int sid = sys_create_semaphore(123456789, SEM_LOCKED);
+    //int sid = sys_create_semaphore(12345678, SEM_UNLOCKED);
     //sys_sem_wait(sid);
-    //sys_sem_close(sid);
     
+
+
+
     while (1)
     {
         if (readNewInput())
