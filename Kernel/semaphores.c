@@ -148,11 +148,12 @@ int s_wait(int sid){
 void check_blocked(uint64_t lock, semaphore sem){
     node_pointer aux = sem -> waiting_proc;
     if(aux != NULL){
-        (sem->state) = SEM_LOCKED;
+        //(sem->state) = SEM_LOCKED;
         set_state(aux -> pid, READY);
         sem->waiting_proc = sem -> waiting_proc -> next;
         unGiveMeMemory((void *)aux);
         //xchg1((uint64_t)&(sem->state));
+        (sem->state)++;
         
     }
 }
