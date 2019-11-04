@@ -10,8 +10,6 @@
 void checking(){
     
     int sid = sys_create_semaphore(1, SEM_LOCKED);
-    printDec(sid);
-    printAction(0);
     sys_sem_post(sid);
     sys_sem_close(sid);
     
