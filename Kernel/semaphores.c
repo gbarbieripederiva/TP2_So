@@ -79,7 +79,7 @@ int s_close(int sid){
     while(i < MAX_SEMS && (semaphores[i] == NULL || semaphores[i] -> sem_id != sid)){
         i++;
     }
-    if(semaphores[i] -> sem_id == sid){
+    if(semaphores[i] != NULL && semaphores[i] -> sem_id == sid){
         if(semaphores[i] -> refs > 1){ //opened from different processes
         
             _cli();
