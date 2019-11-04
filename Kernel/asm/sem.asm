@@ -14,3 +14,11 @@ leave_region:
     xchg rax, qword [rdi]
     call check_blocked
     ret
+
+
+GLOBAL xchg
+xchg:
+    xchg rax, qword [rsi]
+    xchg qword [rdi], rax
+    xchg rax, qword [rsi]
+    ret
