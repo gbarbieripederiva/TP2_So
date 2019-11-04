@@ -109,16 +109,17 @@ int pipe_write(int fd, char * buff,int size){
     if(size>SIZEOFBUFF){
         return -1;
     }
-    // si no hay suficiente espacio...
-    if(size+pipes[fd]->count>=SIZEOFBUFF){
-        //TODO: implentar bloqueo
-        return -1;
-    }
     fd=fd-AMOUNTOFPIPES;
 
     //TODO: forzar sem a estar bloqueado
     s_wait(pipes[fd]->buffSem);//SEMAPHORE
     
+    // si no hay suficiente espacio...
+    if(size+pipes[fd]->count>=SIZEOFBUFF){
+        //TODO: implentar bloqueo
+        s_post(pipes[fd]->buffSem);
+        return -1;
+    }
     // copio el string desde el puntero de escritura hasta que termine de copiar
     // o escriba todo el buffer
 
