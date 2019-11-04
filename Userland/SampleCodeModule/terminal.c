@@ -39,6 +39,7 @@ void terminal()
 
     int sid = sys_create_semaphore(1, SEM_LOCKED);
     sys_sem_wait(sid);
+    sys_sem_close(sid);
     
 
 
