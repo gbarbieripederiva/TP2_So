@@ -1,6 +1,7 @@
 #ifndef SEMAPHORE_H
 #define SEMAPHORE_H
 
+#include <stdint.h>
 #define SEM_LOCKED 1
 #define SEM_UNLOCKED 0
 
