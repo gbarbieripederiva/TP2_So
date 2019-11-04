@@ -41,7 +41,7 @@ void sys_dup_out(int pid,int fd);//SYSCALL 81
 int sys_get_char_from_stdin();//SYSCALL 99
 int sys_read_from_stdin(char* buffer,int size);//SYSCALL 100
 int sys_write_to_stdout(char* buffer,int size);//SYSCALL 101
- 
+int sys_print_new_line_to_stdout();//SYSCALL 102 
 
 
 #endif

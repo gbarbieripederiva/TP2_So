@@ -151,6 +151,9 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 	case 101:
 		return (int) sys_write_to_stdout((char *)arg1,(int)arg2);
 		break;
+	case 102:
+		return (int)sys_print_new_line_to_stdout();
+		break;
 
 	case 120:
 		ncPrintDec(arg1);
@@ -449,6 +452,16 @@ int sys_write_to_stdout(char* buffer,int size){
 		return 0;
 	}else{
 		return pipe_write(fd,buffer,size);
+	}
+}
+//SYSCALL 102
+int sys_print_new_line_to_stdout(){
+	int fd=getCurrentProcess()->stdout;
+	if(fd<0){
+		ncNewLine();
+		return 0;
+	}else{
+		return pipe_write(fd,"\n",2);
 	}
 }
 
