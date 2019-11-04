@@ -167,6 +167,7 @@ int pipe_read(int fd,char * buff, int size){
     //agrego el 0 final
     buff[i]=0;
 
+    pipes[fd]->readP+=i-1;
     //sete size en count-size o 0 el que sea mayor
     pipes[fd]->count=pipes[fd]->count>(size-1)?pipes[fd]->count-(size-1):0;
 
