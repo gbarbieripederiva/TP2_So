@@ -778,18 +778,31 @@ void unblockCommand(uint64_t pid){
 }
 
 void catCommand(uint64_t string){//dont know if it should be redirected
-        
-        printAction(0);
-        print((char *) string);
-        printAction(0);
+        char aux = getLastInput();
+        while (aux != 0)
+        {
+            print(&aux);
+            aux =getLastInput();
+        }
 }
 
 void wcCommand(uint64_t string){
-    char * str = (char *) string;
+    char aux = getLastInput();
+    int counter = 0;
+        while (aux != 0)
+        {
+            if(aux == 10){
+                counter++;
+            }
+        }
+        printDec(counter);
 }
 
 void filterCommand(uint64_t string){
-    char * str = (char *) string;
+    char aux = getLastInput();
+    while(aux != 0){
+
+    }
 }
 
 void semCommand(){
