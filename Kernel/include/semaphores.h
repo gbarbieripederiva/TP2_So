@@ -4,6 +4,8 @@
 #define SEM_LOCKED 1
 #define SEM_UNLOCKED 0
 
+#include <stdint.h>
+
 typedef struct process_node * node_pointer;
 struct process_node{
     int pid;
@@ -21,7 +23,7 @@ typedef struct sem{
 
 typedef sem *semaphore;
 
-#include <stdint.h>
+
 #include <memoryManager.h>
 #include <sem.h>
 #include <scheduler.h>
