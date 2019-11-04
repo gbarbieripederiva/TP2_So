@@ -6,6 +6,6 @@
 
 void enter_region(uint64_t lock,semaphore semaph, int pid);
 void leave_region(uint64_t lock, semaphore semaph);
-void xchg(uint64_t lock, uint64_t change);
+void xchg1(uint64_t lock);
 
 #endif
