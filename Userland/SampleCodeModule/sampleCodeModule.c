@@ -9,7 +9,7 @@
 
 void checking(){
     
-    int sid = sys_create_semaphore(123456789, SEM_LOCKED);
+    int sid = sys_create_semaphore(12345678, SEM_LOCKED);
     printDec(sid);
     printAction(0);
     sys_sem_post(sid);
@@ -21,8 +21,8 @@ int main() {
     terminalInfo = sys_create_process(1, (uint64_t)terminal);
     sys_run_process(terminalInfo, 1);
     
-    //uint64_t checkInfo = sys_create_process(1, (uint64_t)checking);
-    //sys_run_process(checkInfo, 1);
+    uint64_t checkInfo = sys_create_process(1, (uint64_t)checking);
+    sys_run_process(checkInfo, 1);
 
     
 
