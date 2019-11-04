@@ -188,47 +188,7 @@ processInfo getCurrentProcess(){
     return procsInSched[iterator].process;
 }
 
-// set current process stdin
-void setCurrentStdin(int fd){
-    procsInSched[iterator].process->stdin=fd;
-}
-// set current process stdout
-void setCurrentStdout(int fd){
-    procsInSched[iterator].process->stdout=fd;
-}
-// set process stdin
-void setStdin(int pid,int fd){
-    if(pid<0){
-        setCurrentStdin(fd);
-    }
-    int i = 0;
-    while(i < SIZE && procsInSched[i].process -> pid != pid){
-        i++;
-    }
-    if(i == SIZE){
-        return;
-    }
-    else{ //found the process we are looking for and we can reference to in procsInSched[i]
-        procsInSched[i].process->stdin=fd;
-    }
-}
 
-// set process stdout
-void setStdout(int pid,int fd){
-    if(pid<0){
-        setCurrentStdout(fd);
-    }
-    int i = 0;
-    while(i < SIZE && procsInSched[i].process -> pid != pid){
-        i++;
-    }
-    if(i == SIZE){
-        return;
-    }
-    else{ //found the process we are looking for and we can reference to in procsInSched[i]
-        procsInSched[i].process->stdout=fd;
-    }
-}
 
 /*
  void printTest(procInSched test){

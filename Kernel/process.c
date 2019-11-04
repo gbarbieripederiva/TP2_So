@@ -78,6 +78,8 @@ void run_set_return(uint64_t rip, processInfo process){
     kill_process(process -> pid);
 }
 
+
+
 //builds stack of a new process
 uint64_t build_stack(uint64_t rip, uint64_t from, processInfo process){
     stack_frame  * stack = (stack_frame *)(from + STACK_SIZE - sizeof(stack_frame) - 1);
@@ -209,3 +211,47 @@ processInfo create_process_with_args(int priority, uint64_t rip, uint64_t arg1, 
     return process;
 }
 
+
+// set current process stdin
+void setCurrentStdin(int fd){
+    int pid = get_current_pid();
+    processes[pid]->stdin = fd;
+}
+// set current process stdout
+void setCurrentStdout(int fd){
+    int pid = get_current_pid();
+    processes[pid]->stdout = fd;
+}
+// set process stdin
+void setStdin(int pid,int fd){
+    if(pid<0){
+        setCurrentStdin(fd);
+    }
+    int i = 0;
+    while(i < MAX_PROCESSES && processes[i] -> pid != pid){
+        i++;
+    }
+    if(i == MAX_PROCESSES){
+        return;
+    }
+    else{ //found the process we are looking for and we can reference to in procsInSched[i]
+        processes[i] -> stdin=fd;
+    }
+}
+
+// set process stdout
+void setStdout(int pid,int fd){
+    if(pid<0){
+        setCurrentStdout(fd);
+    }
+    int i = 0;
+    while(i < MAX_PROCESSES && processes[i] -> pid != pid){
+        i++;
+    }
+    if(i == MAX_PROCESSES){
+        return;
+    }
+    else{ //found the process we are looking for and we can reference to in procsInSched[i]
+        processes[i] ->stdout = fd;
+    }
+}

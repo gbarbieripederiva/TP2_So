@@ -28,6 +28,4 @@ int set_state(int pid, int state);
 int get_current_pid();
 void print_running_procs();
 processInfo getCurrentProcess();
-void setStdin(int pid,int fd);// set process stdin
-void setStdout(int pid,int fd);// set process stdout
 #endif

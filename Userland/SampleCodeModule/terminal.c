@@ -797,12 +797,26 @@ void wcCommand(uint64_t string){
         }
         printDec(counter);
 }
+int isVowel(char a){
+    if(a == 65 || a == 69 || a == 73 || a == 79 || a == 85 || a == 97 || a == 101|| a == 105|| a == 111 || a == 6){
+        return 1;
+    }
+    return 0;
+}
 
 void filterCommand(uint64_t string){
     char aux = getLastInput();
+    char res[300];
+    int i = 0;
     while(aux != 0){
-
+        if(!isVowel){
+            res[i] = aux;
+            i++;
+        }
+        aux = getLastInput();
     }
+    res[i] = 0;
+    print(res);
 }
 
 void semCommand(){
