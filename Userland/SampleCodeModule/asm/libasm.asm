@@ -367,6 +367,65 @@ sys_print_pipe:
 	popState
 	ret
 
+GLOBAL sys_dup_in
+sys_dup_in:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_dup_in is call 80
+	mov rdi,80
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_dup_out
+sys_dup_out:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_dup_out is call 81
+	mov rdi,81
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_get_char_from_stdin
+sys_get_char_from_stdin:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_get_char_from_stdin is call 99
+	mov rdi,99
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_read_from_stdin
+sys_read_from_stdin:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_read_from_stdin is call 100
+	mov rdi,100
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_write_to_stdout
+sys_write_to_stdout:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_write_to_stdout is call 101
+	mov rdi,101
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_print_new_line_to_stdout
+sys_print_new_line_to_stdout:
+	pushState
+	adjust_to_sys_call
+	;sys call sys_print_new_line_to_stdout is call 102
+	mov rdi,102
+	int 80h
+	popState
+	ret
 
 GLOBAL testchoi
 testchoi:

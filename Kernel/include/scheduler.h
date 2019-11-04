@@ -15,7 +15,6 @@ struct procInSched{
     processInfo process;
     int entered;
     int state;
-    int fd[2];
    
 };
 typedef struct procInSched procInSched;

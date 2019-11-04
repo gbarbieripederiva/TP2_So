@@ -102,7 +102,7 @@ void pipe_close(int num){
 
 int pipe_write(int fd, char * buff,int size){
     // si no es un fd valido retorna error
-    if(fd<AMOUNTOFPIPES || fd>AMOUNTOFPIPES*2 || size<1 || pipes[fd]==0){
+    if(fd<AMOUNTOFPIPES || fd>=AMOUNTOFPIPES*2 || size<1 || pipes[fd]==0){
         return -2;
     }
     // si el size es demasiado retorna error
@@ -143,7 +143,7 @@ int pipe_write(int fd, char * buff,int size){
 
 int pipe_read(int fd,char * buff, int size){
     //checkear que haya al menos espacio para el 0
-    if(fd<0 || fd>AMOUNTOFPIPES || size<1 || pipes[fd]==0){
+    if(fd<0 || fd>=AMOUNTOFPIPES || size<1 || pipes[fd]==0){
         return -2;
     }
     //wait del semaforo de lectura primero y luego del mutex de memoria

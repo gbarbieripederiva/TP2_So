@@ -183,6 +183,9 @@ void setCurrentStdout(int fd){
 }
 // set process stdin
 void setStdin(int pid,int fd){
+    if(pid<0){
+        setCurrentStdin(fd);
+    }
     int i = 0;
     while(i < SIZE && procsInSched[i].process -> pid != pid){
         i++;
@@ -191,18 +194,24 @@ void setStdin(int pid,int fd){
         return;
     }
     else{ //found the process we are looking for and we can reference to in procsInSched[i]
-    
-        if(fd<0){
-            setCurrentStdin(fd);
-        }
+        procsInSched[i].process->stdin=fd;
     }
 }
 
 // set process stdout
 void setStdout(int pid,int fd){
-    //TODO
-    if(fd<0){
+    if(pid<0){
         setCurrentStdout(fd);
+    }
+    int i = 0;
+    while(i < SIZE && procsInSched[i].process -> pid != pid){
+        i++;
+    }
+    if(i == SIZE){
+        return;
+    }
+    else{ //found the process we are looking for and we can reference to in procsInSched[i]
+        procsInSched[i].process->stdout=fd;
     }
 }
 

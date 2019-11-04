@@ -15,7 +15,8 @@ uint64_t getTicks()
 
 void print(char *buffer)
 {
-   sys_write_call((uint64_t)buffer, (uint64_t)strlength(buffer));
+   sys_write_to_stdout((uint64_t)buffer,(uint64_t)strlength(buffer));
+   //sys_write_call((uint64_t)buffer, (uint64_t)strlength(buffer));
 }
 
 void putChar(char c)
@@ -29,13 +30,20 @@ void putChar(char c)
    -A backspace(erase a char) if action = 1
  */
 void printAction(int action){
-   sys_print_action_call((uint64_t)action);
+   //TODO: add pipe support
+   if(action==0){
+      sys_print_new_line_to_stdout();
+   }else{
+      sys_print_action_call((uint64_t)action);
+   }
 }
 
 //Get last input from the buffer and consume it
 char getLastInput()
 {
-   return sys_get_last_in_call();
+   
+   //return sys_get_last_in_call();
+   return sys_get_char_from_stdin();
 }
 
 /* Prints a number on based on the option:
@@ -43,7 +51,23 @@ char getLastInput()
    -1 for hexadecimal
 */
 void printDec(int number){
-   sys_print_number_call((uint64_t)number,0);
+   //TODO: Add pipe support
+   if(number==0){
+      sys_write_to_stdout("0",2);
+   }else
+   {
+      int num,dig;
+      for ( dig = 0,num=number; num!=0; dig++,num=num/10)
+      {}
+      char buff[dig+1];
+      buff[dig]=0;
+      for(int i=dig-1,num=number;i>=0;i--){
+         buff[i]=num%10+'0';
+         num=num/10;
+      }
+      sys_write_to_stdout(buff,dig+1);
+   }
+   //sys_print_number_call((uint64_t)number,0);
 }
 
 /*
@@ -67,6 +91,9 @@ void playSound(uint16_t freq){
 void stopSound(){
    sys_change_sound_call(0,0);
 }
+
+
+
 
 
 /*
