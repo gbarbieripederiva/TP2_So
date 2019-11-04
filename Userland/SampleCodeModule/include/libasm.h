@@ -111,6 +111,8 @@ int sys_read_pipe(int fd, char * buffer, int size); //SYSCALL 78
 //SYS CALL 79 to print state of a pipe
 void sys_print_pipe();
 
+int sys_put_to_sleep(int pid, long secoonds);
+
 
 void testchoi(uint64_t arg1, uint64_t arg2, uint64_t arg3, uint64_t arg4);
 

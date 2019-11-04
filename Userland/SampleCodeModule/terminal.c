@@ -6,7 +6,7 @@
 #define BUFFER_SIZE 100
 #define MAX_COMDESC 100
 #define MAX_COMMANDS 2
-#define COMMANDS 21
+#define COMMANDS 22
 #define SPACE 32
 #define MARKS 34
 
@@ -507,6 +507,21 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
     case PIPE:
         break;
 
+    case SLEEP:
+        if(tokens >= tokenNum + 2){
+            char arg1[64];
+            char arg2[64];
+            extractToken(arg1, string, tokenNum + 1);
+            extractToken(arg2, string, tokenNum + 2);
+            sleepCommand((int) stringToInt(arg1), (long) stringToInt(arg2));
+    
+        }
+        else{
+            tokenIterator = tokens + 1; // this is to stop the while iteration
+            print("Not enough arguments for command sleep");
+            printAction(0);
+        }
+        break;
 
 
 
@@ -546,6 +561,10 @@ void handleCommand(){
 
 
 //----------------------Possible Commands-------------------------------------------
+
+void sleepCommand(int pid, long seconds){
+    sys_put_to_sleep(pid, seconds);
+}
 
 void helpCommand()
 {
@@ -757,6 +776,7 @@ void fillCommandList()
     commands[18] = "phylo";
     commands[19] = "&";
     commands[20] = "|";
+    commands[21] = "sleep";
 
 }
 

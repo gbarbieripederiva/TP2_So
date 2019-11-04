@@ -61,6 +61,7 @@ void semCommand();
 #define PHYLO 18
 #define BACKGROUND 19
 #define PIPE 20
+#define SLEEP 21
 
 
 

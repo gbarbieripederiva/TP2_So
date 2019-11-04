@@ -36,7 +36,7 @@ void sys_close_pipe(int fd); //SYSCALL 76
 int sys_write_pipe(int fd, char * buffer, int size); //SYSCALL 77
 int sys_red_pipe(int fd, char * buffer, int size); //SYSCALL 78
 void sys_print_pipe();
-
+int sys_put_to_sleep(int pid, long seconds);
 
 
 #endif

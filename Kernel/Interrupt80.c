@@ -145,6 +145,12 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		ncNewLine();
 		ncPrintDec(arg4);
 		break;
+
+
+	case 200:
+		return (int) sys_put_to_sleep((int) arg1, (long) arg2);
+		break;
+
 		
 	}
 
@@ -392,4 +398,8 @@ int sys_read_pipe(int fd, char * buffer, int size){
 //SYSCALL 79 prints from a pipe
 void sys_print_pipe(){
 	print_pipes();
+}
+
+int sys_put_to_sleep(int pid, long seconds){
+	return (int) putToSleep(pid, seconds/0.055);
 }
