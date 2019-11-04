@@ -16,7 +16,7 @@ leave_region:
     ret
 
 
-GLOBAL xchg
+GLOBAL xchg1
 xchg1:
     mov rax, 1
     xchg qword [rdi], rax
