@@ -31,8 +31,8 @@ static int keyboardPipeOut;
 void initKeyboardPipe(){
 	int pipe[2];
 	pipe_open(pipe);
-	keyboardPipeOut=pipe[1];
-	keyboardPipeIn=pipe[0];
+	keyboardPipeOut=pipe[0];
+	keyboardPipeIn=pipe[1];
 }
 
 //Ads an element to the buffer.
