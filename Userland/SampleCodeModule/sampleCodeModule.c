@@ -8,20 +8,18 @@
 
 
 void checking(){
-    while(1){
-        print("Hola");
-       printAction(0);
-       print("Chau");
-       printAction(0);
-
-       
-    }
+    
+    int sid = sys_create_semaphore(1, SEM_LOCKED);
+    sys_sem_post(sid);
 }
 
 int main() {
     uint64_t terminalInfo;
     terminalInfo = sys_create_process(1, (uint64_t)terminal);
     sys_run_process(terminalInfo, 1);
+
+    uint64_t checkInfo = sys_create_process(0, (uint64_t)checking);
+    sys_run_process(checking, 1);
     
 
     
