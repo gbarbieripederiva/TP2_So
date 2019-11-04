@@ -39,7 +39,8 @@ void terminal()
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
     int sid = sys_create_semaphore(1, SEM_UNLOCKED);
-    //sys_sem_wait(sid);
+    sys_sem_wait(sid);
+    sys_sem_wait(sid);
     
 
 
