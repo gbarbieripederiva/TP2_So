@@ -16,7 +16,7 @@
 static char terminalBuffer[BUFFER_SIZE + 1] = {0}; //Non cyclic buffer
 static int bufferSize = 0;
 
-
+unsigned long var = UINT64_MAX;
 
 
 
@@ -34,7 +34,10 @@ void terminal()
 {
 
     fillCommandList();
-   
+    
+    if(var == UINT64_MAX){
+        print("verdadero");
+    }
 
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
