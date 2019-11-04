@@ -24,7 +24,7 @@ semaphore create_sem_struct(int name, int state){
     aux1 -> name = name;
     aux1 ->refs = 1; //if it was created it was openned
     aux1 -> sem_id = sem_id;
-    aux1 -> state = state;
+    aux1 -> state = (uint64_t)state;
     aux1 -> waiting_proc = NULL;
     sem_id++;
     return aux1;
@@ -203,3 +203,6 @@ void print_sems(){
         i++;
     }
 }
+
+
+

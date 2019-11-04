@@ -13,7 +13,7 @@ struct process_node{
 
 typedef struct sem{
     int name;
-    int state;
+    uint64_t state;
     int sem_id;
     int refs;
     node_pointer waiting_proc;
