@@ -2,6 +2,7 @@
 #define SCHEDULER_H 
 #include <stdint.h>
 #include <process.h>
+#define ASLEEP 4
 #define HALT 3
 #define EMPTY 2
 #define BLOCKED 0
