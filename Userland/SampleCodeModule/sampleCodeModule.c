@@ -8,14 +8,9 @@
 
 
 void checking(){
-    while(1){
-        print("Hola");
-       printAction(0);
-       print("Chau");
-       printAction(0);
-
-       
-    }
+  int sid = sys_create_semaphore(1, SEM_LOCKED);
+  sys_sem_post(sid);
+  sys_sem_close(sid);
 }
 
 int main() {
