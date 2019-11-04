@@ -11,6 +11,7 @@ void checking(){
     
     int sid = sys_create_semaphore(1, SEM_LOCKED);
     sys_sem_post(sid);
+    sys_sem_close(sid);
 }
 
 int main() {
@@ -19,7 +20,7 @@ int main() {
     sys_run_process(terminalInfo, 1);
 
     uint64_t checkInfo = sys_create_process(0, (uint64_t)checking);
-    sys_run_process(checking, 1);
+    sys_run_process(checkInfo, 1);
     
 
     
