@@ -20,9 +20,6 @@ int main() {
     uint64_t terminalInfo;
     terminalInfo = sys_create_process(1, (uint64_t)terminal);
     sys_run_process(terminalInfo, 1);
-
-    //uint64_t checkInfo = sys_create_process(0, (uint64_t)checking);
-    //sys_run_process(checkInfo, 1);
     
     uint64_t checkInfo = sys_create_process(1, (uint64_t)checking);
     sys_run_process(checkInfo, 1);
