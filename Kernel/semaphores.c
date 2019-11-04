@@ -37,7 +37,9 @@ int s_open(int name, int state){
         j++;
     }
     if(semaphores[j] -> name == name){ // if it finds a semaphore with the same name it returns its sem id
+        _cli();
         semaphores[j] ->refs ++;
+        _sti();
         return semaphores[j]->sem_id;
     }
     else{ //it creates one
@@ -76,7 +78,9 @@ int s_close(int sid){
     }
     if(semaphores[i] -> sem_id == sid){
         if(semaphores[i] -> refs > 1){ //opened from different processes
-            (semaphores[i] -> refs)++;
+            _cli();
+            (semaphores[i] -> refs)--;
+            _sti();
         }
         else{ //it is openned in just 1 process
             free_waiting_procs(semaphores[i]);
