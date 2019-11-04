@@ -22,7 +22,7 @@ void init_sems(){
 semaphore create_sem_struct(int name, int state){
     semaphore aux1 = (semaphore) giveMeMemory (sizeof(sem));
     aux1 -> name = name;
-    aux1 ->refs = 1;
+    aux1 ->refs = 1; //if it was created it was openned
     aux1 -> sem_id = sem_id;
     aux1 -> state = state;
     aux1 -> waiting_proc = NULL;
