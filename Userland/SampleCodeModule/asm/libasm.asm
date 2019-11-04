@@ -376,3 +376,13 @@ testchoi:
 	int 80h
 	popState
 	ret
+
+
+GLOBAL sys_put_to_sleep
+sys_put_to_sleep:
+	pushState
+	adjust_to_sys_call
+	mov rdi, 200
+	int 80h
+	popState
+	ret
