@@ -427,7 +427,8 @@ int sys_get_char_from_stdin(){
 	//obtener el stdin del proceso actual
 	int fd=getCurrentProcess()->stdin;
 	if(fd<0){
-		return getCharFromKeyboardPipe();
+		return getLastInput();
+		// return getCharFromKeyboardPipe();
 	}else{
 		char ret[2];
 		int error=pipe_read(fd,ret,2);
@@ -439,7 +440,8 @@ int sys_get_char_from_stdin(){
 int sys_read_from_stdin(char* buffer,int size){
 	int fd=getCurrentProcess()->stdin;
 	if(fd<0){
-		return readFromKeyboardPipe(buffer,size);
+		return 0;
+		// return readFromKeyboardPipe(buffer,size);
 	}else{
 		return pipe_read(fd,buffer,size);
 	}
