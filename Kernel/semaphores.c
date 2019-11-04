@@ -151,8 +151,8 @@ void check_blocked(uint64_t lock, semaphore sem){
         set_state(aux -> pid, READY);
         sem->waiting_proc = sem -> waiting_proc -> next;
         unGiveMeMemory((void *)aux);
-        xchg1((uint64_t)&(sem->state));
-        //(sem->state)++;
+        //xchg1((uint64_t)&(sem->state));
+        (sem->state) = 1;
     }
 }
 //unlocks the sem
