@@ -70,7 +70,8 @@ int main()
 	loadIDT();
 	char str[15] = "HOLA";
 	int fd = give_me_fd(1);
-	ncPrintDec((uint64_t)fd_write(fd, str,5));
+	uint64_t aux = (uint64_t)fd_write(fd, str,5);
+	ncPrintDec(aux);
 	ncNewLine();
 	char dest[15];
 	ncPrintDec((uint64_t)fd_read(fd, dest, 15));
