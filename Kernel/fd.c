@@ -98,6 +98,7 @@ int fd_write(int fd_id, char *str, int size){
 
     s_post(fds[pos]->sems_id[MUTEX]);
     s_post(fds[pos]->sems_id[ABLE_TO_READ]);
+    return 0;
 }
 
 int fd_read(int fd, char *dest , int maxSize){
@@ -129,6 +130,7 @@ int fd_read(int fd, char *dest , int maxSize){
     fds[pos] -> read_index = fds[pos] -> read_index % BUFFER_SIZE;
 
     s_post(fds[pos] -> sems_id[MUTEX]);
+    return 0;
 
 }
 
