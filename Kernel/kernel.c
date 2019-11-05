@@ -70,9 +70,9 @@ int main()
 	loadIDT();
 	char str[15] = "HOLA";
 	int fd = give_me_fd(1);
-	fd_write(fd, str,5);
+	ncPrintDec(fd_write(fd, str,5));
 	char dest[15];
-	fd_read(fd, dest, 15);
+	ncPrintDec(fd_read(fd, dest, 15));
 	ncPrintDec(fd);
 	ncPrint(dest);
 	//Entering sampleCodeModuleAddress in userland
