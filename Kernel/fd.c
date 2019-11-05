@@ -39,11 +39,12 @@ void init_fds(){
 fd * create_fd_struct(int pos, int name){
     fd * aux = (fd *) giveMeMemory(sizeof(fd));
     aux -> name = name;
-    aux -> fd_id = fd_id++;
+    aux -> fd_id = fd_id;
     aux -> read_index = 0;
     aux -> write_index = 0;
     aux -> sems_id[MUTEX] = s_open(pos + FD_AMOUNT, SEM_UNLOCKED);
     aux -> sems_id[ABLE_TO_READ] = s_open(pos + FD_AMOUNT * 2, SEM_LOCKED);
+    fd_id++;
 
 }
 
