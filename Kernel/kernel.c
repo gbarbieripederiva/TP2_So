@@ -74,7 +74,7 @@ int main()
 	char dest[15];
 	ncPrintDec(fd_read(fd, dest, 15));
 	ncPrintDec(fd);
-	ncPrint(dest);
+	//ncPrint(dest);
 	//Entering sampleCodeModuleAddress in userland
 	uint64_t sampleInfo = create_process(1, (uint64_t)((EntryPoint)sampleCodeModuleAddress));
 	run_process(sampleInfo, READY);	
