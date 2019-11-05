@@ -22,7 +22,6 @@ int main()
     uint64_t terminalInfo;
     terminalInfo = sys_create_process(1, (uint64_t)terminal);
     sys_run_process(terminalInfo, 1);
-    sys_put_to_sleep(terminalInfo, 100);
 
     return 0;
 }

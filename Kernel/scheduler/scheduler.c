@@ -94,31 +94,6 @@ void next()
         procsInSched[iterator].entered--;
         return;
     }
-    if (procsInSched[iterator].state == ASLEEP)
-    {
-        unsigned long currentTicks = getTicks();
-        if (currentTicks < sleepInfo[iterator][0])
-        { //handle tick overflow
-
-            unsigned long difference = UINT64_MAX - sleepInfo[iterator][0];
-
-            if (difference > sleepInfo[iterator][1])
-            { //setReady. Looks like we do things twice, but we do not want underflow from an unsigned substraction later on
-
-                procsInSched[iterator].state = READY;
-                procsInSched[iterator].entered = procsInSched[iterator].process->priority;
-                return;
-            }
-            sleepInfo[iterator][0] = 0;
-            sleepInfo[iterator][1] -= difference;
-        }
-        if (currentTicks >= sleepInfo[iterator][1])
-        {
-            procsInSched[iterator].state = READY;
-            procsInSched[iterator].entered = procsInSched[iterator].process->priority;
-            return;
-        }
-    }
 
     procsInSched[iterator].entered = procsInSched[iterator].process->priority; //reset entered times
     iterator++;
@@ -126,6 +101,35 @@ void next()
 
     while (procsInSched[iterator % SIZE].state != READY && i > 0)
     {
+        if (procsInSched[iterator].state == ASLEEP)
+        {
+            unsigned long currentTicks = getTicks();
+            if (currentTicks < sleepInfo[iterator][0])
+            { //handle tick overflow
+
+                unsigned long difference = UINT64_MAX - sleepInfo[iterator][0];
+
+                if (difference > sleepInfo[iterator][1])
+                { //setReady. Looks like we do things twice, but we do not want underflow from an unsigned substraction later on
+
+                    procsInSched[iterator].state = READY;
+                    procsInSched[iterator].entered = procsInSched[iterator].process->priority;
+                    iterator--;
+                    i++;
+                    return;
+                }
+                sleepInfo[iterator][0] = 0;
+                sleepInfo[iterator][1] -= difference;
+            }
+            if (currentTicks >= sleepInfo[iterator][1])
+            {
+                procsInSched[iterator].state = READY;
+                procsInSched[iterator].entered = procsInSched[iterator].process->priority;
+                iterator--;
+                i++;
+                return;
+            }
+        }
         iterator++;
         i--;
     }
