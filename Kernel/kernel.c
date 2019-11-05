@@ -71,6 +71,7 @@ int main()
 	char str[15] = "HOLA";
 	int fd = give_me_fd(1);
 	ncPrintDec(fd_write(fd, str,5));
+	ncNewLine();
 	char dest[15];
 	ncPrintDec(fd_read(fd, dest, 15));
 	ncPrintDec(fd);
