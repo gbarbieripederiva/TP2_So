@@ -79,8 +79,8 @@ int fd_write(int fd_id, char *str, int size){
     while(pos < FD_AMOUNT && fds[pos] -> fd_id != fd_id){
         pos++;
     }
-    if(FD_AMOUNT){
-        return 0;
+    if(pos == FD_AMOUNT){
+        return -1;
     }
 
 
@@ -110,7 +110,7 @@ int fd_read(int fd, char *dest , int maxSize){
     while(pos < FD_AMOUNT && fds[pos] -> fd_id != fd_id){
         pos++;
     }
-    if(FD_AMOUNT){
+    if(pos == FD_AMOUNT){
         return -1;
     }
     if(fds[pos] -> count == 0){ 
