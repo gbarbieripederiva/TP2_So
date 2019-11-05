@@ -35,10 +35,10 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		sys_print_action((int)arg1);
 		break;
 	case 4:
-		sys_write_number((int)arg1,(int) arg2);
+		sys_write_number((int)arg1, (int)arg2);
 		break;
 	//sys_change_sound: turns on beep(with a frequency) or turns it off
-	case 5: 
+	case 5:
 		sys_change_sound((int)arg1, (uint16_t)arg2);
 		break;
 	//sys_call_put_char_fixed: puts char in a designated position.
@@ -47,15 +47,15 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		break;
 	//sys_get_ticks
 	case 10:
-		return (uint64_t) sys_get_ticks();
+		return (uint64_t)sys_get_ticks();
 		break;
 	//sys_get_last_in: peek the last char entered in the keyboard
 	case 11:
-		return (uint64_t) sys_get_last_in();
+		return (uint64_t)sys_get_last_in();
 		break;
 	//sys_get_clock_info: gets the the seconds, minutes or hours.
 	case 12:
-		return (uint64_t) sys_get_clock_info((int)arg1);
+		return (uint64_t)sys_get_clock_info((int)arg1);
 		break;
 	//sys_screen: used for managing screen from userland
 	case 20:
@@ -63,27 +63,27 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		break;
 	//sys_mem_get: get memory
 	case 45:
-		return (uint64_t) sys_mem_get((long)arg1);
+		return (uint64_t)sys_mem_get((long)arg1);
 		break;
 	//sys_mem_free: frees memory
 	case 46:
-		return (int) sys_mem_free((uint64_t) arg1);
+		return (int)sys_mem_free((uint64_t)arg1);
 		break;
 	//sys_create_process: Creates and registers new process
 	case 47:
-		return (uint64_t) sys_create_process((int) arg1, (uint64_t)arg2); 
+		return (uint64_t)sys_create_process((int)arg1, (uint64_t)arg2);
 		break;
 	//sys_run_process: Puts process into scheduler with state READY, BLOCKED, HALT
 	case 48:
-		return (int) sys_run_process((processInfo) arg1, (int) arg2);
+		return (int)sys_run_process((processInfo)arg1, (int)arg2);
 		break;
 	//sys_kill_process: stops iterating process from scheduler
 	case 49:
-		return (int) sys_kill_process((int) arg1);
+		return (int)sys_kill_process((int)arg1);
 		break;
 	//sys_get_pid
 	case 50:
-		return (int) sys_get_pid();
+		return (int)sys_get_pid();
 		break;
 	//sys_print_running_procs: prints process info
 	case 51:
@@ -91,46 +91,46 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		break;
 	//sys_set_priority: sets priority to a process
 	case 52:
-		return (int) sys_set_priority((int) arg1, (int) arg2);
+		return (int)sys_set_priority((int)arg1, (int)arg2);
 		break;
 	//sys_set_state: sets a state to a process
 	case 53:
-		return (int) sys_set_state((int)arg1, (int) arg2);
+		return (int)sys_set_state((int)arg1, (int)arg2);
 		break;
 	//sys_create_process_params: to create a process with parameters
 	case 54:
-		return (uint64_t) sys_create_process_params((int) arg1, (uint64_t) arg2, (uint64_t) arg3, (uint64_t) arg4);
+		return (uint64_t)sys_create_process_params((int)arg1, (uint64_t)arg2, (uint64_t)arg3, (uint64_t)arg4);
 	//sys_create_semaphore: creates a sem and returns sem id
 	case 60:
-		return (int) sys_create_semaphore((int)arg1, (int) arg2);
+		return (int)sys_create_semaphore((int)arg1, (int)arg2);
 		break;
 	//sys_sem_close: close sem
 	case 61:
-		return (int) sys_sem_close((int) arg1);
+		return (int)sys_sem_close((int)arg1);
 		break;
 	//sys_sem_post: clears sem
 	case 62:
-		return (int) sys_sem_post((int) arg1);
+		return (int)sys_sem_post((int)arg1);
 		break;
 	//sys_sem_wait: waits for a sem
 	case 63:
-		return (int) sys_sem_wait((int) arg1);
+		return (int)sys_sem_wait((int)arg1);
 		break;
 	//sys_print_sems: prints openned semaphores
 	case 64:
 		sys_print_sems();
 		break;
 	case 75:
-		return (int)sys_open_pipe((int *) arg1);
+		return (int)sys_open_pipe((int *)arg1);
 		break;
 	case 76:
-		sys_close_pipe((int) arg1);
+		sys_close_pipe((int)arg1);
 		break;
 	case 77:
-		return (int) sys_write_pipe((int) arg1, (char *) arg2,(int) arg3);
+		return (int)sys_write_pipe((int)arg1, (char *)arg2, (int)arg3);
 		break;
 	case 78:
-		return (int) sys_read_pipe((int) arg1, (char *) arg2, (int) arg3);
+		return (int)sys_read_pipe((int)arg1, (char *)arg2, (int)arg3);
 		break;
 	case 79:
 		sys_print_pipe();
@@ -146,17 +146,10 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		ncPrintDec(arg4);
 		break;
 
-
 	case 200:
-		return (int) sys_put_to_sleep((int) arg1, (long) arg2);
+		return (int)sys_put_to_sleep((int)arg1, (long)arg2);
 		break;
-
-		
 	}
-
-
-
-
 
 	return 0;
 }
@@ -197,35 +190,39 @@ void sys_put_char(char c)
 }
 
 //SYS_CALL 3
-void sys_print_action(int action){
-	switch(action){
-		//If its an enter.
-		case 0:
-			//prints a new line
-			ncNewLine();
-			break;
-		//If its a backsapce
-		case 1:
-			ncBackspace();
-			break;
+void sys_print_action(int action)
+{
+	switch (action)
+	{
+	//If its an enter.
+	case 0:
+		//prints a new line
+		ncNewLine();
+		break;
+	//If its a backsapce
+	case 1:
+		ncBackspace();
+		break;
 	}
 }
 
 //SYS_CALL 4
-void sys_write_number(int number, int option){
-	switch(option){
-		case 0:
-			ncPrintDec(number);
-			break;
-		case 1:
-			ncPrintHex(number);
-			break;
-
+void sys_write_number(int number, int option)
+{
+	switch (option)
+	{
+	case 0:
+		ncPrintDec(number);
+		break;
+	case 1:
+		ncPrintHex(number);
+		break;
 	}
 }
 
 //SYS_CALL 5
-void sys_change_sound(int option, uint16_t frequency){
+void sys_change_sound(int option, uint16_t frequency)
+{
 	switch (option)
 	{
 	case 0:
@@ -235,13 +232,14 @@ void sys_change_sound(int option, uint16_t frequency){
 		turnOnBeep(frequency);
 		break;
 	}
-
 }
 
 //SYS_CALL 6
-void sys_put_char_fixed(uint16_t x, uint16_t y, uint8_t character){
-	if(character!=0){
-		drawCharAt(x,y,character);
+void sys_put_char_fixed(uint16_t x, uint16_t y, uint8_t character)
+{
+	if (character != 0)
+	{
+		drawCharAt(x, y, character);
 	}
 }
 
@@ -258,18 +256,19 @@ char sys_get_last_in()
 }
 
 //SYS_CALL 12
-uint8_t sys_get_clock_info(int option){
-	switch(option){
-		case 0:
-			return readSeconds();
-		case 1:
-			return readMinutes();
-		case 2:
-			return readHours();	
+uint8_t sys_get_clock_info(int option)
+{
+	switch (option)
+	{
+	case 0:
+		return readSeconds();
+	case 1:
+		return readMinutes();
+	case 2:
+		return readHours();
 	}
 
 	return 0;
-
 }
 
 //Strucure used for sys_scr
@@ -307,99 +306,120 @@ void sys_screen(uint64_t option, uint64_t arg1, uint64_t arg2)
 
 //SYSCALL 45 get memory
 //TODO
-uint64_t sys_mem_get(long size){
-	return (uint64_t) giveMeMemory(size);
+uint64_t sys_mem_get(long size)
+{
+	return (uint64_t)giveMeMemory(size);
 }
 
 //SYSCALL 46 free memory
-int sys_mem_free(uint64_t chunk){
+int sys_mem_free(uint64_t chunk)
+{
 	return (int)unGiveMeMemory((void *)chunk);
 }
 //SYSCALL 47 creates a new process
-uint64_t sys_create_process(int priority, uint64_t process){
-	return (uint64_t) create_process(priority, process);
+uint64_t sys_create_process(int priority, uint64_t process)
+{
+	return (uint64_t)create_process(priority, process);
 }
 //SYSCALL 48 runs a process
-int sys_run_process(uint64_t process, int state){
-	return run_process((processInfo) process, state);
+int sys_run_process(uint64_t process, int state)
+{
+	return run_process((processInfo)process, state);
 }
 //SYSCALL 49 kills a running process
-int sys_kill_process(int pid){
+int sys_kill_process(int pid)
+{
 	return kill_process(pid);
 }
 
 //SYSCALL 50 get pid
-int sys_get_pid(){
+int sys_get_pid()
+{
 	return get_current_pid();
 }
 //SYSCALL 51 prints process information
-void sys_print_running_procs(){
+void sys_print_running_procs()
+{
 	print_running_procs();
 }
 //SYSCALL 52 set priority to a process
-int sys_set_priority(int pid, int priority){
-	return (int) set_priority(pid, priority);
+int sys_set_priority(int pid, int priority)
+{
+	return (int)set_priority(pid, priority);
 }
 
 //SYSCALL 53 to set state
-int sys_set_state(int pid, int state){
-	return (int) set_state(pid, state);
+int sys_set_state(int pid, int state)
+{
+	return (int)set_state(pid, state);
 }
 
 //SYSCALL 54 to create a process with parameters
-uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2){
-	return (uint64_t) create_process_with_args(priority, rip ,arg1 , arg2);
+uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2)
+{
+	return (uint64_t)create_process_with_args(priority, rip, arg1, arg2);
 }
 
 //SYSCALL 60 creates a semaphore
-int sys_create_semaphore(int name, int state){
-	return (int) s_open(name, state);
+int sys_create_semaphore(int name, int state)
+{
+	return (int)s_open(name, state);
 }
 
 //SYSCALL 61 close an existing semaphore, if does not exist it returns -1
-int sys_sem_close(int sid){
-	return (int) s_close(sid);
+int sys_sem_close(int sid)
+{
+	return (int)s_close(sid);
 }
 
 //SYSCALL 62 sem post
-int sys_sem_post(int sid){
-	return (int) s_post(sid);
+int sys_sem_post(int sid)
+{
+	return (int)s_post(sid);
 }
 
 //SYSCALL 63 sem wait
-int sys_sem_wait(int sid){
-	return (int) s_wait(sid);
+int sys_sem_wait(int sid)
+{
+	return (int)s_wait(sid);
 }
 
 //SYSCALL 64 print sems
-void sys_print_sems(){
+void sys_print_sems()
+{
 	print_sems();
 }
 
 //SYSCALL 75 opens a pipe if it doesnt exist it creates one
-int sys_open_pipe(int *fd){
-	return (int) pipe_open(fd);
+int sys_open_pipe(int *fd)
+{
+	return (int)pipe_open(fd);
 }
 //SYSCALL 76 closes a pipe
-void sys_close_pipe(int fd){
+void sys_close_pipe(int fd)
+{
 	pipe_close(fd);
 }
 
 //SYSCALL 77 writes a pipe
-int sys_write_pipe(int fd, char * buffer, int size){
+int sys_write_pipe(int fd, char *buffer, int size)
+{
 	return pipe_write(fd, buffer, size);
 }
 
 //SYSCALL 78 reads from a pipe
-int sys_read_pipe(int fd, char * buffer, int size){
+int sys_read_pipe(int fd, char *buffer, int size)
+{
 	return pipe_read(fd, buffer, size);
 }
 
 //SYSCALL 79 prints from a pipe
-void sys_print_pipe(){
+void sys_print_pipe()
+{
 	print_pipes();
 }
 
-int sys_put_to_sleep(int pid, long seconds){
-	return (int) putToSleep(pid, seconds/0.055);
+int sys_put_to_sleep(int pid, unsigned long ticks)
+{
+	return (int)putToSleep(pid, ticks);
 }

@@ -157,7 +157,7 @@ int kill_process(int pid)
     return -1;
 }
 
-int putToSleep(int pid, long duration)
+int putToSleep(int pid, unsigned long duration)
 {
     int i = 0;
 
