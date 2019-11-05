@@ -33,6 +33,7 @@ semaphore create_sem_struct(int name, int state){
 //it opens a semaphore with its sem id
 int s_open(int name, int state){
     int j = 0;
+    
     while((j < MAX_SEMS) && (semaphores[j] == NULL || semaphores[j]->name != name)) {
         j++;
     }
