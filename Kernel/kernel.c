@@ -70,11 +70,13 @@ int main()
 	loadIDT();
 	char str[15] = "HOLA";
 	int fd = give_me_fd(1);
-	ncPrintDec(fd_write(fd, str,5));
+	ncPrintDec((uint64_t)fd_write(fd, str,5));
 	ncNewLine();
 	char dest[15];
-	ncPrintDec(fd_read(fd, dest, 15));
+	ncPrintDec((uint64_t)fd_read(fd, dest, 15));
+	ncNewLine();
 	ncPrintDec(fd);
+	ncNewLine();
 	//ncPrint(dest);
 	//Entering sampleCodeModuleAddress in userland
 	uint64_t sampleInfo = create_process(1, (uint64_t)((EntryPoint)sampleCodeModuleAddress));
