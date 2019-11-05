@@ -4,6 +4,14 @@
 
 
 
+
+
+
+
+
+
+
+/*
 typedef struct Pipe
 {
     //buffer de escritura
@@ -206,3 +214,4 @@ void print_pipes(){
         }
     }
 }
+*/

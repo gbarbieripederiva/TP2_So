@@ -42,6 +42,7 @@ void terminal()
     sys_sem_wait(sid);
 
     
+    
 
 
 

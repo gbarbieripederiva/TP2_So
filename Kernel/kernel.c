@@ -11,6 +11,7 @@
 #include <scheduler.h>
 #include <schedulerTest.h>
 #include <semaphore.h>
+#include <fd.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -52,6 +53,7 @@ void *initializeKernelBinary()
 	init_processes();
 	init_sched();
 	init_sems();
+	init_fds();
 
 	
 
@@ -66,9 +68,15 @@ int main()
 {
 	_cli();
 	loadIDT();
+	char str[15] = "HOLA";
+	int fd = give_me_fd(1);
+	fd_write(fd, str,5);
+	fd_read(fd, str, 15);
+	print("str");
 	//Entering sampleCodeModuleAddress in userland
 	uint64_t sampleInfo = create_process(1, (uint64_t)((EntryPoint)sampleCodeModuleAddress));
 	run_process(sampleInfo, READY);	
+	
 	_sti();
 	
 

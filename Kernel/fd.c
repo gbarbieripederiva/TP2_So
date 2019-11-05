@@ -73,7 +73,7 @@ int give_me_fd(int name){
 }
 
 
-int fd_write(char *str, int size, int fd_id){
+int fd_write(int fd_id, char *str, int size){
     int aux_size = size;
     int pos = 0;
     while(pos < FD_AMOUNT && fds[pos] -> fd_id != fd_id){
