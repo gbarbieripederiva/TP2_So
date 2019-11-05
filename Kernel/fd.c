@@ -98,6 +98,8 @@ int fd_write(int fd_id, char *str, int size){
 
     s_post(fds[pos]->sems_id[MUTEX]);
     s_post(fds[pos]->sems_id[ABLE_TO_READ]);
+
+    
     return 0;
 }
 
