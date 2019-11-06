@@ -51,7 +51,7 @@ fd * create_fd_struct(int pos, int name){
 
 int give_me_fd(int name){
     int i = 0;
-    while(i < FD_AMOUNT && (fds[i] != NULL || fds[i] ->name != name)){
+    while(i < FD_AMOUNT && (fds[i] != NULL || fds[i] -> name != name)){
         i++;
     }
     if(fds[i] == name){
@@ -67,8 +67,8 @@ int give_me_fd(int name){
         if(j == FD_AMOUNT){
             return -1;
         }
-            fds[i] = create_fd_struct(i, name);
-            return fds[i] -> fd_id;
+            fds[j] = create_fd_struct(j, name);
+            return fds[j] -> fd_id;
     }
     
 }
