@@ -102,10 +102,16 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		return (uint64_t) sys_create_process_params((int) arg1, (uint64_t) arg2, (uint64_t) arg3, (uint64_t) arg4);
 		break;
 	case 55:
-		return (int) sys_set_std_in((int) arg1, (int) arg2);
+		return (int) sys_set_stdin((int) arg1, (int) arg2);
 		break;
 	case 56:
-		return (int) sys_set_std_out((int) arg1, (int) arg2);
+		return (int) sys_set_stdout((int) arg1, (int) arg2);
+		break;
+	case 57:
+		return (int) sys_get_stdin();
+		break;
+	case 58:
+		return (int) sys_get_stdout();
 		break;
 	//sys_create_semaphore: creates a sem and returns sem id
 	case 60:
@@ -352,12 +358,20 @@ uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, ui
 	return (uint64_t) create_process_with_args(priority, rip ,arg1 , arg2);
 }
 
-int sys_set_std_in(int pid, int fd){
+int sys_set_stdin(int pid, int fd){
 	return set_std_in(pid, fd);
 }
 
-int sys_set_std_out(int pid, int fd){
+int sys_set_stdout(int pid, int fd){
 	return set_std_out(pid, fd);
+}
+
+int sys_get_stdin(){
+	return get_stdin();
+}
+
+int sys_get_stdout(){
+	return get_stdout();
 }
 
 //SYSCALL 60 creates a semaphore

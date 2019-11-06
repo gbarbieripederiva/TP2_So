@@ -37,16 +37,11 @@ void terminal()
     
     
     print("Welcome! Please enter a command. Try 'help'");
-    printNewLineOfTerminal();
     
-    int fd = sys_open_pipe(1);
-    char hi[50];
-
-    sys_read_pipe(fd, hi, 4);
-    
+    int stdin = sys_get_stdin();
     printAction(0);
-    sys_read_pipe(fd, hi, 29);
-    print(hi);
+    printDec(stdin);
+    printAction(0);
     
     
 

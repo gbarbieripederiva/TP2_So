@@ -184,30 +184,10 @@ void print_running_procs(){
 }
 
 
-
-/*
- void printTest(procInSched test){
-    printf("pid = %d\n",  test.process -> pid);
-    switch (test.state){
-        case 0: 
-                printf("BLOCKED\n");
-                break;
-        case 1: 
-                printf("READY\n");
-                break;
-        case 2: 
-                printf("EMPTY\n");
-                break;
-        case 3: 
-                printf("HALT\n");
-                break;
-
-    }
-    printf("Function name: %s\n", test.process ->name);
-    printf("Stack Pointer: %llu\n", test.process -> sp);
-    printf("Priority: %d\n", test.process -> priority);
-    printf("Entered = %d\n\n", test.entered);
+int get_stdin(){
+    return procsInSched[iterator].process -> fd[STDIN];
 }
 
-
-*/
+int get_stdout(){
+    return procsInSched[iterator].process -> fd[STDOUT];
+}

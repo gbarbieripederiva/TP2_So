@@ -85,6 +85,10 @@ int sys_set_stdin(int pid, int fd);
 
 int sys_set_stdout(int pid, int fd);
 
+int sys_get_stdin();
+
+int sys_get_stdout();
+
 //SYS CALL 60, to create a sempahore
 int sys_create_semaphore(int nombre, int state);
 
