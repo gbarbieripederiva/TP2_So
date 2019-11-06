@@ -53,6 +53,7 @@ fd * create_fd_struct(int pos, int name, int pipe){
     int i = 0;
     while(i < MAX_BLOCKED){
         aux -> blocked_pid[i] = -1;
+        i++;
     }
     fd_id++;
     return aux;
