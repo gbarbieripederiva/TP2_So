@@ -37,7 +37,7 @@ int s_open(int name, int state){
     while((j < MAX_SEMS) && (semaphores[j] == NULL || semaphores[j]->name != name)) {
         j++;
     }
-    if(semaphores[j] -> name == name){ // if it finds a semaphore with the same name it returns its sem id
+    if(semaphores[j] != NULL && semaphores[j] -> name == name){ // if it finds a semaphore with the same name it returns its sem id
     
     
         _cli();

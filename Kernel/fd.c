@@ -55,7 +55,8 @@ int give_me_fd(int name){
     while(i < FD_AMOUNT && (fds[i] == NULL || fds[i] -> name != name)){
         i++;
     }
-    if(fds[i] != NULL && fds[i] == name){
+    
+    if(fds[i] != NULL && fds[i] -> name == name){
         return fds[i]->fd_id;
     }
 
@@ -76,8 +77,6 @@ int give_me_fd(int name){
 
 
 int fd_write(int fd, char *str, int size){
-    ncPrintDec(fds[0]->name);
-    ncNewLine();
     int aux_size = size;
     int pos = 0;
     while(pos < FD_AMOUNT && (fds[pos] == NULL || fds[pos] -> fd_id != fd)){
@@ -104,7 +103,6 @@ int fd_write(int fd, char *str, int size){
     
 
     s_post(fds[pos]->sems_id[MUTEX]);
-    ncPrint("HOLA3");
 
     s_post(fds[pos]->sems_id[ABLE_TO_READ]);
 
