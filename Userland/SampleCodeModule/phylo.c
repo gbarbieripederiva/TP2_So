@@ -23,7 +23,6 @@ void phylosopher(int i);
 void printState (){
     int h = 0;
     while(h < cant){
-        if(state[h] != -1){
             print("Phylosofer ");
             printDec(h);
             print("state: ");
@@ -42,7 +41,7 @@ void printState (){
             default:
                 break;
             }
-        }
+    
         
         h++;
     }
@@ -73,7 +72,6 @@ void start_phylo(int cant){
     }
     uint64_t start = sys_get_ticks_call();
     uint64_t diference = 3 * 18000;
-    print("HOLA");
     while (1)
     {   
         
