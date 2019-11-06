@@ -202,6 +202,8 @@ int fd_close(int fd){
             s_post(fds[pos] ->sems_id[MUTEX]);
         }
         else{
+            s_close(fds[pos] ->sems_id[MUTEX]);
+            s_close(fds[pos] ->sems_id[ABLE_TO_READ]);
             unGiveMeMemory(fds[pos]);
             fds[pos] = NULL;
         }

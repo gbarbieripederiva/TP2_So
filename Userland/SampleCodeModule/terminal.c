@@ -10,13 +10,17 @@
 #define SPACE 32
 #define MARKS 34
 #define PIPE_MARK 124
+#define M_PIPES 10
+#define N_OVERLAP 12345
 
 
 //Buffer to store the input from the keyboard.
 static char terminalBuffer[BUFFER_SIZE + 1] = {0}; //Non cyclic buffer
 static int bufferSize = 0;
 int fd = 10;
-
+int changeStdin = 0;
+int pipes[10] = {-1};
+int pipeNum = 0;
 
 
 
@@ -477,7 +481,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                 background = 0;
                 uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) arg1, 0);
                 if(pipesAmount != 0){
-                    //TODO
+                    sys_set_stdout(catInfo ,pipes[pipeNum]);
+                }
+                if(changeStdin == 1){
+                    sys_set_stdin(catInfo, pipes[pipeNum]);
+                    changeStdin = 0;
+                    pipeNum ++;
                 }
                 sys_run_process(catInfo, PROC_RUNNING);
             }
@@ -498,7 +507,12 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             if(background == 1 || pipesAmount != 0){
                 uint64_t wcInfo = sys_create_process_params(0, (uint64_t)wcCommand , (uint64_t) arg1, 0);
                 if(pipesAmount != 0){
-                    //TO
+                    sys_set_stdout(wcInfo ,pipes[pipeNum]);
+                }
+                if(changeStdin == 1){
+                    sys_set_stdin(wcInfo, pipes[pipeNum]);
+                    changeStdin = 0;
+                    pipeNum ++;
                 }
                 sys_run_process(wcInfo, PROC_RUNNING);
             }
@@ -520,8 +534,13 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1 || pipesAmount != 0){
                 uint64_t filterInfo = sys_create_process_params(0, (uint64_t)filterCommand , (uint64_t) arg1, 0);
-                if(pipesAmount != 0){
-                    
+                 if(pipesAmount != 0){
+                    sys_set_stdout(filterInfo ,pipes[pipeNum]);
+                }
+                if(changeStdin == 1){
+                    sys_set_stdin(filterInfo, pipes[pipeNum]);
+                    changeStdin = 0;
+                    pipeNum ++;
                 }
                 sys_run_process(filterInfo, PROC_RUNNING);
             }
@@ -571,6 +590,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
     
     case PIPE:
         pipesAmount--;
+        changeStdin = 1;
         break;
 
 
@@ -605,11 +625,21 @@ int pipesCount(char * string){
 
 void handleCommand(){
     background = 0;
+    pipeNum = 0;
     tokenIterator = 1;
+    changeStdin = 0;
     char potentialCommand[MAX_COMDESC];
     strncopy(terminalBuffer, potentialCommand, bufferSize);
     pipesAmount = pipesCount(potentialCommand);
     tokens = tokensCounter(potentialCommand);
+    int i = 0;
+    while(i < M_PIPES && i != pipesAmount){
+        if(i == M_PIPES){
+            print("More pipes than permited");
+            return;
+        }
+        pipes[i] = sys_open_pipe(i + N_OVERLAP);
+    }
     while(tokens + 1 > tokenIterator){ //consumes all the tokens the potential command has
         handleToken(potentialCommand, tokenIterator);
     }
