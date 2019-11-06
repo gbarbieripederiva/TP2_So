@@ -73,7 +73,6 @@ int main()
 	(uint64_t)fd_write(fd, str,5);
 	char dest[15];
 	(uint64_t)fd_read(fd, dest, 15);
-	ncPrint(dest);
 	//Entering sampleCodeModuleAddress in userland
 	uint64_t sampleInfo = create_process(1, (uint64_t)((EntryPoint)sampleCodeModuleAddress));
 	run_process(sampleInfo, READY);	
