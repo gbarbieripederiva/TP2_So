@@ -9,11 +9,13 @@
 #define PROC_RUNNING 1
 
 typedef struct process{
+    int ppid;
     int pid;
     char * name;
     int priority;
     uint64_t stack_end;
     uint64_t sp;
+    int fd[2];
 } process;
 
 typedef struct process * processInfo;
