@@ -39,6 +39,10 @@ void terminal()
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
     
+    char buff[100];
+    int stdin = sys_get_stdin();
+    sys_read_pipe(stdin, buff, 100);
+    write_fd(sys_get_stdout, buff);
 
 
 
@@ -854,50 +858,3 @@ void fillCommandList()
 
 }
 
-
-
-
-/*
-//Store all the commands in this array.
-static command commandList[MAX_COMMANDS];
-static int commandsSize = 0;
-
-//Structure of a command stored in the command List
-typedef struct command
-{
-    char desc[MAX_COMDESC];
-    void (*cmdptr)(void);
-} command;
-void handleCommand()
-{
-
-    void fillCommand(char *desc, void (*cmdptr)(void))
-{
-    command aux;
-    strncopy(desc, aux.desc, strlength(desc));
-    aux.cmdptr = cmdptr;
-    commandList[commandsSize++] = aux;
-}
-    //Copy the command into the array. Did this to avoid a bug in which in some cases the buffer
-    //represented more chars that it should.
-    char potentialCommand[MAX_COMDESC] = {0};
-    strncopy(terminalBuffer, potentialCommand, bufferSize);
-
-    for (int i = 0; i < commandsSize; i++)
-    {
-        if (strcmp(potentialCommand, commandList[i].desc))
-        {
-            (commandList[i].cmdptr)();
-
-            //After executing the command we print a newLine and exit.
-            printNewLineOfTerminal();
-            return;
-        }
-    }
-
-    //If command not found
-    print("Not a valid command: ");
-    print(potentialCommand);
-    printNewLineOfTerminal();
-}
-*/

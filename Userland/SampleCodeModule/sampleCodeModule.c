@@ -9,12 +9,10 @@
 
 void checking(){
     
-    int fd = sys_open_pipe(1);
+    int stdout = sys_get_stdout();
     char *str = "HOLA MUNDO";
     char buff[80];
-    //sys_write_pipe(fd, str, strlength(str) + 1);
-    sys_read_pipe(fd, buff, 80);
-    
+    write_fd(stdout, str);
     
 
     
@@ -28,6 +26,7 @@ int main() {
     sys_run_process(terminalInfo, 1);
 
     uint64_t checkInfo = sys_create_process(0, (uint64_t)checking);
+    sys_set_stdout(checkInfo, fd);
     sys_run_process(checkInfo, 1);
     
 

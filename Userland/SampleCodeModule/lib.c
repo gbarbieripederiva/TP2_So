@@ -1,5 +1,6 @@
 #include "include/libasm.h"
 #include "include/lib.h"
+#include <fd.h>
 #include <stdint.h>
 
 //-----------Functions that involve an interaction with the kernel aka int 80h------------
@@ -11,6 +12,14 @@ void read(char *buffer, int count)
 uint64_t getTicks()
 {
    return sys_get_ticks_call();
+}
+void write_fd(char * buffer, int fd){
+   if(fd == -1){
+      sys_write_call((uint64_t)buffer, (uint64_t)strlength(buffer));
+   }
+   else{
+      sys_write_pipe(fd, buffer, strlength(buffer));
+   }
 }
 
 void print(char *buffer)
