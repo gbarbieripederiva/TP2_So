@@ -42,8 +42,8 @@ fd * create_fd_struct(int pos, int name){
     aux -> fd_id = fd_id;
     aux -> read_index = 0;
     aux -> write_index = 0;
-    aux -> sems_id[MUTEX] = s_open(pos + FD_AMOUNT, SEM_UNLOCKED);
-    aux -> sems_id[ABLE_TO_READ] = s_open(pos + FD_AMOUNT * 2, SEM_LOCKED);
+    aux -> sems_id[MUTEX] = s_open(pos, SEM_UNLOCKED);
+    aux -> sems_id[ABLE_TO_READ] = s_open(pos + FD_AMOUNT, SEM_LOCKED);
     fd_id++;
 
 }
@@ -51,10 +51,10 @@ fd * create_fd_struct(int pos, int name){
 
 int give_me_fd(int name){
     int i = 0;
-    while(i < FD_AMOUNT && (fds[i] != NULL || fds[i] -> name != name)){
+    while(i < FD_AMOUNT && (fds[i] == NULL || fds[i] -> name != name)){
         i++;
     }
-    if(fds[i] == name){
+    if(fds[i] != NULL && fds[i] == name){
         return fds[i]->fd_id;
     }
 
