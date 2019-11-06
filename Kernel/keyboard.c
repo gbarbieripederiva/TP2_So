@@ -159,9 +159,9 @@ uint8_t getLastInput()
 		size--;
 		//return buffer[endPosition];
 	}
-	char aux[1];
+	char aux;
 
-	fd_read(KEYBOARD, aux, 1);
+	fd_read(KEYBOARD, &aux, 1);
 	ncPrintChar(aux);
-	return (uint8_t)aux[0];
+	return (uint8_t)aux;
 }
