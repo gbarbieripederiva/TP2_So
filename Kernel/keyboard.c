@@ -2,6 +2,7 @@
 #include <keyboard.h>
 #include <naiveConsole.h>
 #include <keyMap.h>
+#include <fd.h>
 
 //Chose 100 as maximum size
 #define BUFFER_SIZE 100
@@ -112,9 +113,10 @@ void keyboard_handler(uint8_t code)
 //Adds to buffer the current letter.
 void addToBuffer(char charToAdd)
 {
-	buffer[endPosition] = charToAdd;
-	endPosition = (endPosition + 1) % BUFFER_SIZE; //As its cyclic iterator
-	size++;
+	fd_write(KEYBORD,buffer ,1);
+	//buffer[endPosition] = charToAdd;
+	//endPosition = (endPosition + 1) % BUFFER_SIZE; //As its cyclic iterator
+	//size++;
 }
 
 //Function to return a uint8 from the buffer and delete it. Return 0 if empty
@@ -136,6 +138,10 @@ uint8_t getChar()
 //Return the last input read from the keyboard and consumes it. Returns 0 if buffer empty
 uint8_t getLastInput()
 {
+	char aux;
+	fd_read(KEYBORD, &aux, 1);
+	return aux;
+	/*
 	if (size <= 0)
 	{
 		return 0;
@@ -152,4 +158,5 @@ uint8_t getLastInput()
 		size--;
 		return buffer[endPosition];
 	}
+	*/
 }

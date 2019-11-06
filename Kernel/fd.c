@@ -2,11 +2,13 @@
 #include <null.h>
 #include <memoryManager.h>
 #include <semaphores.h>
+#include <fd.h>
 #define BUFFER_SIZE 2048
 #define FD_AMOUNT 40
 #define MUTEX 0
 #define ABLE_TO_READ 1
 #define MAX_BLOCKED 20
+
 
 
 
@@ -29,7 +31,6 @@ typedef struct fd
 
 fd * fds[FD_AMOUNT];
 
-
 void init_fds(){
     fd_id = 0;
     int i = 0;
@@ -37,6 +38,8 @@ void init_fds(){
         fds[i] = NULL;
         i++;
     }
+
+     int keybord = give_me_fd(KEYBORD, 0);
 
 }
 
