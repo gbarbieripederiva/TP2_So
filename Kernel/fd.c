@@ -210,11 +210,13 @@ void print_fds(){
             ncPrintDec(fds[pos]-> count);
             int j = 0;
             while(j < MAX_BLOCKED){
-            ncNewLine();
-            ncPrint("Blocked process ");
-            ncPrintDec(j + 1);
-            ncPrint(": ");
-            ncPrintDec(fds[pos]-> blocked_pid[j]);
+                if(fds[pos]-> blocked_pid[j] != -1){
+                    ncNewLine();
+                    ncPrint("Blocked process ");
+                    ncPrintDec(j + 1);
+                    ncPrint(": ");
+                    ncPrintDec(fds[pos]-> blocked_pid[j]);
+                }
             j++;
             }
 
@@ -239,11 +241,13 @@ void print_only_pipes(){
             ncPrintDec(fds[pos]-> count);
             int j = 0;
             while(j < MAX_BLOCKED){
-            ncNewLine();
-            ncPrint("Blocked process ");
-            ncPrintDec(j + 1);
-            ncPrint(": ");
-            ncPrintDec(fds[pos]-> blocked_pid[j]);
+                if(fds[pos]-> blocked_pid[j] != -1){
+                    ncNewLine();
+                    ncPrint("Blocked process ");
+                    ncPrintDec(j + 1);
+                    ncPrint(": ");
+                    ncPrintDec(fds[pos]-> blocked_pid[j]);
+                }
             j++;
             }
 
