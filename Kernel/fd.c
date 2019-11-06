@@ -39,8 +39,6 @@ void init_fds(){
 fd * create_fd_struct(int pos, int name){
     fd * aux = (fd *) giveMeMemory(sizeof(fd));
     aux -> name = name;
-    ncPrintDec(fd_id);
-    ncNewLine();
     aux -> fd_id = fd_id;
     aux -> read_index = 0;
     aux -> write_index = 0;
@@ -71,8 +69,6 @@ int give_me_fd(int name){
             return -1;
         }
             fds[j] = create_fd_struct(j, name);
-            ncPrintDec(fds[j] -> fd_id);
-            ncNewLine();
             return fds[j] -> fd_id;
     }
     
@@ -116,6 +112,8 @@ int fd_read(int fd, char *dest , int maxSize){
     while(pos < FD_AMOUNT && (fds[pos] != NULL || fds[pos] -> fd_id != fd)){
         pos++;
     }
+    ncPrintDec(pos);
+    ncNewLine;
     if(pos == FD_AMOUNT){
         return -1;
     }
