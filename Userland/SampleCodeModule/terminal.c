@@ -777,11 +777,11 @@ void unblockCommand(uint64_t pid){
 
 void catCommand(uint64_t string){//dont know if it should be redirected
         int stdin = sys_get_stdin();
-        printDec(stdin);
         char buff[100] = {0};
         sys_write_pipe(stdin, (char *)string, strlength((char *) string) + 1);
         sys_read_pipe(stdin, buff, 100);
         int stdout = sys_get_stdin();
+        printDec(stdout);
         write_fd(stdout, buff);
 }
 
