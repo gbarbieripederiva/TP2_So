@@ -485,6 +485,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                 }
                 if(changeStdin == 1){
                     sys_set_stdin(catInfo, pipes[pipeNum]);
+                    pipesAmount--;
                     changeStdin = 0;
                     pipeNum ++;
                 }
@@ -511,6 +512,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                 }
                 if(changeStdin == 1){
                     sys_set_stdin(wcInfo, pipes[pipeNum]);
+                    pipesAmount--;
                     changeStdin = 0;
                     pipeNum ++;
                 }
@@ -540,6 +542,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                 }
                 if(changeStdin == 1){
                     sys_set_stdin(filterInfo, pipes[pipeNum]);
+                    pipesAmount--;
                     changeStdin = 0;
                     pipeNum ++;
                 }
@@ -590,7 +593,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         break;
     
     case PIPE:
-        pipesAmount--;
         changeStdin = 1;
         break;
 
