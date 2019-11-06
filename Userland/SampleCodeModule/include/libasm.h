@@ -97,7 +97,7 @@ int sys_sem_wait(int sid);
 void sys_print_sems();
 
 //SYS CALL 75, to open a pipe
-int sys_open_pipe(int *fd);
+int sys_open_pipe(int fd);
 
 //SYS CALL 76, to close a pipe
 void sys_close_pipe(int fd);

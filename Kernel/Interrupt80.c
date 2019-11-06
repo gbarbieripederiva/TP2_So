@@ -121,7 +121,7 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		sys_print_sems();
 		break;
 	case 75:
-		return (int)sys_open_pipe((int *) arg1);
+		return (int)sys_open_pipe((int) arg1);
 		break;
 	case 76:
 		sys_close_pipe((int) arg1);
@@ -371,7 +371,7 @@ void sys_print_sems(){
 }
 
 //SYSCALL 75 opens a pipe if it doesnt exist it creates one
-int sys_open_pipe(int *fd){
+int sys_open_pipe(int fd){
 	return (int) pipe_open(fd);
 }
 //SYSCALL 76 closes a pipe

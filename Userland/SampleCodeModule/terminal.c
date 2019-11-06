@@ -34,7 +34,10 @@ void terminal()
 {
 
     fillCommandList();
-    
+    int fd = sys_open_pipe(1);
+    char hi[50];
+    sys_read_pipe(fd, hi, 50);
+    print(hi);
     
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();

@@ -318,7 +318,7 @@ sys_print_sems:
 	ret
 
 GLOBAL sys_open_pipe
-sys_pipe_open:
+sys_open_pipe:
 	pushState
 	adjust_to_sys_call
 	;sys call sys_open_pipe is call 75
@@ -328,7 +328,7 @@ sys_pipe_open:
 	ret
 
 GLOBAL sys_close_pipe
-sys_pipe_close:
+sys_close_pipe:
 	pushState
 	adjust_to_sys_call
 	;sys call sys_close_pipe is call 76

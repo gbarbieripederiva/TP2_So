@@ -1,15 +1,32 @@
 #include <pipes.h>
 #include <semaphores.h>
 #include <null.h>
+#include <fd.h>
 
 
 
 
+int pipe_open(int name){
+    return give_me_fd(name);
+}
 
+int pipe_write(int fd, char * buff,int size){
+    return fd_write(fd, buff, size);
+}
 
+int pipe_read(int fd,char * buff, int size){
+    return fd_read(fd, buff, size);
+}
 
+void pipe_close(int num){
+    
+}
 
+void print_pipes(){
 
+}
+
+/*
 
 
 typedef struct Pipe
@@ -214,3 +231,4 @@ void print_pipes(){
         }
     }
 }
+*/

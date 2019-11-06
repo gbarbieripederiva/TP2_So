@@ -9,9 +9,11 @@
 
 void checking(){
     
-    int sid = sys_create_semaphore(1, SEM_LOCKED);
-    sys_sem_post(sid);
-    sys_sem_close(sid);
+    int fd = sys_open_pipe(1);
+    char *str = "HOLA MUNDO";
+    sys_write_pipe(fd, str, strlength(str) + 1);
+
+
     
 }
 
