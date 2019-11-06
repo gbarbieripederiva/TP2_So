@@ -168,6 +168,8 @@ int fd_read(int fd, char *dest , int maxSize){
         (fds[pos] -> count)--;
         j++;
     }
+
+    ncPrintChar(dest[0]);
     fds[pos] -> read_index = fds[pos] -> read_index % BUFFER_SIZE;
 
     s_post(fds[pos] -> sems_id[MUTEX]);
