@@ -480,15 +480,16 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             if(background == 1 || pipesAmount != 0){
                 background = 0;
                 uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) arg1, 0);
-                if(pipesAmount != 0){
-                    sys_set_stdout(catInfo ,pipes[pipeNum]);
-                }
                 if(changeStdin == 1){
                     sys_set_stdin(catInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
                     pipeNum ++;
                 }
+                if(pipesAmount != 0){
+                    sys_set_stdout(catInfo ,pipes[pipeNum]);
+                }
+                
                 sys_run_process(catInfo, PROC_RUNNING);
             }
             else{
@@ -500,15 +501,16 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
               if(background == 1 || pipesAmount != 0){
                 background = 0;
                 uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) 0, 0);
-                if(pipesAmount != 0){
-                    sys_set_stdout(catInfo ,pipes[pipeNum]);
-                }
-                if(changeStdin == 1){
+                 if(changeStdin == 1){
                     sys_set_stdin(catInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
                     pipeNum ++;
                 }
+                if(pipesAmount != 0){
+                    sys_set_stdout(catInfo ,pipes[pipeNum]);
+                }
+               
                 sys_run_process(catInfo, PROC_RUNNING);
             }
             else{
@@ -523,15 +525,16 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1 || pipesAmount != 0){
                 uint64_t wcInfo = sys_create_process_params(0, (uint64_t)wcCommand , (uint64_t) arg1, 0);
-                if(pipesAmount != 0){
-                    sys_set_stdout(wcInfo ,pipes[pipeNum]);
-                }
                 if(changeStdin == 1){
                     sys_set_stdin(wcInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
                     pipeNum ++;
                 }
+                if(pipesAmount != 0){
+                    sys_set_stdout(wcInfo ,pipes[pipeNum]);
+                }
+                
                 sys_run_process(wcInfo, PROC_RUNNING);
             }
             else
@@ -543,16 +546,15 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         else{
                  if(background == 1 || pipesAmount != 0){
                 uint64_t wcInfo = sys_create_process_params(0, (uint64_t)wcCommand , (uint64_t) 0, 0);
-                if(pipesAmount != 0){
-                    sys_set_stdout(wcInfo ,pipes[pipeNum]);
-                }
                 if(changeStdin == 1){
-                    print("hi");
                     sys_set_stdin(wcInfo, pipes[pipeNum]);
-                    pipesAmount--;
                     changeStdin = 0;
                     pipeNum ++;
                 }
+                if(pipesAmount != 0){
+                    sys_set_stdout(wcInfo ,pipes[pipeNum]);
+                }
+             
                 sys_run_process(wcInfo, PROC_RUNNING);
             }
             else{
@@ -566,18 +568,20 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             background = 0;
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
+           
             if(background == 1 || pipesAmount != 0){
                 uint64_t filterInfo = sys_create_process_params(0, (uint64_t)filterCommand , (uint64_t) arg1, 0);
-                 if(pipesAmount != 0){
-                     
-                    sys_set_stdout(filterInfo ,pipes[pipeNum]);
-                }
-                if(changeStdin == 1){
+                  if(changeStdin == 1){
                     sys_set_stdin(filterInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
                     pipeNum ++;
                 }
+                 if(pipesAmount != 0){
+                     
+                    sys_set_stdout(filterInfo ,pipes[pipeNum]);
+                }
+              
                 sys_run_process(filterInfo, PROC_RUNNING);
             }
             else
@@ -589,16 +593,17 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         else{
                if(background == 1 || pipesAmount != 0){
                 uint64_t filterInfo = sys_create_process_params(0, (uint64_t)filterCommand , (uint64_t)0, 0);
-                 if(pipesAmount != 0){
-                     
-                    sys_set_stdout(filterInfo ,pipes[pipeNum]);
-                }
-                if(changeStdin == 1){
+                 if(changeStdin == 1){
                     sys_set_stdin(filterInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
                     pipeNum ++;
                 }
+                 if(pipesAmount != 0){
+                     
+                    sys_set_stdout(filterInfo ,pipes[pipeNum]);
+                }
+                
                 sys_run_process(filterInfo, PROC_RUNNING);
             }
             else{
@@ -640,7 +645,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         break;
     
     case PIPE:
-        printDec(9999);
         changeStdin = 1;
         break;
 
