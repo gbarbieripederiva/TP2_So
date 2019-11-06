@@ -97,6 +97,8 @@ int readNewInput()
         if (bufferSize <= 100)
         {
             terminalBuffer[bufferSize++] = newChar;
+            print(terminalBuffer);
+            printAction(0);
             putChar(newChar);
             return 0;
         }
