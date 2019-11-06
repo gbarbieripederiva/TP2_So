@@ -60,7 +60,7 @@ int give_me_fd(int name){
 
     else{
         int j = 0;
-        while(i < FD_AMOUNT && fds[j] != NULL){
+        while(j < FD_AMOUNT && fds[j] != NULL){
             j++;
         }
 
