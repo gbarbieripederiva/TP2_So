@@ -909,9 +909,9 @@ void filterCommand(uint64_t string){
         int stdin = sys_get_stdin();
         char buff[100] = {0};
         printDec(stdin);
-        sys_write_pipe(stdin, string, strlength(string) + 1);
+
+        //sys_write_pipe(stdin, string, strlength(string) + 1);
         sys_read_pipe(stdin, buff, 100);
-        print(buff);
         char res[100] = {0};
         int h = 0;
         int j = 0;
