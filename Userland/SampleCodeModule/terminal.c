@@ -47,7 +47,7 @@ void terminal()
     int stdout = (int) sys_get_stdout();
     printAction(0);
     print("STDOUT: ");
-    printDec(stdin);
+    printDec(stdout);
     printAction(0);
     
 
