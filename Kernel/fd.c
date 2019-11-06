@@ -165,8 +165,9 @@ int fd_read(int fd, char *dest , int maxSize){
     int j = 0;
 
     while(j < maxSize && fds[pos] -> count != 0){
-        ncPrintChar(fds[pos] -> buffer[fds[pos] ->read_index % BUFFER_SIZE]);
+        //ncPrintChar(fds[pos] -> buffer[fds[pos] ->read_index % BUFFER_SIZE]);
         dest[j] = fds[pos] -> buffer[fds[pos] -> read_index % BUFFER_SIZE];
+        ncPrintChar(dest[j]);
         (fds[pos] -> read_index) ++;
         (fds[pos] -> count)--;
         j++;
