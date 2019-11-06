@@ -130,7 +130,7 @@ int fd_write(int fd, char *str, int size){
 }
 
 int fd_read(int fd, char *dest , int maxSize){
-
+    ncPrint("HOLa");
     
     int pos = 0;
     while(pos < FD_AMOUNT && (fds[pos] == NULL || fds[pos] -> fd_id != fd)){
@@ -159,7 +159,7 @@ int fd_read(int fd, char *dest , int maxSize){
 
         fds[pos]->blocked_pid[j] = -1;
     }
-    ncPrint("HOLa");
+    
 
     s_wait(fds[pos] -> sems_id[MUTEX]);
 
