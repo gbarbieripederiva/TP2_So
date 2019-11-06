@@ -2,12 +2,13 @@
 #include <semaphores.h>
 #include <null.h>
 #include <fd.h>
+#define MAX_PIPES 100
 
 
-
+int pipes[MAX_PIPES];
 
 int pipe_open(int name){
-    return give_me_fd(name);
+    return give_me_fd(name, 1);
 }
 
 int pipe_write(int fd, char * buff,int size){
@@ -19,11 +20,11 @@ int pipe_read(int fd,char * buff, int size){
 }
 
 void pipe_close(int num){
-    
+    fd_close(num);
 }
 
 void print_pipes(){
-
+    print_only_pipes();
 }
 
 /*
