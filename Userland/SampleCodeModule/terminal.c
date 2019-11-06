@@ -499,7 +499,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         else{
               if(background == 1 || pipesAmount != 0){
                 background = 0;
-                uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) arg1, 0);
+                uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) 0, 0);
                 if(pipesAmount != 0){
                     sys_set_stdout(catInfo ,pipes[pipeNum]);
                 }
@@ -511,7 +511,8 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                 }
                 sys_run_process(catInfo, PROC_RUNNING);
             }
-           catCommand((uint64_t)0);
+            else{
+            catCommand((uint64_t)0);}
         }
         break;
 
@@ -553,7 +554,8 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                 }
                 sys_run_process(wcInfo, PROC_RUNNING);
             }
-            wcCommand((uint64_t) 0);
+            else{
+                wcCommand((uint64_t) 0);}
         }
         break;
 
