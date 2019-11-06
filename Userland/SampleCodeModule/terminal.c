@@ -67,7 +67,7 @@ int readNewInput()
     char newChar = 0;
 
     newChar = getLastInput();
-    putChar(newChar);
+
 
     //If there is nothing new or its not a valid character...
     if (newChar == 0)
