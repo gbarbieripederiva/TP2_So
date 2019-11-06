@@ -2,6 +2,7 @@
 #include <terminal.h>
 #include <stdint.h>
 #include <libasm.h>
+#include <lib.h>
 
 #define NO_OVER 50000
 #define MAX_PHYLO 10
@@ -49,7 +50,7 @@ void printState (){
 
 void start_phylo(int cant){
     int pid[MAX_PHYLO];
-    mutex = sys_create_semaphore(12341234, SEM_UNLOCKED);
+    mutex = sys_create_semaphore(12234321, SEM_UNLOCKED);
     cant = cant;
     int j = 0;
     uint64_t info[MAX_PHYLO];
@@ -64,19 +65,18 @@ void start_phylo(int cant){
     
 
     while(j < cant){
-        info[j] = sys_create_process_params(0,(uint64_t)phylosopher, j, 0);
+        info[j] = sys_create_process_params(0,(uint64_t)phylosopher, j, j);
         sem_id[j] = sys_create_semaphore(j + NO_OVER, SEM_LOCKED);
         sys_run_process(info[j], 1);
         pid[j] = ((processInfo) info[j]) -> pid;
         j++;
     }
-    uint64_t start = sys_get_ticks_call();
+    uint64_t start = get_ticks();
     uint64_t diference = 3 * 18000;
     while (1)
     {   
-        print("HOLA");
         
-        if((start - sys_get_ticks_call()) > diference){
+        if((start - getTicks()) > diference){
             printState();
         }
     }
