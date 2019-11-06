@@ -811,16 +811,32 @@ void wcCommand(uint64_t string){
         write_fd(stdout, res);
 }
 
+int isVowel(char a){
+    if(a == 65 || a == 69 || a == 73 || a == 79 || a == 85 || a == 97 || a == 101|| a == 105|| a == 111 || a == 6){
+        return 1;
+    }
+    return 0;
+}
+
 void filterCommand(uint64_t string){
         int stdin = sys_get_stdin();
         char buff[100] = {0};
         sys_write_pipe(stdin, string, strlength(string) + 1);
         sys_read_pipe(stdin, buff, 100);
-
         
+        char res[100] = {0};
+        int h = 0;
+        int j = 0;
+        while(j < 100 && buff[j] != 0){
+            if(!(isVowel(buff[j]))){
+                res[h] = buff[j];
+                h++;
+            }
+            j++;
+        }
 
         int stdout = sys_get_stdin();
-        write_fd(stdout, buff);
+        write_fd(stdout, res);
 }
 
 void semCommand(){
