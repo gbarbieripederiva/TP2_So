@@ -811,7 +811,7 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         sys_write_pipe(stdin, (char *)string, strlength((char *) string) + 1);
         sys_read_pipe(stdin, buff, 100);
         int stdout = sys_get_stdout();
-        print("stdout");
+        printDec(stdout);
         write_fd(stdout, buff);
 }
 
