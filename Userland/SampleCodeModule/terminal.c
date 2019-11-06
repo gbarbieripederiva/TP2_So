@@ -38,7 +38,7 @@ void terminal()
     
     print("Welcome! Please enter a command. Try 'help'");
     
-    int stdin = sys_get_stdin();
+    int stdin = (int)sys_get_stdin();
     printAction(0);
     printDec(stdin);
     printAction(0);
