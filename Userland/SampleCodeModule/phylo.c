@@ -75,7 +75,7 @@ void start_phylo(int phylos){
         j++;
     }
     uint64_t start = getTicks();
-    uint64_t diference = 3 * 30000;
+    uint64_t diference = 3 * 150000;
     while (1)
     {   
         
