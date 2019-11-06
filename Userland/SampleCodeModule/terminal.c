@@ -639,6 +639,7 @@ void handleCommand(){
             return;
         }
         pipes[i] = sys_open_pipe(i + N_OVERLAP);
+        i++;
     }
     while(tokens + 1 > tokenIterator){ //consumes all the tokens the potential command has
         handleToken(potentialCommand, tokenIterator);
