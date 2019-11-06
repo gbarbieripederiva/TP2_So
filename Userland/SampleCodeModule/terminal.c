@@ -635,6 +635,7 @@ void handleCommand(){
     char potentialCommand[MAX_COMDESC];
     strncopy(terminalBuffer, potentialCommand, bufferSize);
     pipesAmount = pipesCount(potentialCommand);
+    printDec(pipesAmount);
     tokens = tokensCounter(potentialCommand);
     int i = 0;
     while(i < M_PIPES && i != pipesAmount){
