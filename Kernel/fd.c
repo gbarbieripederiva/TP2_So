@@ -53,7 +53,6 @@ fd * create_fd_struct(int pos, int name){
 int give_me_fd(int name){
     int i = 0;
     while(i < FD_AMOUNT && (fds[i] == NULL || fds[i] -> name != name)){
-        ncPrintDec(i);
         i++;
     }
     if(fds[i] != NULL && fds[i] == name){
@@ -77,6 +76,8 @@ int give_me_fd(int name){
 
 
 int fd_write(int fd, char *str, int size){
+    ncPrintDec(fds[0]->name);
+    ncNewLine();
     int aux_size = size;
     int pos = 0;
     while(pos < FD_AMOUNT && (fds[pos] == NULL || fds[pos] -> fd_id != fd)){
