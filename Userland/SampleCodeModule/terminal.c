@@ -488,7 +488,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     pipeNum ++;
                 }
                 if(pipesAmount != 0){
-                    print("ACA SI");
                     sys_set_stdout(catInfo ,pipes[pipeNum]);
                 }
                 
@@ -602,7 +601,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     pipeNum ++;
                 }
                  if(pipesAmount != 0){
-                     print("ACA NO");
                     sys_set_stdout(filterInfo ,pipes[pipeNum]);
                 }
                 
@@ -868,8 +866,9 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         int stdin = sys_get_stdin();
         char buff[100] = {0};
         int stdout = sys_get_stdout();
-        write_fd(stdout, (char *) string);
-        sys_read_pipe(stdin, buff, 100);
+        printDec(stdout);
+        //write_fd(stdout, (char *) string);
+        //sys_read_pipe(stdin, buff, 100);
         write_fd(stdout, buff);
        
         
