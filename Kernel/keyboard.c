@@ -141,12 +141,11 @@ uint8_t getChar()
 uint8_t getLastInput()
 {
 	
-	/*
+	
 	if (size <= 0)
 	{
 		return 0;
 	}
-	*/
 	if(endPosition == 0)
 	{
 		endPosition = BUFFER_SIZE-1;
