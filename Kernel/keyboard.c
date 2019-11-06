@@ -162,5 +162,6 @@ uint8_t getLastInput()
 	char aux[1];
 
 	fd_read(KEYBOARD, aux, 1);
+	ncPrintChar(aux);
 	return (uint8_t)aux[0];
 }

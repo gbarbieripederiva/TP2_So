@@ -70,8 +70,12 @@ int readNewInput()
 
 
     //If there is nothing new or its not a valid character...
+    if (newChar == 0)
+    {
+        return 0;
+    }
     //If its just a backsapce
-    if (newChar == BACKSPACE)
+    else if (newChar == BACKSPACE)
     {
         if (bufferSize > 0)
         {
@@ -93,9 +97,7 @@ int readNewInput()
         if (bufferSize <= 100)
         {
             terminalBuffer[bufferSize++] = newChar;
-            print(terminalBuffer);
-            printAction(0);
-            putChar(newChar);
+            //putChar(newChar);
             return 0;
         }
     }
