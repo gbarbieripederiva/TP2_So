@@ -920,7 +920,6 @@ void filterCommand(uint64_t string){
         }
 
         int stdout = sys_get_stdout();
-        printDec(stdout);
         write_fd(stdout, res);
 }
 
