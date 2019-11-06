@@ -70,7 +70,7 @@ void start_phylo(int cant){
         sys_run_process(info[j], 1);
         pid[j] = ((processInfo) info[j]) -> pid;
     }
-
+    print("HELLO");
     int start = sys_get_ticks_call();
     int diference = 3 * 18000;
 
