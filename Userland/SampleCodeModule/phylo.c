@@ -74,6 +74,7 @@ void start_phylo(int cant){
     uint64_t diference = 3 * 18000;
     while (1)
     {   
+        print("HOLA");
         
         if((start - sys_get_ticks_call()) > diference){
             printState();
