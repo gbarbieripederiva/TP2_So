@@ -88,11 +88,12 @@ int fd_write(int fd, char *str, int size){
 
     s_wait(fds[pos] ->sems_id[MUTEX]);
 
+    int ite = 0;
     while(aux_size != 0){
-        ncPrintDec(fds[pos] ->write_index % BUFFER_SIZE);
-        fds[pos] -> buffer[fds[pos] ->write_index % BUFFER_SIZE] = str[size];
+        fds[pos] -> buffer[fds[pos] ->write_index % BUFFER_SIZE] = str[ite];
         (fds[pos] -> write_index)++;
         (fds[pos] -> count) ++;
+        ite++;
         aux_size--;
     }
     ncPrint(fds[pos]->buffer);
