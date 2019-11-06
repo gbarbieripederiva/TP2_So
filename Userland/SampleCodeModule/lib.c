@@ -17,6 +17,7 @@ void write_fd(char * buffer, int fd){
       sys_write_call((uint64_t)buffer, (uint64_t)strlength(buffer));
    }
    else{
+      printDec(fd);
       sys_write_pipe(fd, buffer, strlength(buffer));
    }
 }
