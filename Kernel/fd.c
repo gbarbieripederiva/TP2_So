@@ -112,6 +112,7 @@ int fd_read(int fd, char *dest , int maxSize){
     while(pos < FD_AMOUNT && (fds[pos] != NULL || fds[pos] -> fd_id != fd)){
         pos++;
     }
+    ncNewLine();
     ncPrintDec(pos);
     ncNewLine;
     if(pos == FD_AMOUNT){
