@@ -477,10 +477,9 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         if(tokens >= tokenNum + 1){
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
-            if(background == 1){
+            if(background == 1 || pipesAmount != 0){
                 background = 0;
                 uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) arg1, 0);
-                printDec(pipesAmount);
                 printAction(0);
                 if(pipesAmount != 0){
                     printDec(pipes[pipeNum]);
@@ -635,7 +634,6 @@ void handleCommand(){
     char potentialCommand[MAX_COMDESC];
     strncopy(terminalBuffer, potentialCommand, bufferSize);
     pipesAmount = pipesCount(potentialCommand);
-    printDec(pipesAmount);
     tokens = tokensCounter(potentialCommand);
     int i = 0;
     while(i < M_PIPES && i != pipesAmount){
