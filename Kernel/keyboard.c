@@ -159,8 +159,8 @@ uint8_t getLastInput()
 		size--;
 		//return buffer[endPosition];
 	}
-	char aux;
+	char aux[1];
 
-	fd_read(KEYBOARD, &aux, 1);
-	return (uint8_t)aux;
+	fd_read(KEYBOARD, aux, 1);
+	return (uint8_t)aux[0];
 }
