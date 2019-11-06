@@ -21,6 +21,7 @@ static int bufferSize = 0;
 
 
 
+
 //command handler variables
 char *commands[COMMANDS] = {0}; //all command names
 int tokenIterator = 0; //used to process multiple tokens
@@ -39,6 +40,10 @@ void terminal()
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
     
+
+    char result[20];
+    print(intToString(45,result, 10));
+    printAction(0);
     char buff[100];
     int stdin = sys_get_stdin();
     sys_read_pipe(stdin, buff, 100);
@@ -487,9 +492,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             }
         }
         else{
-            tokenIterator = tokens + 1; // this is to stop the while iteration
-            print("Not enough arguments for command cat");
-            printAction(0);
+           catCommand((uint64_t)0);
         }
         break;
 
@@ -511,9 +514,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             }
         }
         else{
-            tokenIterator = tokens + 1; // this is to stop the while iteration
-            print("Not enough arguments for command wc");
-            printAction(0);
+            wcCommand((uint64_t) 0);
         }
         break;
 
@@ -537,9 +538,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             
         }
         else{
-            tokenIterator = tokens + 1; // this is to stop the while iteration
-            print("Not enough arguments for command filter");
-            printAction(0);
+            filterCommand((uint64_t) 0);
         }
         break;
 
@@ -780,15 +779,26 @@ void unblockCommand(uint64_t pid){
     }
 }
 
+
+
 void catCommand(uint64_t string){//dont know if it should be redirected
-        
-        printAction(0);
-        print((char *) string);
-        printAction(0);
+        int stdin = sys_get_stdin();
+        char buff[100] = {0};
+        sys_write_pipe(stdin, string, strlength(string) + 1);
+        sys_read_pipe(stdin, buff, 100);
+        int stdout = sys_get_stdin();
+        write_fd(stdout, buff);
 }
 
+
 void wcCommand(uint64_t string){
-    char * str = (char *) string;
+        int stdin = sys_get_stdin();
+        char buff[100] = {0};
+        sys_write_pipe(stdin, string, strlength(string) + 1);
+
+        sys_read_pipe(stdin, buff, 100);
+        int stdout = sys_get_stdin();
+        write_fd(stdout, buff);
 }
 
 void filterCommand(uint64_t string){

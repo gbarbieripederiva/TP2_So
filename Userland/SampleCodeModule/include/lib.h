@@ -43,4 +43,5 @@ void drawRectangle(Rectangle *rect);
 int strlength(char *str);
 int strcmp(const char *str1, const char *str2);
 void strncopy(char *source, char *dest, int size);
+char* intToString(int value, char* result, int base);
 #endif
