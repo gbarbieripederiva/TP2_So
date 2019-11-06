@@ -99,6 +99,8 @@ int fd_write(int fd, char *str, int size){
 
     fds[pos] -> write_index = fds[pos] -> write_index % BUFFER_SIZE;
 
+    ncPrint("HOLA2");
+
     s_post(fds[pos]->sems_id[MUTEX]);
 
     s_post(fds[pos]->sems_id[ABLE_TO_READ]);
@@ -118,7 +120,6 @@ int fd_read(int fd, char *dest , int maxSize){
         return -1;
     }
     if(fds[pos] -> count == 0){ 
-    ncPrint("HOLA");
     s_wait(fds[pos] -> sems_id[ABLE_TO_READ]);
     }
 
