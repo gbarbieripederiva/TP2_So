@@ -487,6 +487,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     pipeNum ++;
                 }
                 if(pipesAmount != 0){
+                    print("hola");
                     sys_set_stdout(catInfo ,pipes[pipeNum]);
                 }
                 
@@ -865,6 +866,7 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         int stdin = sys_get_stdin();
         char buff[100] = {0};
         int stdout = sys_get_stdout();
+        printDec(stdout);
         //sys_write_pipe(stdin, (char *)string, strlength((char *) string) + 1);
         if(string == 0){
         sys_read_pipe(stdin, buff, 100);
