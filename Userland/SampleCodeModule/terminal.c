@@ -541,7 +541,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     sys_set_stdout(filterInfo ,pipes[pipeNum]);
                 }
                 if(changeStdin == 1){
-                    printDec(9999);
+                    printDec(555);
                     sys_set_stdin(filterInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
