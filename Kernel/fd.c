@@ -167,13 +167,13 @@ int fd_read(int fd, char *dest , int maxSize){
     while(j < maxSize && fds[pos] -> count != 0){
         //ncPrintChar(fds[pos] -> buffer[fds[pos] ->read_index % BUFFER_SIZE]);
         dest[j] = (char) fds[pos] -> buffer[fds[pos] -> read_index % BUFFER_SIZE];
-        
+        ncPrintDec(dest[0]);
         (fds[pos] -> read_index) ++;
         (fds[pos] -> count)--;
         j++;
     }
 
-    ncPrintDec(dest[0]);
+
 
     
     fds[pos] -> read_index = fds[pos] -> read_index % BUFFER_SIZE;
