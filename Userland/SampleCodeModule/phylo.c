@@ -74,11 +74,12 @@ void start_phylo(int phylos){
         j++;
     }
     uint64_t start = getTicks();
-    uint64_t diference = 3 * 18000;
+    uint64_t diference = 3 * 30000;
     while (1)
     {   
         
         if((start - getTicks()) > diference){
+            start = getTicks();
             printState();
         }
     }
