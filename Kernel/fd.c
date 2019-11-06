@@ -172,7 +172,7 @@ int fd_read(int fd, char *dest , int maxSize){
         j++;
     }
 
-    ncPrintDec(dest[0]);
+    ncPrintDec(dest[0] == 97);
 
 
 
