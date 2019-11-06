@@ -44,6 +44,11 @@ void terminal()
     printDec(stdin);
     printAction(0);
     
+    int stdout = (int) sys_get_stdout();
+    printAction(0);
+    print("STDOUT: ");
+    printDec(stdin);
+    printAction(0);
     
 
 
