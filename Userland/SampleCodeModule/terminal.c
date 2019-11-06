@@ -21,6 +21,7 @@ int fd = 10;
 int changeStdin = 0;
 int pipes[10] = {-1};
 int pipeNum = 0;
+int not_same = 25;
 
 
 
@@ -487,7 +488,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     pipeNum ++;
                 }
                 if(pipesAmount != 0){
-                    print("hola");
                     sys_set_stdout(catInfo ,pipes[pipeNum]);
                 }
                 
@@ -694,7 +694,8 @@ void handleCommand(){
             print("More pipes than permited");
             return;
         }
-        pipes[i] = sys_open_pipe(i + N_OVERLAP);
+        pipes[i] = sys_open_pipe(not_same + N_OVERLAP);
+        not_same ++;
         i++;
     }
     while(tokens + 1 > tokenIterator){ //consumes all the tokens the potential command has
