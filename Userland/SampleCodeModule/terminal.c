@@ -907,6 +907,7 @@ void filterCommand(uint64_t string){
         sys_write_pipe(stdin, string, strlength(string) + 1);
         sys_read_pipe(stdin, buff, 100);
         
+        print(string);
         char res[100] = {0};
         int h = 0;
         int j = 0;
