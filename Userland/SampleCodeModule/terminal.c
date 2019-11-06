@@ -535,6 +535,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             if(background == 1 || pipesAmount != 0){
                 uint64_t filterInfo = sys_create_process_params(0, (uint64_t)filterCommand , (uint64_t) arg1, 0);
                  if(pipesAmount != 0){
+                     printDec(pipes[pipeNum]);
                     sys_set_stdout(filterInfo ,pipes[pipeNum]);
                 }
                 if(changeStdin == 1){
@@ -639,7 +640,6 @@ void handleCommand(){
             return;
         }
         pipes[i] = sys_open_pipe(i + N_OVERLAP);
-        printDec(pipes[0]);
         i++;
     }
     while(tokens + 1 > tokenIterator){ //consumes all the tokens the potential command has
