@@ -839,7 +839,7 @@ void wcCommand(uint64_t string){
 }
 
 int isVowel(char a){
-    if(a == 65 || a == 69 || a == 73 || a == 79 || a == 85 || a == 97 || a == 101|| a == 105|| a == 111 || a == 6){
+    if(a == 65 || a == 69 || a == 73 || a == 79 || a == 85 || a == 97 || a == 101|| a == 105|| a == 111 || a == 117){
         return 1;
     }
     return 0;
