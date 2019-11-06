@@ -73,7 +73,7 @@ void start_phylo(int phylos){
         pid[j] = ((processInfo) info[j]) -> pid;
         j++;
     }
-    uint64_t start = get_ticks();
+    uint64_t start = getTicks();
     uint64_t diference = 3 * 18000;
     while (1)
     {   
