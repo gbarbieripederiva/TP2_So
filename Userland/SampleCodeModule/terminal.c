@@ -15,6 +15,7 @@
 //Buffer to store the input from the keyboard.
 static char terminalBuffer[BUFFER_SIZE + 1] = {0}; //Non cyclic buffer
 static int bufferSize = 0;
+int fd = 10;
 
 
 
@@ -497,7 +498,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             if(background == 1 || pipesAmount != 0){
                 uint64_t wcInfo = sys_create_process_params(0, (uint64_t)wcCommand , (uint64_t) arg1, 0);
                 if(pipesAmount != 0){
-                    //TODO
+                    //TO
                 }
                 sys_run_process(wcInfo, PROC_RUNNING);
             }
@@ -520,7 +521,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             if(background == 1 || pipesAmount != 0){
                 uint64_t filterInfo = sys_create_process_params(0, (uint64_t)filterCommand , (uint64_t) arg1, 0);
                 if(pipesAmount != 0){
-                    //TODO
+                    
                 }
                 sys_run_process(filterInfo, PROC_RUNNING);
             }
@@ -776,6 +777,7 @@ void unblockCommand(uint64_t pid){
 
 void catCommand(uint64_t string){//dont know if it should be redirected
         int stdin = sys_get_stdin();
+        printDec(stdin);
         char buff[100] = {0};
         sys_write_pipe(stdin, (char *)string, strlength((char *) string) + 1);
         sys_read_pipe(stdin, buff, 100);
