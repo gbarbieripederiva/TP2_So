@@ -108,7 +108,6 @@ int fd_write(int fd, char *str, int size){
 
     int ite = 0;
     while(aux_size > 0){
-        ncPrint("a");
         fds[pos] -> buffer[fds[pos] ->write_index % BUFFER_SIZE] = str[ite];
         (fds[pos] -> write_index)++;
         (fds[pos] -> count) ++;
@@ -164,6 +163,7 @@ int fd_read(int fd, char *dest , int maxSize){
     int j = 0;
 
     while(j < maxSize && fds[pos] -> count != 0){
+        ncPrint("hola");
         dest[j] = fds[pos] -> buffer[fds[pos] -> read_index % BUFFER_SIZE];
         (fds[pos] -> read_index) ++;
         (fds[pos] -> count)--;
