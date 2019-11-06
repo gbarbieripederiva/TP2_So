@@ -214,7 +214,7 @@ void print_fds(){
                     ncNewLine();
                     ncPrint("Blocked process ");
                     ncPrintDec(j + 1);
-                    ncPrint(": ");
+                    ncPrint(" -> pid: ");
                     ncPrintDec(fds[pos]-> blocked_pid[j]);
                 }
             j++;
@@ -245,7 +245,7 @@ void print_only_pipes(){
                     ncNewLine();
                     ncPrint("Blocked process ");
                     ncPrintDec(j + 1);
-                    ncPrint(": ");
+                    ncPrint("-> pid: ");
                     ncPrintDec(fds[pos]-> blocked_pid[j]);
                 }
             j++;
