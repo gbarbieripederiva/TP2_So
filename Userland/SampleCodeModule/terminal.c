@@ -41,9 +41,11 @@ void terminal()
     
     int fd = sys_open_pipe(1);
     char hi[50];
+    printDec(fd);
+    printAction(0);
     sys_read_pipe(fd, hi, 50);
     print(hi);
-    printDec(fd);
+    
     
     
 

@@ -12,6 +12,7 @@ void checking(){
     int fd = sys_open_pipe(1);
     char *str = "HOLA MUNDO";
     printDec(fd);
+    printAction(0);
     sys_write_pipe(fd, str, strlength(str) + 1);
     
 
