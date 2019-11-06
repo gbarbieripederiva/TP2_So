@@ -594,6 +594,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                if(background == 1 || pipesAmount != 0){
                 uint64_t filterInfo = sys_create_process_params(0, (uint64_t)filterCommand , (uint64_t)0, 0);
                  if(changeStdin == 1){
+                     print("hoola");
                     sys_set_stdin(filterInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
