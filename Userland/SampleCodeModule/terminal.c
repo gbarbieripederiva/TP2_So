@@ -780,7 +780,7 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         char buff[100] = {0};
         sys_write_pipe(stdin, (char *)string, strlength((char *) string) + 1);
         sys_read_pipe(stdin, buff, 100);
-        int stdout = sys_get_stdin();
+        int stdout = sys_get_stdout();
         printDec(stdout);
         write_fd(stdout, buff);
 }
@@ -805,7 +805,7 @@ void wcCommand(uint64_t string){
         char aux[100];
         res = intToString(counter, aux, 10);
 
-        int stdout = sys_get_stdin();
+        int stdout = sys_get_stdout();
         write_fd(stdout, res);
 }
 
@@ -833,7 +833,7 @@ void filterCommand(uint64_t string){
             j++;
         }
 
-        int stdout = sys_get_stdin();
+        int stdout = sys_get_stdout();
         write_fd(stdout, res);
 }
 
