@@ -99,9 +99,10 @@ int fd_write(int fd, char *str, int size){
 
     fds[pos] -> write_index = fds[pos] -> write_index % BUFFER_SIZE;
 
-    ncPrint("HOLA2");
+    
 
     s_post(fds[pos]->sems_id[MUTEX]);
+    ncPrint("HOLA3")
 
     s_post(fds[pos]->sems_id[ABLE_TO_READ]);
 
