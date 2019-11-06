@@ -70,12 +70,8 @@ int readNewInput()
 
 
     //If there is nothing new or its not a valid character...
-    if (newChar == 0)
-    {
-        return 0;
-    }
     //If its just a backsapce
-    else if (newChar == BACKSPACE)
+    if (newChar == BACKSPACE)
     {
         if (bufferSize > 0)
         {
