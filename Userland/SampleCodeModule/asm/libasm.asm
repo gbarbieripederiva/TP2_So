@@ -267,6 +267,24 @@ sys_create_process_params:
 	popState
 	ret
 
+GLOBAL sys_set_stdin
+sys_set_stdin:
+	pushState
+	adjust_to_sys_call
+	mov rdi, 55
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_set_stdout
+sys_set_stdout:
+	pushState
+	adjust_to_sys_call
+	mov rdi, 56
+	int 80h
+	popState
+	ret
+
 GLOBAL sys_create_semaphore
 sys_create_semaphore:
 	pushState

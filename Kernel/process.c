@@ -125,7 +125,8 @@ processInfo create_process(int priority, uint64_t rip){
     process -> stack_end = (uint64_t)giveMeMemory(STACK_SIZE);
     process -> sp = build_stack(rip, process -> stack_end, process);
     processes[pid++] = process;
-
+    process -> fd[STDIN] = -1;
+    process -> fd[STDOUT] = -1;
     return process;
 }
 
@@ -205,3 +206,30 @@ processInfo create_process_with_args(int priority, uint64_t rip, uint64_t arg1, 
     return process;
 }
 
+int set_std_in(int pid, int fd){
+    int i = 0;
+    while(i < MAX_PROCESSES && (processes[i] == NULL || processes[i] -> pid != pid)){
+        i++;
+    }
+    if(i == MAX_PROCESSES){
+        return -1;
+    }
+    else{
+        processes[i] -> fd[STDIN] = fd;
+        return 0;
+    }
+}
+
+int set_std_out(int pid, int fd){
+    int i = 0;
+    while(i < MAX_PROCESSES && (processes[i] == NULL || processes[i] -> pid != pid)){
+        i++;
+    }
+    if(i == MAX_PROCESSES){
+        return -1;
+    }
+    else{
+        processes[i] -> fd[STDOUT] = fd;
+        return 0;
+    }
+}
