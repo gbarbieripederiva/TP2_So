@@ -9,7 +9,8 @@
 /* ***************************************************************************** */
 
 #include <lib.h>
-
+#include <libasm.h>
+#include <rng.h>
 #define W 32
 #define R 624
 #define DISCARD 31
@@ -142,4 +143,8 @@ static unsigned int case_6 (void){
    if (state_i == 1)
       WELLRNG19937 = case_2;
    return (STATE[state_i] ^ (newVM2 & BITMASK));
+}
+
+int random(){
+   return sys_get_ticks_call() % 5;
 }

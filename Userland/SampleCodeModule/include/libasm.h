@@ -1,7 +1,8 @@
-#include <stdint.h>
+
 #ifndef __LIBASMUSERLAND___
 #define __LIBASMUSERLAND__
 
+#include <stdint.h>
 #define SEM_LOCKED 1
 #define SEM_UNLOCKED 0
 

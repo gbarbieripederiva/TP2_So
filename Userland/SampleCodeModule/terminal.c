@@ -2,6 +2,7 @@
 #include <terminal.h>
 #include <jueguito.h>
 #include <libasm.h>
+#include <phylo.h>
 
 #define BUFFER_SIZE 100
 #define MAX_COMDESC 100
@@ -879,12 +880,13 @@ void wcCommand(uint64_t string){
         int stdin = sys_get_stdin();
         char buff[100] = {0};
         if(string != 0){
-        sys_write_pipe(stdin, string, strlength(string) + 1);}
+        sys_write_pipe(stdin, string, strlength(string) + 1);
+        }
         sys_read_pipe(stdin, buff, 100);
 
         int strlen = strlength(buff);
         int j = 0;
-        int counter = 0;
+        int counter = 1;
         while(j < strlen){
             if(buff[j] == 10){
                 counter++;

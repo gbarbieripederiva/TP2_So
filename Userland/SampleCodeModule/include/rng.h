@@ -8,5 +8,11 @@
 /*                 by Shin Harase, Hiroshima University.                         */
 /* ***************************************************************************** */
 
+#ifndef RNG_H
+#define RNG_H
+
 void InitWELLRNG19937();
 extern unsigned int (*WELLRNG19937)(void);
+int random();
+
+#endif
