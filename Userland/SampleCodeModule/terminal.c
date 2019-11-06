@@ -864,11 +864,16 @@ void unblockCommand(uint64_t pid){
 void catCommand(uint64_t string){//dont know if it should be redirected
         int stdin = sys_get_stdin();
         char buff[100] = {0};
-        sys_write_pipe(stdin, (char *)string, strlength((char *) string) + 1);
-        sys_read_pipe(stdin, buff, 100);
-        print(string);
         int stdout = sys_get_stdout();
-        write_fd(stdout, buff);
+        //sys_write_pipe(stdin, (char *)string, strlength((char *) string) + 1);
+        if(string[0] == 0){
+        sys_read_pipe(stdin, buff, 100);
+        write_fd(stdout, buff);}
+        else{
+            write_fd(stdout, string);
+        }
+        
+        
 }
 
 
