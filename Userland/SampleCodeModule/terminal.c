@@ -866,9 +866,9 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         int stdin = sys_get_stdin();
         char buff[100] = {0};
         int stdout = sys_get_stdout();
-        printDec(stdout);
-        write_fd(stdout, (char *) string);
-        //sys_read_pipe(stdin, buff, 100);
+        if(string != 0){
+        write_fd(stdout, (char *) string); }
+        sys_read_pipe(stdin, buff, 100);
         write_fd(stdout, buff);
        
         
@@ -878,7 +878,8 @@ void catCommand(uint64_t string){//dont know if it should be redirected
 void wcCommand(uint64_t string){
         int stdin = sys_get_stdin();
         char buff[100] = {0};
-        sys_write_pipe(stdin, string, strlength(string) + 1);
+        if(string != 0){
+        sys_write_pipe(stdin, string, strlength(string) + 1);}
         sys_read_pipe(stdin, buff, 100);
 
         int strlen = strlength(buff);
@@ -908,9 +909,8 @@ int isVowel(char a){
 void filterCommand(uint64_t string){
         int stdin = sys_get_stdin();
         char buff[100] = {0};
-        printDec(stdin);
-
-        //sys_write_pipe(stdin, string, strlength(string) + 1);
+        if(string != 0){
+            sys_write_pipe(stdin, string, strlength(string) + 1);}
         sys_read_pipe(stdin, buff, 100);
         char res[100] = {0};
         int h = 0;
