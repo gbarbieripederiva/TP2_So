@@ -48,10 +48,12 @@ void printState (){
     }
 }
 
-void start_phylo(int cant){
+void start_phylo(int phylos){
     int pid[MAX_PHYLO];
     mutex = sys_create_semaphore(12234321, SEM_UNLOCKED);
-    cant = cant;
+   
+    cant = phylos;
+     printDec(cant);
     int j = 0;
     uint64_t info[MAX_PHYLO];
     int g = 0;
