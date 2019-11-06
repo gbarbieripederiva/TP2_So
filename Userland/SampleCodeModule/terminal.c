@@ -968,7 +968,7 @@ void fillCommandList()
     commands[3] = "time";
     commands[4] = "help";
     commands[5] = "snake";
-    commands[6] = "testvDivisionBy0";
+    commands[6] = "testDivisionBy0";
     commands[7] = "testInvalidOpcode";
     commands[8] = "mem";
     commands[9] = "ps";
