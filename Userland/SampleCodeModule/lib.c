@@ -1,6 +1,5 @@
 #include "include/libasm.h"
 #include "include/lib.h"
-#include <fd.h>
 #include <stdint.h>
 
 //-----------Functions that involve an interaction with the kernel aka int 80h------------
