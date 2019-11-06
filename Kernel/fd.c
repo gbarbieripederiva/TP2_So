@@ -47,6 +47,7 @@ fd * create_fd_struct(int pos, int name){
     aux -> sems_id[MUTEX] = s_open(pos, SEM_UNLOCKED);
     aux -> sems_id[ABLE_TO_READ] = s_open(pos + FD_AMOUNT, SEM_LOCKED);
     fd_id++;
+    return aux;
 
 }
 
