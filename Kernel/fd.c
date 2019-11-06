@@ -135,7 +135,7 @@ int fd_read(int fd, char *dest , int maxSize){
         j++;
     }
     if( j == maxSize){
-        dest[j] = 0;
+        dest[j -1] = 0;
     }
 
     fds[pos] -> read_index = fds[pos] -> read_index % BUFFER_SIZE;
