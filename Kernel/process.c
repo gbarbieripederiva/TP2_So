@@ -203,7 +203,7 @@ processInfo create_process_with_args(int priority, uint64_t rip, uint64_t arg1, 
     process -> sp = build_stack_with_args(rip, process -> stack_end, process, arg1, arg2);
     processes[pid++] = process;
     process ->fd[STDIN] = 0;
-    process -> fd[STDOOU] = -1;
+    process -> fd[STDOUT] = -1;
 
     return process;
 }
