@@ -122,7 +122,6 @@ int fd_read(int fd, char *dest , int maxSize){
     }
     if(fds[pos] -> count == 0){ 
     s_wait(fds[pos] -> sems_id[ABLE_TO_READ]);
-    ncPrint("HOLA4");
     }
 
     s_wait(fds[pos] -> sems_id[MUTEX]);

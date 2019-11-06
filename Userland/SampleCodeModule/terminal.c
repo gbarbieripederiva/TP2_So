@@ -34,7 +34,7 @@ void terminal()
 {
 
     fillCommandList();
-  
+    
     
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
@@ -43,7 +43,7 @@ void terminal()
     char hi[50];
     sys_read_pipe(fd, hi, 50);
     print(hi);
-
+    printDec(fd);
     
     
 
