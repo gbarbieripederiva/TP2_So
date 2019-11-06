@@ -173,7 +173,7 @@ int fd_read(int fd, char *dest , int maxSize){
         j++;
     }
 
-    ncPrintChar((uint8_t)dest[0]);
+    ncPrintDec(dest[0]);
 
     
     fds[pos] -> read_index = fds[pos] -> read_index % BUFFER_SIZE;
