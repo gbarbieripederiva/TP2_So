@@ -40,7 +40,8 @@ void terminal()
     char buffer[100];
     int stdin = (int)sys_get_stdin();
     sys_read_pipe(stdin, buffer, 100);
-
+    print(buffer);
+    printAction(0);
     
 
 
