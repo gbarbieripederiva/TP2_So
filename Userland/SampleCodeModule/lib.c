@@ -12,12 +12,11 @@ uint64_t getTicks()
 {
    return sys_get_ticks_call();
 }
-void write_fd(char * buffer, int fd){
+void write_fd(int fd, char * buffer){
    if(fd == -1){
       sys_write_call((uint64_t)buffer, (uint64_t)strlength(buffer));
    }
    else{
-      printDec(fd);
       sys_write_pipe(fd, buffer, strlength(buffer));
    }
 }

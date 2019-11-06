@@ -12,7 +12,6 @@ void checking(){
     int stdout = sys_get_stdout();
     char *str = "HOLA MUNDO";
     char buff[80];
-    printDec(stdout);
     write_fd(stdout, str);
     
 

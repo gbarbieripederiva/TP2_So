@@ -18,7 +18,7 @@ void playSound(uint16_t freq);
 void stopSound();
 void playFrequency(uint16_t freq, uint64_t ticks);
 void putCharFixed(uint16_t x, uint16_t y, uint8_t character);
-void write_fd(char *buffer, int fd);
+void write_fd(int fd, char *buffer);
 
 
 #pragma pack(push)
