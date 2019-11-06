@@ -40,9 +40,6 @@ void terminal()
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
     
-
-    char result[20];
-    print(intToString(45,result, 10));
     printAction(0);
     char buff[100];
     int stdin = sys_get_stdin();
@@ -795,14 +792,35 @@ void wcCommand(uint64_t string){
         int stdin = sys_get_stdin();
         char buff[100] = {0};
         sys_write_pipe(stdin, string, strlength(string) + 1);
-
         sys_read_pipe(stdin, buff, 100);
+
+        int strlen = strlength(buff);
+        int j = 0;
+        int counter = 0;
+        while(j < strlen){
+            if(buff[j] == 10){
+                counter++;
+            }
+            j++;
+        }
+        char * res;
+        char aux[100];
+        res = intToString(counter, aux, 10);
+
         int stdout = sys_get_stdin();
-        write_fd(stdout, buff);
+        write_fd(stdout, res);
 }
 
 void filterCommand(uint64_t string){
-    char * str = (char *) string;
+        int stdin = sys_get_stdin();
+        char buff[100] = {0};
+        sys_write_pipe(stdin, string, strlength(string) + 1);
+        sys_read_pipe(stdin, buff, 100);
+
+        
+
+        int stdout = sys_get_stdin();
+        write_fd(stdout, buff);
 }
 
 void semCommand(){
