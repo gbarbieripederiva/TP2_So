@@ -108,11 +108,13 @@ int fd_write(int fd, char *str, int size){
 
     int ite = 0;
     while(aux_size > 0){
+        
         fds[pos] -> buffer[fds[pos] ->write_index % BUFFER_SIZE] = str[ite];
         (fds[pos] -> write_index)++;
         (fds[pos] -> count) ++;
         ite++;
         aux_size--;
+        ncPrintChar(fds[pos] -> buffer[fds[pos] ->write_index % BUFFER_SIZE]);
     }
 
     fds[pos] -> write_index = fds[pos] -> write_index % BUFFER_SIZE;
