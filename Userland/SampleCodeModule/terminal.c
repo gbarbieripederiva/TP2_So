@@ -928,7 +928,6 @@ void semCommand(){
 }
 
 void phyloCommand(){
-    print("HELLO1");
     start_phylo(5);
 }
 

@@ -50,13 +50,11 @@ void printState (){
 
 void start_phylo(int cant){
     int pid[MAX_PHYLO];
-    print("HELLO2");
     mutex = sys_create_semaphore(12341234, SEM_UNLOCKED);
     cant = cant;
     int j = 0;
     uint64_t info[MAX_PHYLO];
     int g = 0;
-    print("HELLO3");
     while (g < MAX_PHYLO)
     {
         pid[g] = -1;
@@ -64,15 +62,16 @@ void start_phylo(int cant){
         state[g] = -1;
         g++;
     }
-    print("HELLO4");
+    
 
     while(j < cant){
         info[j] = sys_create_process_params(0,(uint64_t)phylosopher, j, 0);
         sem_id[j] = sys_create_semaphore(j + NO_OVER, SEM_LOCKED);
         sys_run_process(info[j], 1);
+        print("HELLO");
         pid[j] = ((processInfo) info[j]) -> pid;
+        j++;
     }
-    print("HELLO5");
     int start = sys_get_ticks_call();
     int diference = 3 * 18000;
 
