@@ -481,6 +481,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                 background = 0;
                 uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) arg1, 0);
                 if(pipesAmount != 0){
+                    printDec(pipes[pipeNum]);
                     sys_set_stdout(catInfo ,pipes[pipeNum]);
                 }
                 if(changeStdin == 1){
@@ -535,7 +536,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             if(background == 1 || pipesAmount != 0){
                 uint64_t filterInfo = sys_create_process_params(0, (uint64_t)filterCommand , (uint64_t) arg1, 0);
                  if(pipesAmount != 0){
-                     printDec(pipes[pipeNum]);
+                     
                     sys_set_stdout(filterInfo ,pipes[pipeNum]);
                 }
                 if(changeStdin == 1){
@@ -813,7 +814,6 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         sys_write_pipe(stdin, (char *)string, strlength((char *) string) + 1);
         sys_read_pipe(stdin, buff, 100);
         int stdout = sys_get_stdout();
-        printDec(stdout);
         write_fd(stdout, buff);
 }
 
