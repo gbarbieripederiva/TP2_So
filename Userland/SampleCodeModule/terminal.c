@@ -866,6 +866,7 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         char buff[100] = {0};
         sys_write_pipe(stdin, (char *)string, strlength((char *) string) + 1);
         sys_read_pipe(stdin, buff, 100);
+        print(string);
         int stdout = sys_get_stdout();
         write_fd(stdout, buff);
 }
@@ -906,8 +907,7 @@ void filterCommand(uint64_t string){
         char buff[100] = {0};
         sys_write_pipe(stdin, string, strlength(string) + 1);
         sys_read_pipe(stdin, buff, 100);
-        
-        print(string);
+    
         char res[100] = {0};
         int h = 0;
         int j = 0;
@@ -919,7 +919,6 @@ void filterCommand(uint64_t string){
             j++;
         }
 
-        print(res);
 
         int stdout = sys_get_stdout();
         write_fd(stdout, res);
