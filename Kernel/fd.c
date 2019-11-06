@@ -39,7 +39,7 @@ void init_fds(){
         i++;
     }
 
-     int keybord = give_me_fd(KEYBORD, 0);
+     int keyboard = give_me_fd(KEYBOARD, 0);
 
 }
 
@@ -194,6 +194,7 @@ int fd_close(int fd){
             fds[pos] = NULL;
         }
     }
+    return 0;
 
 }
 
@@ -225,6 +226,29 @@ void print_fds(){
 
         }
         pos++;
+    }
+}
+
+uint8_t get_char_fd(int fd){
+    int j = 0;
+    while(j < FD_AMOUNT && ( fds[j] == NULL || fds[j] -> fd_id == fd)){
+        j++;
+    }
+    if(j == FD_AMOUNT){
+        return 0;
+    }
+    else{
+        if(fds[j] -> count == 0){
+            return 0;
+        }
+        else{
+            uint8_t to_return = fds[j] -> buffer[fds[j] -> read_index % BUFFER_SIZE];
+            (fds[j] -> count) --;
+            (fds[j] -> read_index) ++;
+            fds[j] -> read_index = fds[j] -> read_index % BUFFER_SIZE;
+            return to_return;
+
+        }
     }
 }
 

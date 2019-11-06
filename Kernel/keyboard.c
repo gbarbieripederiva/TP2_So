@@ -116,7 +116,7 @@ void addToBuffer(char charToAdd)
 	buffer[endPosition] = charToAdd;
 	endPosition = (endPosition + 1) % BUFFER_SIZE; //As its cyclic iterator
 	size++;
-	fd_write(KEYBORD,buffer + endPosition ,1);
+	fd_write(KEYBOARD,buffer + endPosition ,1);
 }
 
 //Function to return a uint8 from the buffer and delete it. Return 0 if empty
@@ -128,10 +128,11 @@ uint8_t getChar()
 	}
 	else
 	{
-		uint8_t to_return = buffer[startPosition];
-		startPosition = (startPosition + 1) % BUFFER_SIZE;
-		size--;
-		return to_return;
+		//uint8_t to_return = buffer[startPosition];
+		//startPosition = (startPosition + 1) % BUFFER_SIZE;
+		//size--;
+		return get_char_fd(KEYBOARD);
+		
 	}
 }
 
@@ -158,6 +159,6 @@ uint8_t getLastInput()
 		//return buffer[endPosition];
 	}
 	char aux;
-	fd_read(KEYBORD, &aux, 1);
+	fd_read(KEYBOARD, &aux, 1);
 	return aux;
 }
