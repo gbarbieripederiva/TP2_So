@@ -285,6 +285,25 @@ sys_set_stdout:
 	popState
 	ret
 
+GLOBAL sys_get_stdin
+sys_get_stdin:
+	pushState
+	adjust_to_sys_call
+	mov rdi, 57
+	int 80h
+	popState
+	ret
+
+GLOBAL sys_get_stdout
+sys_get_stdout:
+	pushState
+	adjust_to_sys_call
+	mov rdi, 58
+	int 80h
+	popState
+	ret
+
+
 GLOBAL sys_create_semaphore
 sys_create_semaphore:
 	pushState
