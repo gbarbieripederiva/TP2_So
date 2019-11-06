@@ -107,7 +107,8 @@ int fd_write(int fd, char *str, int size){
     s_wait(fds[pos] ->sems_id[MUTEX]);
 
     int ite = 0;
-    while(aux_size != 0){
+    while(aux_size > 0){
+        ncPrint("a");
         fds[pos] -> buffer[fds[pos] ->write_index % BUFFER_SIZE] = str[ite];
         (fds[pos] -> write_index)++;
         (fds[pos] -> count) ++;
@@ -145,9 +146,12 @@ int fd_read(int fd, char *dest , int maxSize){
        while(j < MAX_BLOCKED && fds[pos]->blocked_pid[j] != -1){ //add to blocked processes until it is unlocked
            j++;
         }
+
+
         if(j == MAX_BLOCKED){
             return -1;
         }
+
         fds[pos]->blocked_pid[j] = pid;
 
         s_wait(fds[pos] -> sems_id[ABLE_TO_READ]);
