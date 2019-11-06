@@ -41,8 +41,6 @@ void terminal()
     
     char buff[100];
     int stdin = sys_get_stdin();
-    print("JA");
-    printDec(stdin);
     sys_read_pipe(stdin, buff, 100);
     write_fd(sys_get_stdout(), buff);
 
