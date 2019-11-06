@@ -71,10 +71,9 @@ void start_phylo(int cant){
         pid[j] = ((processInfo) info[j]) -> pid;
         j++;
     }
-    print("HOLA");
-    int start = sys_get_ticks_call();
+    uint64_t start = sys_get_ticks_call();
     uint64_t diference = 3 * 18000;
-
+    print("HOLA");
     while (1)
     {   
         
