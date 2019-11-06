@@ -40,6 +40,7 @@ void terminal()
     
     int stdin = (int)sys_get_stdin();
     printAction(0);
+    print("STDIN: ");
     printDec(stdin);
     printAction(0);
     

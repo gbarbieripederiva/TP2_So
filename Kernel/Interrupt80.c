@@ -360,7 +360,7 @@ uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, ui
 
 int sys_set_stdin(uint64_t process, int fd){
 	int pid = ((processInfo) process) -> pid;
-	ncPrint(pid);
+	//ncPrint(pid);
 	return set_std_in(pid, fd);
 }
 
