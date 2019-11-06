@@ -68,10 +68,10 @@ void start_phylo(int cant){
         info[j] = sys_create_process_params(0,(uint64_t)phylosopher, j, 0);
         sem_id[j] = sys_create_semaphore(j + NO_OVER, SEM_LOCKED);
         sys_run_process(info[j], 1);
-        print("HELLO");
         pid[j] = ((processInfo) info[j]) -> pid;
         j++;
     }
+    print("HOLA");
     int start = sys_get_ticks_call();
     int diference = 3 * 18000;
 
