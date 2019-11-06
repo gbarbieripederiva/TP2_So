@@ -547,6 +547,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     sys_set_stdout(wcInfo ,pipes[pipeNum]);
                 }
                 if(changeStdin == 1){
+                    print("hi");
                     sys_set_stdin(wcInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
@@ -572,7 +573,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     sys_set_stdout(filterInfo ,pipes[pipeNum]);
                 }
                 if(changeStdin == 1){
-                    printDec(555);
                     sys_set_stdin(filterInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
@@ -594,7 +594,6 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     sys_set_stdout(filterInfo ,pipes[pipeNum]);
                 }
                 if(changeStdin == 1){
-                    printDec(555);
                     sys_set_stdin(filterInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
@@ -900,6 +899,7 @@ int isVowel(char a){
 
 void filterCommand(uint64_t string){
         int stdin = sys_get_stdin();
+        printDec(stdin);
         char buff[100] = {0};
         printDec(stdin);
         sys_write_pipe(stdin, string, strlength(string) + 1);
@@ -917,6 +917,7 @@ void filterCommand(uint64_t string){
         }
 
         int stdout = sys_get_stdout();
+
         write_fd(stdout, res);
 }
 
