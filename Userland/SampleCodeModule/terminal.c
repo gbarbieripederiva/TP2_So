@@ -874,7 +874,7 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         sys_read_pipe(stdin, buff, 100);
         write_fd(stdout, buff);}
         else{
-            print("ACA TAMBIEN")
+            print("ACA TAMBIEN");
             write_fd(stdout, (char *)string);
         }
         
