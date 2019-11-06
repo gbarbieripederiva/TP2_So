@@ -511,6 +511,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     sys_set_stdout(wcInfo ,pipes[pipeNum]);
                 }
                 if(changeStdin == 1){
+                    print(hola);
                     sys_set_stdin(wcInfo, pipes[pipeNum]);
                     pipesAmount--;
                     changeStdin = 0;
