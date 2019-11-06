@@ -63,7 +63,7 @@ int give_me_fd(int name){
         while(j < FD_AMOUNT && fds[j] != NULL){
             j++;
         }
-        ncPrint("HOLA");
+        ncPrintDec(j);
 
         if(j == FD_AMOUNT){
             return -1;
