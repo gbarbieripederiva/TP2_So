@@ -43,7 +43,7 @@ void terminal()
     char hi[50];
     printDec(fd);
     printAction(0);
-    sys_read_pipe(fd, hi, 50);
+    sys_read_pipe(fd, hi, 4);
     print(hi);
     
     
