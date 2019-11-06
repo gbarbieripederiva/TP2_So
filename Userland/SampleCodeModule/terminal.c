@@ -630,7 +630,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         break;
 
     case PHYLO:
-       print("HELLO");
+       
         phyloCommand();
         break;
     
@@ -928,6 +928,7 @@ void semCommand(){
 }
 
 void phyloCommand(){
+    print("HELLO1");
     start_phylo(5);
 }
 
