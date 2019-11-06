@@ -3,6 +3,6 @@
 
 
 void phylosopher(int i);
-void start(int cant);
+void start_phylo(int cant);
 
 #endif

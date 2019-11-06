@@ -935,7 +935,7 @@ void semCommand(){
 }
 
 void phyloCommand(){
-    start(5);
+    start_phylo(5);
 }
 
 
