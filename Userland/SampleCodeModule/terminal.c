@@ -40,11 +40,6 @@ void terminal()
     print("Welcome! Please enter a command. Try 'help'");
     printNewLineOfTerminal();
     
-    printAction(0);
-    char buff[100];
-    int stdin = sys_get_stdin();
-    sys_read_pipe(stdin, buff, 100);
-    write_fd(sys_get_stdout(), buff);
 
 
 
