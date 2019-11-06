@@ -867,7 +867,7 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         char buff[100] = {0};
         int stdout = sys_get_stdout();
         printDec(stdout);
-        //write_fd(stdout, (char *) string);
+        write_fd(stdout, (char *) string);
         //sys_read_pipe(stdin, buff, 100);
         write_fd(stdout, buff);
        
