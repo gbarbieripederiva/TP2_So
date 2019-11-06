@@ -102,7 +102,7 @@ int fd_write(int fd, char *str, int size){
     
 
     s_post(fds[pos]->sems_id[MUTEX]);
-    ncPrint("HOLA3")
+    ncPrint("HOLA3");
 
     s_post(fds[pos]->sems_id[ABLE_TO_READ]);
 
