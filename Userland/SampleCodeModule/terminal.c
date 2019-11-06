@@ -488,6 +488,7 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
                     pipeNum ++;
                 }
                 if(pipesAmount != 0){
+                    print("ACA SI");
                     sys_set_stdout(catInfo ,pipes[pipeNum]);
                 }
                 
@@ -873,6 +874,7 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         sys_read_pipe(stdin, buff, 100);
         write_fd(stdout, buff);}
         else{
+            print("ACA TAMBIEN")
             write_fd(stdout, (char *)string);
         }
         
