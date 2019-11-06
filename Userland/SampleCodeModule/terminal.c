@@ -480,6 +480,8 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
             if(background == 1){
                 background = 0;
                 uint64_t catInfo = sys_create_process_params(0, (uint64_t)catCommand , (uint64_t) arg1, 0);
+                printDec(pipesAmount);
+                printAction(0);
                 if(pipesAmount != 0){
                     printDec(pipes[pipeNum]);
                     sys_set_stdout(catInfo ,pipes[pipeNum]);
