@@ -26,8 +26,8 @@ void sys_print_running_procs(); //SYSCALL 51
 int sys_set_priority(int pid, int priority); //SYSCALL 52
 int sys_set_state(int pid, int priority);//SYSCALL 53
 uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2); //SYSCALL 54
-int sys_set_stdin(int pid, int fd);//SYSCALL 55
-int sys_set_stdout(int pid, int fd);//SYSCALL 56
+int sys_set_stdin(uint64_t process, int fd);//SYSCALL 55
+int sys_set_stdout(uint64_t process, int fd);//SYSCALL 56
 int sys_get_stdin();
 int sys_get_stdout();
 int sys_create_semaphore(int name, int state); //SYSCALL 60

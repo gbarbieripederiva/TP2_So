@@ -81,9 +81,9 @@ int sys_set_state(int pid, int priority);
 //SYS CALL 54 to create a process with parameters
 uint64_t sys_create_process_params(int priority, uint64_t rip, uint64_t arg1, uint64_t arg2);
 
-int sys_set_stdin(int pid, int fd);
+int sys_set_stdin(uint64_t pid, int fd);
 
-int sys_set_stdout(int pid, int fd);
+int sys_set_stdout(uint64_t pid, int fd);
 
 int sys_get_stdin();
 
