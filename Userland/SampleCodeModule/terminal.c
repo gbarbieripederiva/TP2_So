@@ -630,15 +630,8 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         break;
 
     case PHYLO:
-        if(background == 1 || pipesAmount != 0){
-            //TODO
-            if(pipesAmount != 0){
-                //TODO
-            }
-        }
-        else{
-            phyloCommand();
-        }
+       
+        phyloCommand();
         break;
     
     case BACKGROUND: //it has to be called with "& command1 parameters"

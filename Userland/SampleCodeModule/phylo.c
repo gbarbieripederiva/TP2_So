@@ -72,7 +72,7 @@ void start_phylo(int cant){
     }
 
     int start = sys_get_ticks_call();
-    int diference =(int)3 /0.055;
+    int diference =3 * 18000;
 
     while (1)
     {   
