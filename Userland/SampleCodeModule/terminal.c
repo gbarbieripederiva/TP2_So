@@ -875,6 +875,7 @@ void catCommand(uint64_t string){//dont know if it should be redirected
         write_fd(stdout, buff);}
         else{
             print("ACA TAMBIEN");
+            print(string);
             write_fd(stdout, (char *)string);
         }
         
