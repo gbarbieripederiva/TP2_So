@@ -20,6 +20,7 @@ void checking(){
 int main() {
     int fd = sys_open_pipe(1);
     uint64_t terminalInfo;
+    printDec(fd);
     terminalInfo = sys_create_process(1, (uint64_t)terminal);
     sys_set_stdin(((processInfo) terminalInfo) -> pid, fd);
     sys_run_process(terminalInfo, 1);
