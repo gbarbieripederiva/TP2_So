@@ -163,7 +163,7 @@ int fd_read(int fd, char *dest , int maxSize){
     s_wait(fds[pos] -> sems_id[MUTEX]);
 
     int j = 0;
-
+    ncPrint("HOLa");
     while(j < maxSize && fds[pos] -> count != 0){
         //ncPrintChar(fds[pos] -> buffer[fds[pos] ->read_index % BUFFER_SIZE]);
         dest[j] = (char) fds[pos] -> buffer[fds[pos] -> read_index % BUFFER_SIZE];
@@ -171,7 +171,7 @@ int fd_read(int fd, char *dest , int maxSize){
         (fds[pos] -> count)--;
         j++;
     }
-    ncPrint("HOLa");
+    
 
 
 
