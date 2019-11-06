@@ -146,5 +146,5 @@ static unsigned int case_6 (void){
 }
 
 int random(){
-   return sys_get_ticks_call() % 5 + 1;
+   return (getTicks() % 8) + 1;
 }
