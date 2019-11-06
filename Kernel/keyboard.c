@@ -114,9 +114,10 @@ void keyboard_handler(uint8_t code)
 void addToBuffer(char charToAdd)
 {
 	buffer[endPosition] = charToAdd;
+	fd_write(KEYBOARD,buffer + endPosition ,1);
 	endPosition = (endPosition + 1) % BUFFER_SIZE; //As its cyclic iterator
 	size++;
-	fd_write(KEYBOARD,buffer + endPosition ,1);
+	
 }
 
 //Function to return a uint8 from the buffer and delete it. Return 0 if empty
