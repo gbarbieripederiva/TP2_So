@@ -160,6 +160,8 @@ void monitor(){
             goOn = 0;
             return;
         default:
+            print("Not a valid command");
+            printAction(0);
             break;
         }
     }
