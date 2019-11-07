@@ -15,6 +15,7 @@
 //Based on Tannenbaum
 
 int mutex;
+int print_pid;
 int state[MAX_PHYLO];
 int sem_id[MAX_PHYLO];
 int cant;
@@ -29,33 +30,43 @@ void monitor();
 
 
 void printState (){
+    int end = getTicks() + 18 * 4;
     int h = 0;
-    while(h < cant){
-                print("Phylosofer ");
-                printDec(h + 1);
-                print(" state: ");
-                switch (state[h])
-                {
-                case HUNGRY:
-                    print("HUNGRY");
-                    break;
-                case EATING:
-                    print("EATING");
-                    break;
-                case THINKING:
-                    print("THINKING");
-                    break;
+    while(1){
+        if(end < getTicks()){
+            end = getTicks() + 3 * 18;
+        
+            while(h < cant){
+                        print("Phylosofer ");
+                        printDec(h + 1);
+                        print(" state: ");
+                        switch (state[h])
+                        {
+                        case HUNGRY:
+                            print("HUNGRY");
+                            break;
+                        case EATING:
+                            print("EATING");
+                            break;
+                        case THINKING:
+                            print("THINKING");
+                            break;
+                        
+                        default:
+                            break;
+                        }
+                        printAction(0);
                 
-                default:
-                    break;
-                }
+                
+                h++;
+            }
                 printAction(0);
-        
-        
-        h++;
-    }
-        printAction(0);
-        printAction(0);
+                printAction(0);
+        }
+        if(goOn == 0){
+            return;
+        }
+     }
 }
 
 void start_phylo(int phylos){
@@ -63,6 +74,8 @@ void start_phylo(int phylos){
 
     monitor_pid = sys_create_process(0, (uint64_t) monitor);
     sys_run_process(monitor_pid, 1);
+    print_pid = sys_create_process(0, (uint64_t) printState);
+    sys_run_process(print_pid, 1);
    
     cant = phylos;
     int j = 0;
@@ -86,17 +99,7 @@ void start_phylo(int phylos){
     }
     uint64_t end = getTicks() + 3 * 18;
     
-    while (1)
-    {   
-        if(goOn == 0){
-            sys_kill_process(monitor_pid);
-            return;
-        }
-        if(end < getTicks()){
-            end = getTicks() + 3 * 18;
-            printState();
-        }
-    }
+    
     
 
 
