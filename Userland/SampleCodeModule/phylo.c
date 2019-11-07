@@ -62,7 +62,7 @@ void start_phylo(int phylos){
     {
         pid[g] = -1;
         info[g] = -1;
-        state[g] = THINKING
+        state[g] = THINKING;
         g++;
     }
     
