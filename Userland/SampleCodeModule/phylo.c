@@ -6,7 +6,7 @@
 #define NULL 0
 
 #define NO_OVER 50000
-#define MAX_PHYLO 10
+#define MAX_PHYLO 15
 #define HUNGRY 3
 #define THINKING 2
 #define EATING 1
@@ -94,6 +94,7 @@ void start_phylo(int phylos){
             printState();
         }
         if(goOn == 0){
+            sys_sem_close(12234321);
             return;
         }
       }
