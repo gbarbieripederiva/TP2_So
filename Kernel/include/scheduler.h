@@ -6,7 +6,7 @@
 #define EMPTY 2
 #define BLOCKED 0
 #define READY 1
-#define SIZE 20
+#define SIZE 30
 
 
 
