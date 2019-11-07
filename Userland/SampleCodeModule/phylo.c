@@ -25,8 +25,8 @@ void printState (){
     int h = 0;
     while(h < cant){
             print("Phylosofer ");
-            printDec(h);
-            print("state: ");
+            printDec(h + 1);
+            print(" state: ");
             switch (state[h])
             {
             case HUNGRY:
@@ -74,13 +74,13 @@ void start_phylo(int phylos){
         pid[j] = ((processInfo) info[j]) -> pid;
         j++;
     }
-    uint64_t start = getTicks();
-    uint64_t diference = 3 * 40;
+    uint64_t end = getTicks() + 4 * 18;
+    
     while (1)
     {   
         
-        if((start - getTicks()) > diference){
-            start = getTicks();
+        if(end < getTicks()){
+            end = getTicks() + 4 * 18;
             printState();
         }
     }
