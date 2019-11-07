@@ -413,3 +413,13 @@ testchoi:
 	int 80h
 	popState
 	ret
+
+
+GLOBAL sys_print_mem
+sys_print_mem:
+	pushState
+	adjust_to_sys_call
+	mov rdi,150
+	int 80h
+	popState
+	ret

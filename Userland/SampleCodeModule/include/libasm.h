@@ -126,4 +126,6 @@ void sys_print_pipe();
 
 void testchoi(uint64_t arg1, uint64_t arg2, uint64_t arg3, uint64_t arg4);
 
+
+void sys_print_mem();
 #endif

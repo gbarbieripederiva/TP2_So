@@ -787,7 +787,7 @@ void testIvalidOpCodeCommand()
 
 void memCommand()
 {
-    //TODO
+    sys_print_mem();
 }
 
 void pipeCommand() {

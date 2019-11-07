@@ -165,3 +165,8 @@ int unGiveMeMemory(void * location){
     }
     return 0;
 }
+
+
+void print_mem(){
+    //TODO
+}

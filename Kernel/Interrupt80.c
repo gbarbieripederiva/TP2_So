@@ -158,6 +158,9 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		ncNewLine();
 		ncPrintDec(arg4);
 		break;
+	
+	case 150:
+		sys_print_mem();
 		
 	}
 
@@ -424,4 +427,10 @@ int sys_read_pipe(int fd, char * buffer, int size){
 //SYSCALL 79 prints from a pipe
 void sys_print_pipe(){
 	print_pipes();
+}
+
+
+
+void sys_print_mem(){
+	print_mem();
 }

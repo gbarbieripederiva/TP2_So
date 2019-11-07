@@ -140,3 +140,8 @@ int unGiveMeMemory(void * location){
     //there is no memory chunk starting at the specified location
     return -1;
 }
+
+
+void print_mem(){
+    //TODO
+}

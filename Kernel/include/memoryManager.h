@@ -6,7 +6,7 @@
 void initializeMemory();
 void * giveMeMemory(uint64_t size);
 int unGiveMeMemory(void * location);
-
+void print_mem();
 
 
 
