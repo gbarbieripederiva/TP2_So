@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <libasm.h>
 #include <lib.h>
+#define NULL 0
 
 #define NO_OVER 50000
 #define MAX_PHYLO 10
@@ -17,6 +18,11 @@ int mutex;
 int state[MAX_PHYLO];
 int sem_id[MAX_PHYLO];
 int cant;
+int command;
+int monitor_pid;
+int pid[MAX_PHYLO];
+ uint64_t info[MAX_PHYLO];
+ int goOn = 1;
 
 void phylosopher(int i);
 
@@ -52,12 +58,14 @@ void printState (){
 }
 
 void start_phylo(int phylos){
-    int pid[MAX_PHYLO];
     mutex = sys_create_semaphore(12234321, SEM_UNLOCKED);
+
+    monitor_pid = sys_create_process(0, (uint64_t) monitor);
+    sys_run_process(monitor_pid, 1);
    
     cant = phylos;
     int j = 0;
-    uint64_t info[MAX_PHYLO];
+   
     int g = 0;
     while (g < MAX_PHYLO)
     {
@@ -79,7 +87,10 @@ void start_phylo(int phylos){
     
     while (1)
     {   
-        
+        if(goOn == 0){
+            sys_kill_process(monitor_pid);
+            break;
+        }
         if(end < getTicks()){
             end = getTicks() + 5 * 18;
             printState();
@@ -98,6 +109,47 @@ void phylosopher(int i){
         put_forks(i);
 
     }
+}
+
+
+void monitor(){
+    char buffer;
+    while(1){
+        sys_read_pipe(KEYBOARD, &buffer,1);
+        switch (buffer)
+        {
+        case A:
+        case a:
+            sem_id[cant] = sys_create_semaphore(cant + NO_OVER, SEM_LOCKED);
+            info[cant] = sys_create_process_params(0,(uint64_t) phylosopher, cant, 0);
+            pid[cant] = ((processInfo) info[cant]) -> pid;
+            sys_run_process(info[cant], 1);
+            cant ++;
+            break;
+        case S:
+        case s:
+            sys_sem_close(sem_id[cant - 1]);
+            info[cant - 1] = NULL;
+            sys_kill_process(pid[cant - 1]);
+            cant --;
+            break;
+        
+        case Q:
+        case q:
+            int j = 0;
+            while(j < cant){
+                sys_kill_process(pid[j]);
+                sys_sem_close(sem_id[j]);
+                info[j] = NULL;
+                j++;
+            }
+            goOn = 0;
+            return;
+        default:
+            break;
+        }
+    }
+    return;
 }
 
 void take_forks(int i){

@@ -5,6 +5,7 @@
 #include <stdint.h>
 #define SEM_LOCKED 1
 #define SEM_UNLOCKED 0
+#define KEYBOARD 0
 
 #define PROC_BLOCK 0
 #define PROC_RUNNING 1
