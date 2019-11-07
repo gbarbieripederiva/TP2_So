@@ -90,7 +90,7 @@ void start_phylo(int phylos){
     {   
         if(goOn == 0){
             sys_kill_process(monitor_pid);
-            break;
+            return;
         }
         if(end < getTicks()){
             end = getTicks() + 5 * 18;
