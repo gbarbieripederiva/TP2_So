@@ -939,7 +939,7 @@ void semCommand(){
 }
 
 void phyloCommand(int h){
-    start_phylo(h);
+     sys_create_process_params(0, (uint64_t)start_phylo, h, 0);
 }
 
 
