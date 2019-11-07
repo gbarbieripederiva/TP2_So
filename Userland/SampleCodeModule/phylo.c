@@ -120,18 +120,31 @@ void monitor(){
         {
         case A:
         case a:
-            sem_id[cant] = sys_create_semaphore(cant + NO_OVER, SEM_LOCKED);
-            info[cant] = sys_create_process_params(0,(uint64_t) phylosopher, cant, 0);
-            pid[cant] = ((processInfo) info[cant]) -> pid;
-            sys_run_process(info[cant], 1);
-            cant ++;
+            if(cant == MAX_PHYLO){
+                print("This program just admits");
+                printDec(MAX_PHYLO);
+                print("phylosophers");
+                printAction(0);
+            }
+            else{
+                sem_id[cant] = sys_create_semaphore(cant + NO_OVER, SEM_LOCKED);
+                info[cant] = sys_create_process_params(0,(uint64_t) phylosopher, cant, 0);
+                pid[cant] = ((processInfo) info[cant]) -> pid;
+                sys_run_process(info[cant], 1);
+                cant ++;
+            }
             break;
         case S:
         case s:
-            sys_sem_close(sem_id[cant - 1]);
-            info[cant - 1] = NULL;
-            sys_kill_process(pid[cant - 1]);
-            cant --;
+            if(cant == 0){
+                print("No more philosophers to delete");
+            }
+            else{
+                sys_sem_close(sem_id[cant - 1]);
+                info[cant - 1] = NULL;
+                sys_kill_process(pid[cant - 1]);
+                cant --;
+            }
             break;
         
         case Q:
