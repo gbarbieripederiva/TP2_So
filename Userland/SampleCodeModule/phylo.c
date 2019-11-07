@@ -43,6 +43,7 @@ void printState (){
                 break;
             }
             printAction(0);
+            printAction(0);
     
         
         h++;
