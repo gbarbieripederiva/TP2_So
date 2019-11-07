@@ -24,25 +24,26 @@ void phylosopher(int i);
 void printState (){
     int h = 0;
     while(h < cant){
-            print("Phylosofer ");
-            printDec(h + 1);
-            print(" state: ");
-            switch (state[h])
-            {
-            case HUNGRY:
-                print("HUNGRY");
-                break;
-            case EATING:
-                print("EATING");
-                break;
-            case THINKING:
-                print("THINKING");
-                break;
-            
-            default:
-                break;
-            }
-    
+                print("Phylosofer ");
+                printDec(h + 1);
+                print(" state: ");
+                switch (state[h])
+                {
+                case HUNGRY:
+                    print("HUNGRY");
+                    break;
+                case EATING:
+                    print("EATING");
+                    break;
+                case THINKING:
+                    print("THINKING");
+                    break;
+                
+                default:
+                    break;
+                }
+                printAction(0);
+        
         
         h++;
     }
