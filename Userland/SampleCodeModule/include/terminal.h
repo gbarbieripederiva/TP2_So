@@ -38,6 +38,7 @@ void catCommand(uint64_t string);
 void wcCommand(uint64_t string);
 void filterCommand(uint64_t string);
 void semCommand();
+void phyloCommand(int h);
 
 
 //--------------------Command definitions------------------------------------------------

@@ -25,6 +25,7 @@ int pid[MAX_PHYLO];
  int goOn = 1;
 
 void phylosopher(int i);
+void monitor();
 
 
 void printState (){
@@ -118,8 +119,8 @@ void monitor(){
         sys_read_pipe(KEYBOARD, &buffer,1);
         switch (buffer)
         {
-        case A:
-        case a:
+        case 'A':
+        case 'a':
             if(cant == MAX_PHYLO){
                 print("This program just admits");
                 printDec(MAX_PHYLO);
@@ -134,8 +135,8 @@ void monitor(){
                 cant ++;
             }
             break;
-        case S:
-        case s:
+        case 'S':
+        case 's':
             if(cant == 0){
                 print("No more philosophers to delete");
             }
@@ -147,8 +148,8 @@ void monitor(){
             }
             break;
         
-        case Q:
-        case q:
+        case 'Q':
+        case 'q': ;
             int j = 0;
             while(j < cant){
                 sys_kill_process(pid[j]);
