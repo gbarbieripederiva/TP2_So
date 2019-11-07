@@ -939,7 +939,13 @@ void semCommand(){
 }
 
 void phyloCommand(int h){
-     sys_create_process_params(0, (uint64_t)start_phylo, h, 0);
+    print("Press 'a' to add a phylosopher");
+    printAction(0);
+    print("Press 'd' to delete a phylosopher");
+    printAction(0);
+    print("Press 'q' to quit program");
+    printAction(0);
+     start_phylo(h);
 }
 
 
