@@ -42,12 +42,12 @@ void printState (){
             default:
                 break;
             }
-            printAction(0);
-            printAction(0);
     
         
         h++;
     }
+        printAction(0);
+        printAction(0);
 }
 
 void start_phylo(int phylos){
@@ -55,7 +55,6 @@ void start_phylo(int phylos){
     mutex = sys_create_semaphore(12234321, SEM_UNLOCKED);
    
     cant = phylos;
-     printDec(cant);
     int j = 0;
     uint64_t info[MAX_PHYLO];
     int g = 0;
@@ -75,13 +74,13 @@ void start_phylo(int phylos){
         pid[j] = ((processInfo) info[j]) -> pid;
         j++;
     }
-    uint64_t end = getTicks() + 4 * 18;
+    uint64_t end = getTicks() + 5 * 18;
     
     while (1)
     {   
         
         if(end < getTicks()){
-            end = getTicks() + 4 * 18;
+            end = getTicks() + 5 * 18;
             printState();
         }
     }

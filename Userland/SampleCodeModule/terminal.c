@@ -522,10 +522,11 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
 
     case WC:
         if(tokens >= tokenNum + 1){
-            background = 0;
+            
             char arg1[64];
             extractToken(arg1, string, tokenNum + 1);
             if(background == 1 || pipesAmount != 0){
+                background = 0;
                 uint64_t wcInfo = sys_create_process_params(0, (uint64_t)wcCommand , (uint64_t) arg1, 0);
                 if(changeStdin == 1){
                     sys_set_stdin(wcInfo, pipes[pipeNum]);
@@ -630,8 +631,18 @@ void handleToken(char *string, int tokenNum){ //we need to execute the correct f
         break;
 
     case PHYLO:
-       
-        phyloCommand();
+        if(tokens >= tokenNum + 1){
+            char arg1[64];
+            extractToken(arg1, string, tokenNum + 1);
+            phyloCommand((uint64_t) stringToInt(arg1));
+
+        }
+        else
+        {
+            phyloCommand(5);
+        }
+        
+        
         break;
     
     case BACKGROUND: //it has to be called with "& command1 parameters"
@@ -927,8 +938,8 @@ void semCommand(){
     sys_print_sems();
 }
 
-void phyloCommand(){
-    start_phylo(5);
+void phyloCommand(int h){
+    start_phylo(h);
 }
 
 
