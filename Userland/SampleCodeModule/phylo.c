@@ -84,7 +84,7 @@ void start_phylo(int phylos){
         pid[j] = ((processInfo) info[j]) -> pid;
         j++;
     }
-    uint64_t end = getTicks() + 5 * 18;
+    uint64_t end = getTicks() + 3 * 18;
     
     while (1)
     {   
@@ -93,7 +93,7 @@ void start_phylo(int phylos){
             return;
         }
         if(end < getTicks()){
-            end = getTicks() + 5 * 18;
+            end = getTicks() + 3 * 18;
             printState();
         }
     }
