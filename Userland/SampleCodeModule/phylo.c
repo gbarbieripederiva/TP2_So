@@ -27,6 +27,8 @@ int pid[MAX_PHYLO];
 
 void phylosopher(int i);
 void monitor();
+void take_forks(int i);
+void put_forks(int i);
 
 
 void printState (){

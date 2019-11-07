@@ -39,7 +39,7 @@ void init_fds(){
         i++;
     }
 
-     int keyboard = give_me_fd(KEYBOARD, 0);
+     give_me_fd(KEYBOARD, 0);
 
 }
 

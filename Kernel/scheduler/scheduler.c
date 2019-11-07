@@ -106,8 +106,8 @@ int kill_process(int pid){
     }
     if(procsInSched[i].process -> pid == pid) {  //if i equals iterator it means it is currently running we cant remove it
         procsInSched[i].state = EMPTY;
-        unGiveMeMemory(procsInSched[i].process->sp);
-        unGiveMeMemory(procsInSched[i].process);
+        unGiveMeMemory((void *)procsInSched[i].process->sp);
+        unGiveMeMemory((void *)procsInSched[i].process);
         running_procs--;
         _int20();
         

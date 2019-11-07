@@ -69,7 +69,7 @@ void phyloCommand(int h);
 
 
 //-------------------Other definitions---------------------------------------------------
-static const char * terminalSymbol = "$> ";
+static char * terminalSymbol = "$> ";
 
 
 #endif

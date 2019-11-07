@@ -884,7 +884,7 @@ void wcCommand(uint64_t string){
         int stdin = sys_get_stdin();
         char buff[100] = {0};
         if(string != 0){
-        sys_write_pipe(stdin, string, strlength(string) + 1);
+        sys_write_pipe(stdin, (char *)string, strlength((char *)string) + 1);
         }
         sys_read_pipe(stdin, buff, 100);
 
@@ -916,7 +916,7 @@ void filterCommand(uint64_t string){
         int stdin = sys_get_stdin();
         char buff[100] = {0};
         if(string != 0){
-            sys_write_pipe(stdin, string, strlength(string) + 1);}
+            sys_write_pipe(stdin, (char *)string, strlength((char *)string) + 1);}
         sys_read_pipe(stdin, buff, 100);
         char res[100] = {0};
         int h = 0;

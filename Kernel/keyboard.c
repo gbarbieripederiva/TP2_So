@@ -10,7 +10,7 @@
 //Buffer for all the codes
 static uint8_t buffer[BUFFER_SIZE] = {0};
 
-static int startPosition = 0; //To know where in the buffer to start reading from
+//static int startPosition = 0; //To know where in the buffer to start reading from
 static int endPosition = 0;   //End of the buffer(las position is endPosition-1)
 static int size = 0;
 
@@ -114,7 +114,7 @@ void keyboard_handler(uint8_t code)
 void addToBuffer(char charToAdd)
 {
 	buffer[endPosition] = charToAdd;
-	fd_write(KEYBOARD,buffer + endPosition ,1);
+	fd_write(KEYBOARD,(char *)buffer + endPosition ,1);
 	endPosition = (endPosition + 1) % BUFFER_SIZE; //As its cyclic iterator
 	size++;
 	

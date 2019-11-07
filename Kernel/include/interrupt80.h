@@ -38,7 +38,7 @@ void sys_print_sems(); //SYSCALL 64
 int sys_open_pipe(int name); //SYSCALL 75
 void sys_close_pipe(int fd); //SYSCALL 76
 int sys_write_pipe(int fd, char * buffer, int size); //SYSCALL 77
-int sys_red_pipe(int fd, char * buffer, int size); //SYSCALL 78
+int sys_read_pipe(int fd, char * buffer, int size); //SYSCALL 78
 void sys_print_pipe();
 
 

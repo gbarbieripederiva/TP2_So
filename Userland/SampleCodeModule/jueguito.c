@@ -31,7 +31,7 @@ static Direction currentDirection;
 static Cartesian head;
 static Cartesian tail;
 static Direction snake[MAX_WIDTH][MAX_HEIGHT];  //each position saves the direction in which the next snake body part is at. This is what peak efficiency looks like
-static uint8_t endGame;
+static char * endGame;
 static Rectangle body;
 static Rectangle noBody;
 static Rectangle topBar;
@@ -48,7 +48,7 @@ static uint64_t ticksAtSecondUpdate;
 static uint8_t seconds;
 static uint8_t minutes;
 static uint8_t hours;
-static uint8_t *endGameMessage;
+static char *endGameMessage;
 static Sounds sound;
 
 static void initializeMatrix(){
@@ -333,7 +333,7 @@ void game(){
     
     clearScreen();
     playFrequency(5000, 30);
-    print(endGameMessage);
+    print((char *)endGameMessage);
     print(" Your score was: ");
     printDec(score);
     print(". Your game time was: ");

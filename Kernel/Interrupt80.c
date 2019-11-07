@@ -75,7 +75,7 @@ uint64_t interruptAction80Dispatcher(uint64_t callNumber, uint64_t arg1, uint64_
 		break;
 	//sys_run_process: Puts process into scheduler with state READY, BLOCKED, HALT
 	case 48:
-		return (int) sys_run_process((processInfo) arg1, (int) arg2);
+		return (int) sys_run_process((uint64_t) arg1, (int) arg2);
 		break;
 	//sys_kill_process: stops iterating process from scheduler
 	case 49:

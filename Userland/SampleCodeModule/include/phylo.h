@@ -1,8 +1,7 @@
 #ifndef PHYLO_H
 #define PHYLO_H
+#include <rng.h>
 
-
-void phylosopher(int i);
 void start_phylo(int cant);
 
 #endif
