@@ -2,6 +2,7 @@
 #define MEMORYMANAGER_H
 
 #include <stdint.h>
+#include "naiveConsole.h"
 
 void initializeMemory();
 void * giveMeMemory(uint64_t size);

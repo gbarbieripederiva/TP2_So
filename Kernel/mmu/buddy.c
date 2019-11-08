@@ -17,11 +17,10 @@
 
 static uint8_t status[CHUNKS] = {FREE}; //all chunks start as free
 
+static uint64_t used;
 
-//this function does nothing. It's there to keep compatibility with memoryManager, although it could be deleted from there as well
-//this is basically legacy
 void initializeMemory(){
-    
+    used = 0;
 }
 
 static void * giveMeMemoryWrapped(uint64_t size, uint32_t chunk, uint64_t currentSize, uint64_t memLocation){
@@ -88,6 +87,7 @@ static void * giveMeMemoryWrapped(uint64_t size, uint32_t chunk, uint64_t curren
     //this chunk is free, and there are no smaller chunks that can be allocated
 
     status[chunk] = OCCUPIED;
+    used += currentSize;
     return memLocation;
 
 }
@@ -106,13 +106,14 @@ void * giveMeMemory(uint64_t size){
 //The location of root is 0, and for every node the left child has the same location, and the right child has the location
 //(parentLocation + size/2^h) where h is the height of the current node. 
 
-static uint32_t findFirstChunk(uint64_t location){
+static uint32_t findFirstChunk(uint64_t location, uint64_t* currentSize){
     location -= STARTING_MEM_LOCATION; //normalize to 0, as if it was an offset
     uint32_t chunk = 0;
     uint64_t size = INITIAL_MEM_SIZE;
     uint64_t currentLocation = 0;
     while(chunk < CHUNKS){
         if(location == currentLocation){
+            *currentSize = size;
             return chunk;
         }
         size /= 2;
@@ -130,7 +131,7 @@ static uint32_t findFirstChunk(uint64_t location){
 
 //once we finde a location, the current node and its left child, and that child's left child and so on, all share the same location
 //as soon as we find a node that is either a leaf or its left child is free, it means we are on the node that was allocated
-static uint32_t findOccupiedChunk(uint32_t chunk){
+static uint32_t findOccupiedChunk(uint32_t chunk, uint64_t * currentSize){
 
     if(FREE == status[chunk]){
         return -1;
@@ -139,20 +140,23 @@ static uint32_t findOccupiedChunk(uint32_t chunk){
         status[chunk] = FREE;
         return chunk;
     }
-    return findOccupiedChunk(2 * chunk + 1);
+    *currentSize /= 2;
+    return findOccupiedChunk(2 * chunk + 1, currentSize);
 
 }
 
 int unGiveMeMemory(void * location){
-    uint32_t chunk = findFirstChunk(location);
+    uint64_t currentSize;
+    uint32_t chunk = findFirstChunk(location, &currentSize);
     if(chunk < 0){
         return -1;
     }
-    chunk = findOccupiedChunk(chunk);
+    chunk = findOccupiedChunk(chunk, &currentSize);
     if(chunk < 0){
         return -1;
     }
     status[chunk] = FREE;
+    used -= currentSize;
     while(chunk != 0){
         //move to the parent
         chunk = (chunk - 1) / 2;
@@ -168,5 +172,13 @@ int unGiveMeMemory(void * location){
 
 
 void print_mem(){
-    //TODO
+    ncPrint("Total Memory: ");
+    ncPrintDec(INITIAL_MEM_SIZE);
+    ncNewLine();
+    ncPrint("Used Memory: ");
+    ncPrintDec(used);
+    ncNewLine();
+    ncPrint("Free Memory: ");
+    ncPrint(INITIAL_MEM_SIZE - used);
+    ncNewLine();
 }

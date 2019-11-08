@@ -16,6 +16,7 @@ typedef struct memBlock{
 //memSize is changed dinamically to account for the size needed to keep track of the many memory blocks
 static uint64_t memSize;
 static memBlock * greatest;
+static uint64_t used;
 
 static void swap(memBlock * block1, memBlock * block2){
     memBlock aux = *block1;
@@ -35,6 +36,7 @@ void initializeMemory(){
     //the last memBlock in this array has its startLocation set to NULL to signify an end of the array
     greatest = (memBlock *) (STARTING_MEM_LOCATION + memSize);
     greatest->startLocation = NULL;
+    used = 0;
 }
 
 //something like a malloc(). Traverses the memory linearly using a first fit algorithm.
@@ -72,6 +74,7 @@ void * giveMeMemory(uint64_t size){
             //add the "end of array" marker and return
             lowest->startLocation = NULL;
             memSize -= sizeof(memBlock);
+            used += size;
             return retVal;
         }
 
@@ -92,6 +95,7 @@ void * giveMeMemory(uint64_t size){
     //we set this chunk of memory as allocated by saving it in the last position of the memBlock array
     lowest->startLocation = location;
     lowest->size = size;
+    used += size;
 
     //decrement memory size to account for the new memBlock created
     
@@ -120,6 +124,7 @@ int unGiveMeMemory(void * location){
         }
         if (lowest->startLocation == castLocation){
             //move array right and return 0
+            used -= lowest->size;
             memBlock * next = lowest - sizeof(memBlock);
             while(next->startLocation != NULL){
                 lowest->startLocation = next->startLocation;
@@ -143,5 +148,13 @@ int unGiveMeMemory(void * location){
 
 
 void print_mem(){
-    //TODO
+    ncPrint("Total Memory: ");
+    ncPrintDec(INITIAL_MEM_SIZE);
+    ncNewLine();
+    ncPrint("Used Memory: ");
+    ncPrintDec(used);
+    ncNewLine();
+    ncPrint("Free Memory: ");
+    ncPrint(INITIAL_MEM_SIZE - used);
+    ncNewLine();
 }
