@@ -179,6 +179,6 @@ void print_mem(){
     ncPrintDec(used);
     ncNewLine();
     ncPrint("Free Memory: ");
-    ncPrint(INITIAL_MEM_SIZE - used);
+    ncPrintDec(INITIAL_MEM_SIZE - used);
     ncNewLine();
 }

@@ -155,6 +155,7 @@ void print_mem(){
     ncPrintDec(used);
     ncNewLine();
     ncPrint("Free Memory: ");
-    ncPrint(INITIAL_MEM_SIZE - used);
+    uint64_t free = INITIAL_MEM_SIZE - used;
+    ncPrintDec(free);
     ncNewLine();
 }
